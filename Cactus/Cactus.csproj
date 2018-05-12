@@ -75,6 +75,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Interfaces\IFileSwitcher.cs" />
+    <Compile Include="Interfaces\ILogger.cs" />
+    <Compile Include="Interfaces\IMainWindowViewModel.cs" />
+    <Compile Include="Interfaces\IProcessManager.cs" />
+    <Compile Include="Interfaces\IRegistryService.cs" />
+    <Compile Include="Interfaces\IVersionManager.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="ProcessManager.cs" />
+    <Compile Include="RegistryService.cs" />
+    <Compile Include="VersionManager.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -83,12 +94,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="EntryManager.cs" />
+    <Compile Include="FileSwitcher.cs" />
+    <Compile Include="Interfaces\IEntryManager.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Entry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

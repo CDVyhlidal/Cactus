@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Cactus.Interfaces;
+using Castle.MicroKernel.Registration;
+using Castle.Windsor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +26,25 @@ namespace Cactus
         public MainWindow()
         {
             InitializeComponent();
+
+            // Configure Dependency Injection Container
+            IWindsorContainer container = ConfigureServices();
+            var fs = container.Resolve<IFileSwitcher>();
+
+            // Go
+            fs.Run();
+        }
+
+        private IWindsorContainer ConfigureServices()
+        {
+            var container = new WindsorContainer();
+            container.Register(Component.For<IFileSwitcher>().ImplementedBy<FileSwitcher>());
+            container.Register(Component.For<IEntryManager>().ImplementedBy<EntryManager>());
+            container.Register(Component.For<IProcessManager>().ImplementedBy<ProcessManager>());
+            container.Register(Component.For<IVersionManager>().ImplementedBy<VersionManager>());
+            container.Register(Component.For<ILogger>().ImplementedBy<Logger>());
+            container.Register(Component.For<IRegistryService>().ImplementedBy<RegistryService>());
+            return container;
         }
     }
 }
