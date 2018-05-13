@@ -12,10 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using Cactus.Interfaces;
-using Cactus.ViewModels;
-using Castle.MicroKernel.Registration;
-using Castle.Windsor;
 using System.Windows;
 
 namespace Cactus
@@ -25,26 +21,6 @@ namespace Cactus
         public MainWindowView()
         {
             InitializeComponent();
-
-            // Configure Dependency Injection Container
-            IWindsorContainer container = ConfigureServices();
-
-            var viewModel = container.Resolve<IMainWindowViewModel>();
-            DataContext = viewModel;
-        }
-
-        private IWindsorContainer ConfigureServices()
-        {
-            var container = new WindsorContainer();
-            container.Register(Component.For<IFileSwitcher>().ImplementedBy<FileSwitcher>());
-            container.Register(Component.For<IEntryLoader>().ImplementedBy<EntryLoader>());
-            container.Register(Component.For<IEntryManager>().ImplementedBy<EntryManager>());
-            container.Register(Component.For<IProcessManager>().ImplementedBy<ProcessManager>());
-            container.Register(Component.For<IVersionManager>().ImplementedBy<VersionManager>());
-            container.Register(Component.For<ILogger>().ImplementedBy<Logger>());
-            container.Register(Component.For<IRegistryService>().ImplementedBy<RegistryService>());
-            container.Register(Component.For<IMainWindowViewModel>().ImplementedBy<MainWindowViewModel>());
-            return container;
         }
     }
 }

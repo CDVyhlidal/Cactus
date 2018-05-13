@@ -22,6 +22,7 @@ namespace Cactus
             // If what we are running matches what we last ran, then go directly
             // If we are switching entries, then do what you need to do to get the files in the correct order.
             Console.WriteLine("hello");
+
             if (_entries.LastRan == null)
             {
 

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cactus"
         mc:Ignorable="d"
-        Title="Cactus" Width="500" Height="280" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="{Binding Title, Mode=OneWay}" Width="500" Height="280" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        DataContext="{Binding MainWindow, Source={StaticResource Locator}}">
 
     <StackPanel Margin="10">
         <ListView Height="150" Margin="0 0 0 10" ItemsSource="{Binding Entries}">

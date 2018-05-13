@@ -8,6 +8,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/PresentationFramework.Luna;component/themes/Luna.NormalColor.xaml"/>
                 <ResourceDictionary Source="Styles/CommonStyles.xaml"/>
+                <ResourceDictionary>
+                    <local:ViewModelLocator xmlns:local="clr-namespace:Cactus.ViewModels" x:Key="Locator" />
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
