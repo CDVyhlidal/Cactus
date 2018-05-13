@@ -19,5 +19,10 @@ namespace Cactus
         {
             _entries = new ObservableCollection<Entry>(entryLoader.GetEntries());
         }
+
+        public ObservableCollection<Entry> GetEntries()
+        {
+            return _entries;
+        }
     }
 }

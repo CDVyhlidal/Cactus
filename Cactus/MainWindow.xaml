@@ -7,20 +7,46 @@
         mc:Ignorable="d"
         Title="Cactus" Width="500" Height="280" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
+    <!--<Window.Resources>
+      
+    </Window.Resources>-->
+    
     <StackPanel Margin="10">
-        <ListView Height="150" Margin="0 0 0 10"/>
+        <ListView Height="150" Margin="0 0 0 10" ItemsSource="{Binding Entries}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="60" DisplayMemberBinding="{Binding Version}" Header="Version"/>
+                    <GridViewColumn Width="50" Header="Exp">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsHitTestVisible="False" Focusable="False" IsChecked="{Binding IsExpansion}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="50" Header="Last">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsHitTestVisible="False" Focusable="False" IsChecked="{Binding WasLastRan}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding Label}" Header="Label"/>
+                    <GridViewColumn Width="110" DisplayMemberBinding="{Binding Flags}" Header="Flags"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
         <DockPanel Margin="0 0 0 10">
             <Label Name="lblRoot" Content="Diablo II Directory:"/>
-            <TextBox Name="txtRootDir"/>
+            <TextBox Name="txtRootDir" Text="D:\Games\Diablo II\"/>
         </DockPanel>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Height="25">
-            <Button Name="btnAdd" Content="Add" Margin="0 0 5 0" Padding="15 0 15 0"/>
-            <Button Name="btnEdit" Content="Edit" Margin="0 0 5 0" Padding="15 0 15 0"/>
-            <Button Name="btnDelete" Content="Delete" Margin="0 0 5 0" Padding="15 0 15 0"/>
-            <Button Name="btnMoveUp" Content="Up" Margin="0 0 5 0" Padding="15 0 15 0"/>
-            <Button Name="btnMoveDown" Content="Down" Margin="0 0 5 0" Padding="15 0 15 0"/>
-            <Button Name="btnAbout" Content="About" Margin="0 0 5 0" Padding="15 0 15 0"/>
-            <Button Name="btnLaunch" Content="Launch" Padding="15 0 15 0"/>
+            <Button Name="btnAdd" Content="Add" Margin="0 0 5 0"/>
+            <Button Name="btnEdit" Content="Edit" Margin="0 0 5 0"/>
+            <Button Name="btnDelete" Content="Delete" Margin="0 0 5 0"/>
+            <Button Name="btnMoveUp" Content="Up" Margin="0 0 5 0"/>
+            <Button Name="btnMoveDown" Content="Down" Margin="0 0 5 0"/>
+            <Button Name="btnAbout" Content="About" Margin="0 0 5 0"/>
+            <Button Name="btnLaunch" Content="Launch"/>
         </StackPanel>
     </StackPanel>
 </Window>

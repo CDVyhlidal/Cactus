@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Cactus.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,5 +15,6 @@ namespace Cactus.Interfaces
     public interface IEntryManager
     {
         bool? LastRan { get; set; }
+        ObservableCollection<Entry> GetEntries();
     }
 }
