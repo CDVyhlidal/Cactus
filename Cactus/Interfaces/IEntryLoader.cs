@@ -12,7 +12,7 @@ namespace Cactus.Interfaces
     /// </summary>
     public interface IEntryLoader
     {
-        List<Entry> GetEntries();
+        List<EntryModel> GetEntries();
         int SaveEntries();
     }
 }

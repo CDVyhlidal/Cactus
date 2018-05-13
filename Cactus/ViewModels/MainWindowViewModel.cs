@@ -13,7 +13,7 @@ namespace Cactus.ViewModels
     {
         private IEntryManager _entryManager;
 
-        public ObservableCollection<Entry> Entries
+        public ObservableCollection<EntryModel> Entries
         {
             get
             {

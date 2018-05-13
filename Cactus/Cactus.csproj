@@ -97,7 +97,7 @@
     <Compile Include="RegistryService.cs" />
     <Compile Include="VersionManager.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -108,8 +108,8 @@
     <Compile Include="EntryManager.cs" />
     <Compile Include="FileSwitcher.cs" />
     <Compile Include="Interfaces\IEntryManager.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Views\MainWindowView.xaml.cs">
+      <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Styles\CommonStyles.xaml">
@@ -118,7 +118,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Entry.cs" />
+    <Compile Include="Models\EntryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

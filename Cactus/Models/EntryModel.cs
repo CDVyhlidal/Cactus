@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Cactus.Models
 {
-    public class Entry
+    public class EntryModel
     {
         [JsonProperty("Label", Order = 1)]
         public string Label { get; set; }

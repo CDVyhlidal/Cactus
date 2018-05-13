@@ -13,14 +13,14 @@ namespace Cactus
     {
         public bool? LastRan { get; set; }
 
-        public ObservableCollection<Entry> _entries;
+        public ObservableCollection<EntryModel> _entries;
 
         public EntryManager(IEntryLoader entryLoader)
         {
-            _entries = new ObservableCollection<Entry>(entryLoader.GetEntries());
+            _entries = new ObservableCollection<EntryModel>(entryLoader.GetEntries());
         }
 
-        public ObservableCollection<Entry> GetEntries()
+        public ObservableCollection<EntryModel> GetEntries()
         {
             return _entries;
         }

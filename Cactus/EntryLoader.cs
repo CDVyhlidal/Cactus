@@ -10,11 +10,11 @@ namespace Cactus
 {
     public class EntryLoader : IEntryLoader
     {
-        public List<Entry> GetEntries()
+        public List<EntryModel> GetEntries()
         {
-            var exampleEntries = new List<Entry>()
+            var exampleEntries = new List<EntryModel>()
             {
-                new Entry()
+                new EntryModel()
                 {
                     Label = "Singling Classic 1.14d",
                     Version = "1.14d",
@@ -22,7 +22,7 @@ namespace Cactus
                     IsExpansion = false,
                     WasLastRan = true
                 },
-                new Entry()
+                new EntryModel()
                 {
                     Label = "Singling Expansion 1.14d",
                     Version = "1.14d",
@@ -30,7 +30,7 @@ namespace Cactus
                     IsExpansion = true,
                     WasLastRan = false
                 },
-                new Entry()
+                new EntryModel()
                 {
                     Label = "Singling 1.10",
                     Version = "1.00",

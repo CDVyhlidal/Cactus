@@ -15,6 +15,6 @@ namespace Cactus.Interfaces
     public interface IEntryManager
     {
         bool? LastRan { get; set; }
-        ObservableCollection<Entry> GetEntries();
+        ObservableCollection<EntryModel> GetEntries();
     }
 }
