@@ -1,7 +1,7 @@
-Name   : Cactus 0.0.1
-Author : Jonathan Vasquez (fearedbliss) <jon@xyinn.org>
-License: 2-BSD
-Date   : Saturday, May 12, 2018
+Cactus 0.0.1
+Jonathan Vasquez (fearedbliss) <jon@xyinn.org>
+Apache License 2.0
+Saturday, May 12, 2018
 ------------------------------------------------
 
 Description

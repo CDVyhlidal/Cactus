@@ -78,33 +78,6 @@ Just extract the files from the Bundle for the version you want and drop them in
 Diablo II folder (Replacing the existing files in there). You already have the MPQ files, so simply replacing
 the dlls should do the trick, and re-running that version in BVS should fix it.
 
-User Account Control (for Windows Vista and Higher):
----------------
-On Windows Vista, 7, 8 and higher, UAC is enabled by default and Diablo II.exe and Game.exe require administrative privileges.
-Because of this, Bliss Version Switcher will not be able to launch Diablo II when you click launch (Clicking the button won't do
-anything). If you are using one of these operating systems, you have two options:
-
-1. Disable UAC.
-To disable UAC, Press [Windows Key + R] and type "msconfig", then go to Tools -> Change UAC Settings, and switch the slider all the way down.
-Then restart your computer. Now you can launch BlissVersionSwitcher.jar as usual and you are good to go.
-
-2. Use the BlissVersionSwitcher_UAC.bat script to get the appropriate permissions
-Launch the BlissVersionSwitcher_UAC.bat script which will ask you for administrative privileges, Windows will then give
-Bliss Version Switcher correct permissions. After this, BIS (and in turn Diablo II.exe and Game.exe) will have the permissions
-necessary to launch.
-
-This approach requires your system to know where your "javaw.exe" file is which is the file that Java uses to run its applications.
-If you run the script above and it works, then you don't need to do anything, however if you get an error saying that javaw wasn't found,
-your system probably doesn't have java in its PATH. To add your java directory to your path, do the following:
-
-1. Find where you installed java, and locate the bin directory (Mine is installed at: C:\Program Files\Java\jre7\bin)
-2. Go to Control Panel -> System (or press [Windows Key + Pause/Break] button)
-3. On the left click "Advanced System Settings" then navigate to the "Advanced" tab and at the bottom click "Environment Variables"
-4. On the bottom box where it says "System Variables", find "PATH" and click "Edit"
-5. Add the bin directory where java is installed to the end of the line and press Ok. Make sure there is a semicolon ( ; ) separating
-the entries. Example: C:\Python33\;C:\Program Files\Java\jre7\bin
-6. Run the script again :)
-
 Multiple Versions
 ---------------
 If you want to run multiple versions of Diablo II, It is the same process as before. You can get this feature by downloading Singling.
