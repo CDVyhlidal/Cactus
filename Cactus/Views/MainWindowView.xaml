@@ -43,7 +43,7 @@
             <Button Name="btnMoveUp" Content="Up" Margin="0 0 5 0"/>
             <Button Name="btnMoveDown" Content="Down" Margin="0 0 5 0"/>
             <Button Name="btnAbout" Content="About" Margin="0 0 5 0"/>
-            <Button Name="btnLaunch" Content="Launch"/>
+            <Button Name="btnLaunch" Content="Launch" Command="{Binding LaunchCommand}"/>
         </StackPanel>
     </StackPanel>
 </Window>

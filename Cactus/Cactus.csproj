@@ -97,7 +97,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\LaunchCommand.cs" />
     <Compile Include="EntryLoader.cs" />
     <Compile Include="Interfaces\IEntryLoader.cs" />
     <Compile Include="Interfaces\IFileSwitcher.cs" />

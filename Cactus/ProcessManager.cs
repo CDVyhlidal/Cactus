@@ -9,5 +9,9 @@ namespace Cactus
 {
     public class ProcessManager : IProcessManager
     {
+        public void LaunchApplication()
+        {
+            Console.WriteLine("launch application...");
+        }
     }
 }
