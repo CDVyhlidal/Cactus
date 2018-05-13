@@ -9,5 +9,11 @@ namespace Cactus.ViewModels
 {
     public class MainWindowViewModel : IMainWindowViewModel
     {
+        private IEntryManager _entryManager;
+
+        public MainWindowViewModel(IEntryManager entryManager)
+        {
+            _entryManager = entryManager;
+        }
     }
 }

@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cactus"
         mc:Ignorable="d"
-        Title="Cactus" Width="500" Height="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Cactus" Width="500" Height="280" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
     <StackPanel Margin="10">
-        <ListView Height="160" Margin="0 0 0 10"/>
+        <ListView Height="150" Margin="0 0 0 10"/>
         <DockPanel Margin="0 0 0 10">
             <Label Name="lblRoot" Content="Diablo II Directory:"/>
             <TextBox Name="txtRootDir"/>
         </DockPanel>
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Height="30">
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Height="25">
             <Button Name="btnAdd" Content="Add" Margin="0 0 5 0" Padding="15 0 15 0"/>
             <Button Name="btnEdit" Content="Edit" Margin="0 0 5 0" Padding="15 0 15 0"/>
             <Button Name="btnDelete" Content="Delete" Margin="0 0 5 0" Padding="15 0 15 0"/>

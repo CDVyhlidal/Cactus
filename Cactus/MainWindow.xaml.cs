@@ -44,18 +44,16 @@ namespace Cactus
 
             // Configure Dependency Injection Container
             IWindsorContainer container = ConfigureServices();
-           // var fs = container.Resolve<IFileSwitcher>();
 
             var viewModel = container.Resolve<IMainWindowViewModel>();
-
-            // Go
-            //fs.Run();
+            DataContext = viewModel;
         }
 
         private IWindsorContainer ConfigureServices()
         {
             var container = new WindsorContainer();
             container.Register(Component.For<IFileSwitcher>().ImplementedBy<FileSwitcher>());
+            container.Register(Component.For<IEntryLoader>().ImplementedBy<EntryLoader>());
             container.Register(Component.For<IEntryManager>().ImplementedBy<EntryManager>());
             container.Register(Component.For<IProcessManager>().ImplementedBy<ProcessManager>());
             container.Register(Component.For<IVersionManager>().ImplementedBy<VersionManager>());
