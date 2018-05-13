@@ -1,4 +1,5 @@
 ﻿using Cactus.Interfaces;
+using Cactus.ViewModels;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using System;
@@ -29,10 +30,12 @@ namespace Cactus
 
             // Configure Dependency Injection Container
             IWindsorContainer container = ConfigureServices();
-            var fs = container.Resolve<IFileSwitcher>();
+           // var fs = container.Resolve<IFileSwitcher>();
+
+            var viewModel = container.Resolve<IMainWindowViewModel>();
 
             // Go
-            fs.Run();
+            //fs.Run();
         }
 
         private IWindsorContainer ConfigureServices()
@@ -44,6 +47,7 @@ namespace Cactus
             container.Register(Component.For<IVersionManager>().ImplementedBy<VersionManager>());
             container.Register(Component.For<ILogger>().ImplementedBy<Logger>());
             container.Register(Component.For<IRegistryService>().ImplementedBy<RegistryService>());
+            container.Register(Component.For<IMainWindowViewModel>().ImplementedBy<MainWindowViewModel>());
             return container;
         }
     }

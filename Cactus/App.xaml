@@ -4,6 +4,12 @@
              xmlns:local="clr-namespace:Cactus"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/PresentationFramework.Aero;component/themes/Aero.NormalColor.xaml"/>
+                <!--<ResourceDictionary Source="/PresentationFramework.Classic;component/themes/Classic.xaml"/>-->
+                <!--<ResourceDictionary Source="/PresentationFramework.Luna;component/themes/Luna.NormalColor.xaml"/>-->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
