@@ -37,12 +37,12 @@
             <TextBox Name="txtRootDir" Text="D:\Games\Diablo II\"/>
         </DockPanel>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Height="25">
-            <Button Name="btnAdd" Content="Add" Margin="0 0 5 0"/>
-            <Button Name="btnEdit" Content="Edit" Margin="0 0 5 0"/>
-            <Button Name="btnDelete" Content="Delete" Margin="0 0 5 0"/>
-            <Button Name="btnMoveUp" Content="Up" Margin="0 0 5 0"/>
-            <Button Name="btnMoveDown" Content="Down" Margin="0 0 5 0"/>
-            <Button Name="btnAbout" Content="About" Margin="0 0 5 0"/>
+            <Button Name="btnAdd" Content="Add" Command="{Binding AddCommand}" Margin="0 0 5 0"/>
+            <Button Name="btnEdit" Content="Edit" Command="{Binding EditCommand}" Margin="0 0 5 0"/>
+            <Button Name="btnDelete" Content="Delete" Command="{Binding DeleteCommand}" Margin="0 0 5 0"/>
+            <Button Name="btnMoveUp" Content="Up" Command="{Binding UpCommand}" Margin="0 0 5 0"/>
+            <Button Name="btnMoveDown" Content="Down" Command="{Binding DownCommand}" Margin="0 0 5 0"/>
+            <Button Name="btnAbout" Content="About" Command="{Binding AboutCommand}" Margin="0 0 5 0"/>
             <Button Name="btnLaunch" Content="Launch" Command="{Binding LaunchCommand}"/>
         </StackPanel>
     </StackPanel>
