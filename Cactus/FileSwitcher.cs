@@ -16,11 +16,15 @@ namespace Cactus
     {
         private IEntryManager _entries;
         private IPatchFileGenerator _patchFileGenerator;
+        private IProcessManager _processManager;
 
-        public FileSwitcher(IEntryManager entries, IPatchFileGenerator patchFileGenerator)
+        private readonly string RootDirectory = @"D:\Games\Diablo II";
+
+        public FileSwitcher(IEntryManager entries, IPatchFileGenerator patchFileGenerator, IProcessManager processManager)
         {
             _entries = entries;
             _patchFileGenerator = patchFileGenerator;
+            _processManager = processManager;
         }
 
         public void Run(EntryModel entry)
@@ -43,6 +47,7 @@ namespace Cactus
             else if (lastRanEntry.Label == entry.Label && lastRanEntry.IsExpansion == entry.IsExpansion)
             {
                 Console.WriteLine("Running the same version, no change needed.");
+                _processManager.Launch(lastRanEntry);
             }
             else
             {

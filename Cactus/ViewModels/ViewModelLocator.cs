@@ -1,4 +1,5 @@
 using Cactus.Interfaces;
+using Cactus.Models;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 
@@ -32,6 +33,7 @@ namespace Cactus.ViewModels
             container.Register(Component.For<IRegistryService>().ImplementedBy<RegistryService>());
             container.Register(Component.For<IMainWindowViewModel>().ImplementedBy<MainWindowViewModel>());
             container.Register(Component.For<IPatchFileGenerator>().ImplementedBy<PatchFileGenerator>());
+            container.Register(Component.For<IConfiguration>().ImplementedBy<Configuration>());
             return container;
         }
 

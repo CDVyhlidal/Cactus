@@ -10,13 +10,16 @@ namespace Cactus.Models
         [JsonProperty("Version", Order = 2)]
         public string Version { get; set; }
 
-        [JsonProperty("Flags", Order = 3)]
+        [JsonProperty("Path", Order = 3)]
+        public string Path { get; set; }
+
+        [JsonProperty("Flags", Order = 4)]
         public string Flags { get; set; }
 
-        [JsonProperty("IsExpansion", Order = 4)]
+        [JsonProperty("IsExpansion", Order = 5)]
         public bool IsExpansion { get; set; }
 
-        [JsonProperty("WasLastRan", Order = 5)]
+        [JsonProperty("WasLastRan", Order = 6)]
         public bool WasLastRan { get; set; }
     }
 }

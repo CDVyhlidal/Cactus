@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Cactus.Interfaces
 {
-    public interface IProcessManager
+    public interface IConfiguration
     {
-        int Launch(EntryModel entry);
+        string RootDirectory { get; set; }
+        Dictionary<string, EntryModel> Entries { get; set; }
     }
 }

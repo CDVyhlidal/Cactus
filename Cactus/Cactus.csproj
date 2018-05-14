@@ -98,6 +98,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="EntryLoader.cs" />
+    <Compile Include="Interfaces\IConfiguration.cs" />
     <Compile Include="Interfaces\IEntryLoader.cs" />
     <Compile Include="Interfaces\IFileSwitcher.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Interfaces\IRegistryService.cs" />
     <Compile Include="Interfaces\IVersionManager.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\VersionModel.cs" />
     <Compile Include="PatchFileGenerator.cs" />
     <Compile Include="ProcessManager.cs" />

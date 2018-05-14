@@ -17,14 +17,16 @@ namespace Cactus
                 new EntryModel()
                 {
                     Label = "Singling Classic 1.14d",
+                    Path = @"D:\Games\Diablo II\Game.exe",
                     Version = "1.14d",
-                    Flags = "-w -ns -3dfx",
+                    Flags = "-w -ns",
                     IsExpansion = false,
                     WasLastRan = true
                 },
                 new EntryModel()
                 {
                     Label = "Singling Expansion 1.14d",
+                    Path = @"D:\Games\Diablo II\Game.exe",
                     Version = "1.14d",
                     Flags = "-w -ns -3dfx",
                     IsExpansion = true,
@@ -33,6 +35,7 @@ namespace Cactus
                 new EntryModel()
                 {
                     Label = "Singling 1.10",
+                    Path = @"D:\Games\Diablo II\Game.exe",
                     Version = "1.00",
                     Flags = "-w -ns -3dfx",
                     IsExpansion = false,
