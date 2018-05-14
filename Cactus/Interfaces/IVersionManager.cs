@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cactus.Interfaces
+﻿namespace Cactus.Interfaces
 {
     public interface IVersionManager
     {
+        bool Is100(string version);
+        bool Is107(string version);
+        bool Is107Beta(string version);
+        bool Is114OrNewer(string version);
+        bool IsPreLod(string version);
     }
 }

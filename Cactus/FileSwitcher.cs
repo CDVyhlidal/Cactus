@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace Cactus
 {
+    /// <summary>
+    /// This class is responsible for the file switching that occurs when the user
+    /// requests to run a version of Diablo II.
+    /// </summary>
     public class FileSwitcher : IFileSwitcher
     {
         private IEntryManager _entries;
@@ -23,11 +27,12 @@ namespace Cactus
             // If we are switching entries, then do what you need to do to get the files in the correct order.
             Console.WriteLine("hello");
 
-            if (_entries.LastRan == null)
+            var lastRanEntry = _entries.LastRan;
+            if (lastRanEntry == null)
             {
 
             }
-            //else if (_entries.LastRan == "test")
+            //else if (lastRanEntry)
             //{
 
             //}
@@ -36,6 +41,5 @@ namespace Cactus
 
             }
         }
-
     }
 }

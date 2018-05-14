@@ -9,9 +9,25 @@ using System.Threading.Tasks;
 
 namespace Cactus
 {
+    /// <summary>
+    /// This class is responsible for managing the entries.
+    /// 
+    /// - Contains a collection of Entries
+    /// - Adding, Editing, and Deletion of Entries
+    /// </summary>
     public class EntryManager : IEntryManager
     {
-        public bool? LastRan { get; set; }
+        public EntryModel LastRan
+        {
+            get
+            {
+                foreach(var entry in _entries)
+                {
+                    if (entry.WasLastRan) return entry;
+                }
+                return null;
+            }
+        }
 
         public ObservableCollection<EntryModel> _entries;
 
