@@ -9,7 +9,7 @@
         DataContext="{Binding MainWindow, Source={StaticResource Locator}}">
 
     <StackPanel Margin="10">
-        <ListView Height="150" Margin="0 0 0 10" ItemsSource="{Binding Entries}">
+        <ListView Name="EntriesListView" Height="150" Margin="0 0 0 10" ItemsSource="{Binding Entries}" SelectedItem="{Binding SelectedEntry}" SelectionMode="Single">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="60" DisplayMemberBinding="{Binding Version}" Header="Version"/>

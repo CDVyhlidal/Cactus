@@ -68,7 +68,7 @@ namespace Cactus
         public bool RequiresPatchFile(string version)
         {
             var currentVersionIndex = FindIndex(version);
-            return currentVersionIndex == FindIndex("1.00") || currentVersionIndex == FindIndex("1.07");
+            return currentVersionIndex != FindIndex("1.00") && currentVersionIndex != FindIndex("1.07");
         }
 
         private int FindIndex(string version)

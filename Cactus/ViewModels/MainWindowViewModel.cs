@@ -3,11 +3,7 @@ using Cactus.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cactus.ViewModels
 {
@@ -15,6 +11,8 @@ namespace Cactus.ViewModels
     {
         private IEntryManager _entryManager;
         private IFileSwitcher _fileSwitcher;
+
+        public EntryModel SelectedEntry { get; set; }
 
         // Commands
         public RelayCommand AddCommand { get; private set; }
@@ -88,7 +86,7 @@ namespace Cactus.ViewModels
 
         public void Launch()
         {
-            _fileSwitcher.Run();
+            _fileSwitcher.Run(SelectedEntry);
         }
     }
 }

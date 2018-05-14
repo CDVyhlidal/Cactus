@@ -1,4 +1,5 @@
 ﻿using Cactus.Interfaces;
+using Cactus.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,26 +23,30 @@ namespace Cactus
             _patchFileGenerator = patchFileGenerator;
         }
 
-        public void Run()
+        public void Run(EntryModel entry)
         {
+            if (entry == null)
+            {
+                Console.WriteLine("No element was selected. Skipping.");
+                return;
+            }
+
             // If nothing was ever ran, then ..
             // If what we are running matches what we last ran, then go directly
             // If we are switching entries, then do what you need to do to get the files in the correct order.
-            Console.WriteLine("hello");
-
             var lastRanEntry = _entries.LastRan;
 
             if (lastRanEntry == null)
             {
-
+                Console.WriteLine("No version was ever ran. Running this and setting it as main version.");
             }
-            //else if (lastRanEntry)
-            //{
-
-            //}
+            else if (lastRanEntry.Label == entry.Label && lastRanEntry.IsExpansion == entry.IsExpansion)
+            {
+                Console.WriteLine("Running the same version, no change needed.");
+            }
             else
             {
-
+                Console.WriteLine("A different version has been selected. Switching.");
             }
         }
     }

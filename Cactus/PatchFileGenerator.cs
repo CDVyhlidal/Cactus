@@ -47,7 +47,7 @@ namespace Cactus
                     requiredFiles.AddRange(_required107BetaFiles);
                 }
 
-                if (!_versionManager.RequiresPatchFile(version))
+                if (_versionManager.RequiresPatchFile(version))
                 {
                     requiredFiles.Add(_patchMpqFile);
                 }
