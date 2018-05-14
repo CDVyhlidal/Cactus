@@ -102,10 +102,13 @@
     <Compile Include="Interfaces\IFileSwitcher.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Interfaces\IMainWindowViewModel.cs" />
+    <Compile Include="Interfaces\IPatchFileGenerator.cs" />
     <Compile Include="Interfaces\IProcessManager.cs" />
     <Compile Include="Interfaces\IRegistryService.cs" />
     <Compile Include="Interfaces\IVersionManager.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="Models\VersionModel.cs" />
+    <Compile Include="PatchFileGenerator.cs" />
     <Compile Include="ProcessManager.cs" />
     <Compile Include="RegistryService.cs" />
     <Compile Include="VersionManager.cs" />

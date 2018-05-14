@@ -14,10 +14,12 @@ namespace Cactus
     public class FileSwitcher : IFileSwitcher
     {
         private IEntryManager _entries;
+        private IPatchFileGenerator _patchFileGenerator;
 
-        public FileSwitcher(IEntryManager entries)
+        public FileSwitcher(IEntryManager entries, IPatchFileGenerator patchFileGenerator)
         {
             _entries = entries;
+            _patchFileGenerator = patchFileGenerator;
         }
 
         public void Run()
@@ -28,6 +30,7 @@ namespace Cactus
             Console.WriteLine("hello");
 
             var lastRanEntry = _entries.LastRan;
+
             if (lastRanEntry == null)
             {
 

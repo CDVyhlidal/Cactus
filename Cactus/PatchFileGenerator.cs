@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace Cactus
 {
     /// <summary>
-    /// This class is responsible for returning a list of all of the files corresponding
-    /// to a specific patch.
+    /// This class is responsible for returning a list of all of
+    /// the files corresponding to a specific patch.
     /// </summary>
     public class PatchFileGenerator : IPatchFileGenerator
     {
@@ -24,17 +24,36 @@ namespace Cactus
         {
             var requiredFiles = new List<string>();
 
-            // Add all common files
-            requiredFiles.AddRange(_thirdPartyLibraries);
-
-
-            // Add any remaining files that are version specific
-
-            // 1.00 doesn't have BNUpdate.exe
             if (!_versionManager.Is100(version))
             {
-                requiredFiles.AddRange(updateFile);
+                requiredFiles.AddRange(_updateFile);
             }
+
+            requiredFiles.AddRange(_thirdPartyLibraries);
+
+            if (_versionManager.Is114OrNewer(version))
+            {
+                requiredFiles.AddRange(_requiredPost113Files);
+                requiredFiles.Add(_patchMpqFile);
+            }
+            else
+            {
+                // Every other version is the same (1.00-1.13), just 1.00 and 1.07 don't have a Patch_D2.mpq.
+                requiredFiles.AddRange(_requiredPre114Files);
+
+                // 1.07.41 (1.07 Beta. Normal 1.07 (Retail) = 1.07.44) has a few extra files.
+                if (_versionManager.Is107Beta(version))
+                {
+                    requiredFiles.AddRange(_required107BetaFiles);
+                }
+
+                if (!_versionManager.RequiresPatchFile(version))
+                {
+                    requiredFiles.Add(_patchMpqFile);
+                }
+            }
+
+            return requiredFiles;
         }
 
         private readonly List<string> _thirdPartyLibraries = new List<string>()
@@ -45,7 +64,7 @@ namespace Cactus
         };
 
         // Keeping separate from commonFiles since 1.07 doesn't have it.
-        private const string patchMpqFile = "Patch_D2.mpq";
+        private const string _patchMpqFile = "Patch_D2.mpq";
 
         private readonly List<string> _commonFiles = new List<string>()
         { 

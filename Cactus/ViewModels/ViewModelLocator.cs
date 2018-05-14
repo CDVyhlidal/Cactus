@@ -31,6 +31,7 @@ namespace Cactus.ViewModels
             container.Register(Component.For<ILogger>().ImplementedBy<Logger>());
             container.Register(Component.For<IRegistryService>().ImplementedBy<RegistryService>());
             container.Register(Component.For<IMainWindowViewModel>().ImplementedBy<MainWindowViewModel>());
+            container.Register(Component.For<IPatchFileGenerator>().ImplementedBy<PatchFileGenerator>());
             return container;
         }
 

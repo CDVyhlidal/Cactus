@@ -1,10 +1,6 @@
 ﻿using Cactus.Interfaces;
 using Cactus.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cactus
 {
@@ -67,6 +63,12 @@ namespace Cactus
             int pointSeven = FindIndex("1.07");
             
             return currentVersion < pointSeven;
+        }
+
+        public bool RequiresPatchFile(string version)
+        {
+            var currentVersionIndex = FindIndex(version);
+            return currentVersionIndex == FindIndex("1.00") || currentVersionIndex == FindIndex("1.07");
         }
 
         private int FindIndex(string version)
