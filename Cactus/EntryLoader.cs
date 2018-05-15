@@ -21,7 +21,7 @@ namespace Cactus
                     Version = "1.14d",
                     Flags = "-w -ns",
                     IsExpansion = false,
-                    WasLastRan = true
+                    WasLastRan = false
                 },
                 new EntryModel()
                 {
@@ -41,7 +41,7 @@ namespace Cactus
                     IsExpansion = false,
                     WasLastRan = false
                 },
-                  new EntryModel()
+                 new EntryModel()
                 {
                     Label = "Vanilla 1.14d",
                     Path = @"D:\Games\Diablo II\Game.exe",
@@ -49,6 +49,15 @@ namespace Cactus
                     Flags = "-w -ns",
                     IsExpansion = true,
                     WasLastRan = false
+                },
+                 new EntryModel()
+                {
+                    Label = "1.13d",
+                    Path = @"D:\Games\Diablo II\Game.exe",
+                    Version = "1.13d",
+                    Flags = "-w -ns",
+                    IsExpansion = true,
+                    WasLastRan = true
                 }
             };
 

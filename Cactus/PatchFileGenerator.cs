@@ -56,6 +56,20 @@ namespace Cactus
             return requiredFiles;
         }
 
+        public List<string> ExpansionMpqs
+        {
+            get
+            {
+                return new List<string>()
+                {
+                    "d2exp.mpq",
+                    "d2xmusic.mpq",
+                    "d2xvideo.mpq",
+                    "d2xtalk.mpq"
+                };
+            }
+        }
+
         private readonly List<string> _thirdPartyLibraries = new List<string>()
         {
             "binkw32.dll",
@@ -67,7 +81,7 @@ namespace Cactus
         private const string _patchMpqFile = "Patch_D2.mpq";
 
         private readonly List<string> _commonFiles = new List<string>()
-        { 
+        {
             "Diablo II.exe",
             "Game.exe"
         };
@@ -112,14 +126,6 @@ namespace Cactus
         {
             "BlizzardError.exe",
             "SystemSurvey.exe"
-        };
-
-        private readonly List<string> expansionMPQs = new List<string>()
-        {
-            "d2exp.mpq",
-            "d2xmusic.mpq",
-            "d2xvideo.mpq",
-            "d2xtalk.mpq"
         };
     }
 }

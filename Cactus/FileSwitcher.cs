@@ -1,17 +1,13 @@
 ﻿using Cactus.Interfaces;
 using Cactus.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cactus
 {
     /// <summary>
-    /// This class is responsible for the file switching that occurs when the user
-    /// requests to run a version of Diablo II.
+    /// This class is responsible for the file switching that occurs when
+    /// the userrequests to run a version of Diablo II.
     /// </summary>
     public class FileSwitcher : IFileSwitcher
     {
@@ -21,6 +17,9 @@ namespace Cactus
         private IRegistryService _registryService;
         private ILogger _logger;
         private IPathBuilder _pathBuilder;
+
+        private EntryModel _currentEntry;
+        private EntryModel _lastRanEntry;
 
         public FileSwitcher(IEntryManager entries, IPatchFileGenerator patchFileGenerator,
                             IProcessManager processManager, IRegistryService registryService,
@@ -36,50 +35,53 @@ namespace Cactus
 
         public void Run(EntryModel entry)
         {
-            if (entry == null)
+            _currentEntry = entry;
+
+            if (_currentEntry == null)
             {
-                Console.WriteLine("No element was selected. Skipping.");
+                _logger.LogWarning("No element was selected. Skipping.");
                 return;
             }
 
-            // If nothing was ever ran, then ..
-            // If what we are running matches what we last ran, then go directly
-            // If we are switching entries, then do what you need to do to get the files in the correct order.
-            var lastRanEntry = _entries.LastRan;
+            _lastRanEntry = _entries.LastRan;
 
-            if (lastRanEntry == null)
+            if (_lastRanEntry == null)
             {
-                Console.WriteLine("No version was ever ran. Running this and setting it as main version.");
+                _logger.LogInfo("No version was ever ran. Running this and setting it as main version.");
             }
-            else if (lastRanEntry.Label == entry.Label && lastRanEntry.IsExpansion == entry.IsExpansion)
+            else if (_lastRanEntry.Label == _currentEntry.Label && _lastRanEntry.IsExpansion == _currentEntry.IsExpansion)
             {
-                Console.WriteLine("Running the same version, no change needed.");
+                _logger.LogInfo("Running the same version, no change needed.");
                 //_processManager.Launch(lastRanEntry);
             }
             else
             {
-                Console.WriteLine("A different version has been selected. Switching.");
+                _logger.LogInfo("A different version has been selected. Switching.");
 
                 // Before we switch, make sure to do validation and make sure user
                 // has the files they need before attempting to switch.
-                if (!HasRequiredFiles(entry))
+                if (!HasRequiredFiles())
                 {
                     return;
                 }
 
                 // Update Registry
+                _registryService.Update(_currentEntry);
+
                 // Switch Files
-                // What about data folder?
+                SwitchFiles();
+
                 // mark entry as last ran and store
+
                 // launch the app
-                _registryService.Update(entry);
+                //_processManager.Launch(lastRanEntry);
             }
         }
 
-        private bool HasRequiredFiles(EntryModel entry)
+        private bool HasRequiredFiles()
         {
-            var requiredFiles = _patchFileGenerator.GetRequiredFiles(entry.Version);
-            string targetRootDirectory = _pathBuilder.GetStorageDirectory(entry);
+            var requiredFiles = _patchFileGenerator.GetRequiredFiles(_currentEntry.Version);
+            string targetRootDirectory = _pathBuilder.GetStorageDirectory(_currentEntry);
 
             // Check that each of the files we need exist in the target path
             foreach (var file in requiredFiles)
@@ -94,6 +96,82 @@ namespace Cactus
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Switches the files in the root directory with the ones needed for this specific entry.
+        /// </summary>
+        private void SwitchFiles()
+        {
+            try
+            {
+                var currentVersionRequiredFiles = _patchFileGenerator.GetRequiredFiles(_lastRanEntry.Version);
+                var targetVersionRequiredFiles = _patchFileGenerator.GetRequiredFiles(_currentEntry.Version);
+
+                string rootDirectory = _pathBuilder.GetRootDirectory(_lastRanEntry);
+                string copyFromDirectory = _pathBuilder.GetStorageDirectory(_currentEntry);
+
+                // get the files for the current version and remove them from the root directory
+
+                foreach (var file in currentVersionRequiredFiles)
+                {
+                    var targetFile = Path.Combine(rootDirectory, file);
+                    Console.WriteLine("Deleting: " + targetFile);
+                    File.Delete(targetFile);
+                }
+
+                // get the files for the target version and copy them to the root directory
+                foreach (var file in targetVersionRequiredFiles)
+                {
+                    var sourceFile = Path.Combine(copyFromDirectory, file);
+                    var targetFile = Path.Combine(rootDirectory, file);
+                    Console.WriteLine($"Copying: {sourceFile} -> {targetFile}");
+                    File.Copy(sourceFile, targetFile);
+                }
+
+                // if the data folder exists in the root directory, remove it
+                // if the data folder exists in the target version directory, copy it over to root
+
+                // Move the MPQ files away if it's Classic, but make sure they are in the root if it's expansion.
+                if (_lastRanEntry.IsExpansion)
+                {
+                    // If our last entry is Expansion and current entry is Classic, then move files.
+                    if (!_currentEntry.IsExpansion)
+                    {
+                        var expansionMpqs = _patchFileGenerator.ExpansionMpqs;
+
+                        foreach (var mpqFile in expansionMpqs)
+                        {
+                            string mpqPath = Path.Combine(rootDirectory, mpqFile);
+                            string targetMpqPath = mpqPath + ".bak";
+
+                            _logger.LogInfo($"Moving: {mpqPath} -> {targetMpqPath}");
+                            File.Move(mpqPath, targetMpqPath);
+                        }
+                    }
+                }
+                else
+                {
+                    // If our last entry is Classic and current entry is Expansion, then move files.
+                    if (_currentEntry.IsExpansion)
+                    {
+                        var expansionMpqs = _patchFileGenerator.ExpansionMpqs;
+
+                        foreach (var mpqFile in expansionMpqs)
+                        {
+                            string mpqPath = Path.Combine(rootDirectory, mpqFile);
+                            string targetMpqPath = mpqPath + ".bak";
+
+                            _logger.LogInfo($"Moving: {mpqPath} -> {targetMpqPath}");
+                            File.Move(targetMpqPath, mpqPath);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
         }
     }
 }
