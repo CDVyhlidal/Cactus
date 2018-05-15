@@ -5,6 +5,9 @@
 - Make a "Debug" window where people can see all of the logged messages without
   having to open the application through the command line.
 - Test out that /data/ folder is removed and copied correctly.
+- Add checks to make sure that another D2 version cannot be switched to
+  if it's not just a flag difference.
+- Make application only allow one instance.
 
 - Long Term:
   Go through all of the code and add wrappers around any IO or
