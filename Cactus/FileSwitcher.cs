@@ -2,6 +2,7 @@
 using Cactus.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,13 +19,19 @@ namespace Cactus
         private IPatchFileGenerator _patchFileGenerator;
         private IProcessManager _processManager;
         private IRegistryService _registryService;
+        private ILogger _logger;
+        private IPathBuilder _pathBuilder;
 
-        public FileSwitcher(IEntryManager entries, IPatchFileGenerator patchFileGenerator, IProcessManager processManager, IRegistryService registryService)
+        public FileSwitcher(IEntryManager entries, IPatchFileGenerator patchFileGenerator,
+                            IProcessManager processManager, IRegistryService registryService,
+                            ILogger logger, IPathBuilder pathBuilder)
         {
             _entries = entries;
             _patchFileGenerator = patchFileGenerator;
             _processManager = processManager;
             _registryService = registryService;
+            _logger = logger;
+            _pathBuilder = pathBuilder;
         }
 
         public void Run(EntryModel entry)
@@ -55,6 +62,10 @@ namespace Cactus
 
                 // Before we switch, make sure to do validation and make sure user
                 // has the files they need before attempting to switch.
+                if (!HasRequiredFiles(entry))
+                {
+                    return;
+                }
 
                 // Update Registry
                 // Switch Files
@@ -63,6 +74,26 @@ namespace Cactus
                 // launch the app
                 _registryService.Update(entry);
             }
+        }
+
+        private bool HasRequiredFiles(EntryModel entry)
+        {
+            var requiredFiles = _patchFileGenerator.GetRequiredFiles(entry.Version);
+            string targetRootDirectory = _pathBuilder.GetStorageDirectory(entry);
+
+            // Check that each of the files we need exist in the target path
+            foreach (var file in requiredFiles)
+            {
+                string targetFile = Path.Combine(targetRootDirectory, file);
+
+                if (!File.Exists(targetFile))
+                {
+                    _logger.LogError($"The target file doesn't exist: {targetFile}");
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

@@ -34,11 +34,20 @@ namespace Cactus
                 },
                 new EntryModel()
                 {
-                    Label = "Singling 1.10",
+                    Label = "Singling 1.00",
                     Path = @"D:\Games\Diablo II\Game.exe",
                     Version = "1.00",
                     Flags = "-w -ns -3dfx",
                     IsExpansion = false,
+                    WasLastRan = false
+                },
+                  new EntryModel()
+                {
+                    Label = "Vanilla 1.14d",
+                    Path = @"D:\Games\Diablo II\Game.exe",
+                    Version = "1.14d",
+                    Flags = "-w -ns",
+                    IsExpansion = true,
                     WasLastRan = false
                 }
             };
