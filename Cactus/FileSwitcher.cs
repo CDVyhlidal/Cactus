@@ -1,5 +1,6 @@
 ﻿using Cactus.Interfaces;
 using Cactus.Models;
+using Microsoft.VisualBasic.FileIO;
 using System;
 using System.IO;
 
@@ -43,7 +44,7 @@ namespace Cactus
                 return;
             }
 
-            _lastRanEntry = _entries.LastRan;
+            _lastRanEntry = _entries.GetLastRan();
 
             if (_lastRanEntry == null)
             {
@@ -72,6 +73,10 @@ namespace Cactus
                 SwitchFiles();
 
                 // mark entry as last ran and store
+                _entries.MarkAsLastRan(_lastRanEntry, _currentEntry);
+
+                // Save Entries
+                _entries.SaveEntries();
 
                 // launch the app
                 //_processManager.Launch(lastRanEntry);
@@ -112,7 +117,6 @@ namespace Cactus
                 string copyFromDirectory = _pathBuilder.GetStorageDirectory(_currentEntry);
 
                 // get the files for the current version and remove them from the root directory
-
                 foreach (var file in currentVersionRequiredFiles)
                 {
                     var targetFile = Path.Combine(rootDirectory, file);
@@ -130,7 +134,21 @@ namespace Cactus
                 }
 
                 // if the data folder exists in the root directory, remove it
+                var rootDataDirectory = _pathBuilder.GetRootDataDirectory(_lastRanEntry);
+
+                if (Directory.Exists(rootDataDirectory))
+                {
+                    _logger.LogInfo("Deleting /data/ directory in root directory");
+                    Directory.Delete(rootDataDirectory);
+                }
+
                 // if the data folder exists in the target version directory, copy it over to root
+                var storageDataDirectory = _pathBuilder.GetStorageDataDirectory(_currentEntry);
+                if (Directory.Exists(storageDataDirectory))
+                {
+                    _logger.LogInfo("Copying /data/ directory to root directory");
+                    FileSystem.CopyDirectory(storageDataDirectory, rootDataDirectory);
+                }
 
                 // Move the MPQ files away if it's Classic, but make sure they are in the root if it's expansion.
                 if (_lastRanEntry.IsExpansion)

@@ -49,7 +49,7 @@ namespace Cactus.ViewModels
         {
             get
             {
-                return _entryManager.GetEntries();
+                return _entryManager.GetObservableEntries();
             }
         }
 

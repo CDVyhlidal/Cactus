@@ -1,10 +1,6 @@
 ﻿using Cactus.Models;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cactus.Interfaces
 {
@@ -14,7 +10,10 @@ namespace Cactus.Interfaces
     /// </summary>
     public interface IEntryManager
     {
-        EntryModel LastRan { get; }
-        ObservableCollection<EntryModel> GetEntries();
+        EntryModel GetLastRan();
+        ObservableCollection<EntryModel> GetObservableEntries();
+        List<EntryModel> GetEntries();
+        void MarkAsLastRan(EntryModel oldEntry, EntryModel newEntry);
+        void SaveEntries();
     }
 }

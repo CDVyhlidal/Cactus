@@ -1,0 +1,10 @@
+﻿- Make more checks when switching files/mpq etc so that it doesn't
+  throw an exception if the file doesn't exist.
+- Update dependency property so that when we switch versions the UI also gets updated.
+- Make all of the windows for Add/Edit/About
+- Make a "Debug" window where people can see all of the logged messages without
+  having to open the application through the command line.
+
+- Long Term:
+  Go through all of the code and add wrappers around any IO or
+  other operations so that the code can be unit tested.
