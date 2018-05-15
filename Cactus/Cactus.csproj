@@ -108,7 +108,6 @@
     <Compile Include="Interfaces\IRegistryService.cs" />
     <Compile Include="Interfaces\IVersionManager.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\VersionModel.cs" />
     <Compile Include="PatchFileGenerator.cs" />
     <Compile Include="ProcessManager.cs" />
@@ -126,7 +125,7 @@
     <Compile Include="EntryManager.cs" />
     <Compile Include="FileSwitcher.cs" />
     <Compile Include="Interfaces\IEntryManager.cs" />
-    <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="DependencyContainer.cs" />
     <Compile Include="Views\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>

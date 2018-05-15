@@ -11,18 +11,14 @@ namespace Cactus
 {
     public class ProcessManager : IProcessManager
     {
-        private readonly IConfiguration _configuration;
-
-        public ProcessManager(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
         public int Launch(EntryModel entry)
         {
-            var processInfo = new ProcessStartInfo();
-            processInfo.FileName = entry.Path;
-            processInfo.Arguments = entry.Flags;
+            var processInfo = new ProcessStartInfo
+            {
+                FileName = entry.Path,
+                Arguments = entry.Flags
+            };
+
             var process = Process.Start(processInfo);
 
            // var path = Path.Combine(_configuration.RootDirectory, entry.

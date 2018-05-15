@@ -1,22 +1,18 @@
 using Cactus.Interfaces;
-using Cactus.Models;
+using Cactus.ViewModels;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 
-namespace Cactus.ViewModels
+namespace Cactus
 {
     /// <summary>
-    /// This class contains static references to all the view models in the
-    /// application and provides an entry point for the bindings.
+    /// This class is responsible for providing all of the dependencies for the application.
     /// </summary>
-    public class ViewModelLocator
+    public class DependencyContainer
     {
         private IWindsorContainer _container;
 
-        /// <summary>
-        /// Initializes a new instance of the ViewModelLocator class.
-        /// </summary>
-        public ViewModelLocator()
+        public DependencyContainer()
         {
             _container = ConfigureServices();
         }
@@ -33,7 +29,6 @@ namespace Cactus.ViewModels
             container.Register(Component.For<IRegistryService>().ImplementedBy<RegistryService>());
             container.Register(Component.For<IMainWindowViewModel>().ImplementedBy<MainWindowViewModel>());
             container.Register(Component.For<IPatchFileGenerator>().ImplementedBy<PatchFileGenerator>());
-            container.Register(Component.For<IConfiguration>().ImplementedBy<Configuration>());
             return container;
         }
 
@@ -43,11 +38,6 @@ namespace Cactus.ViewModels
             {
                 return _container.Resolve<IMainWindowViewModel>();
             }
-        }
-        
-        public static void Cleanup()
-        {
-            // TODO Clear the ViewModels
         }
     }
 }
