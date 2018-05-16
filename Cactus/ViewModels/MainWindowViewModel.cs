@@ -53,7 +53,6 @@ namespace Cactus.ViewModels
             }
         }
 
-        // Command Functions
         public void Add()
         {
             Console.WriteLine("Add");

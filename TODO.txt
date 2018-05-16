@@ -1,12 +1,9 @@
 - Make more checks when switching files/mpq etc so that it doesn't
   throw an exception if the file doesn't exist.
-- Update dependency property so that when we switch versions the UI also gets updated.
 - Make all of the windows for Add/Edit/About
 - Make a "Debug" window where people can see all of the logged messages without
   having to open the application through the command line.
 - Test out that /data/ folder is removed and copied correctly.
-- Add checks to make sure that another D2 version cannot be switched to
-  if it's not just a flag difference.
 - Make application only allow one instance.
 
 - Long Term:

@@ -3,6 +3,7 @@ using Cactus.Models;
 using Microsoft.VisualBasic.FileIO;
 using System;
 using System.IO;
+using System.Threading;
 
 namespace Cactus
 {
@@ -53,7 +54,10 @@ namespace Cactus
             else if (_lastRanEntry.Label == _currentEntry.Label && _lastRanEntry.IsExpansion == _currentEntry.IsExpansion)
             {
                 _logger.LogInfo("Running the same version, no change needed.");
-                //_processManager.Launch(lastRanEntry);
+
+                // TODO: If the labels and game mode is the same, but just the flags are different, then allow the launch.
+                var launchThread = new Thread(() => _processManager.Launch(_lastRanEntry));
+                launchThread.Start();
             }
             else
             {
@@ -63,6 +67,14 @@ namespace Cactus
                 // has the files they need before attempting to switch.
                 if (!HasRequiredFiles())
                 {
+                    return;
+                }
+
+                // If there is an existing process running, do not allow a switch.
+                // Only identical versions can be launched.
+                if (_processManager.AreProcessesRunning)
+                {
+                    _logger.LogWarning("Another process related to another game mode/version is running. Ignoring switch request.");
                     return;
                 }
 
@@ -79,7 +91,8 @@ namespace Cactus
                 _entries.SaveEntries();
 
                 // launch the app
-                //_processManager.Launch(lastRanEntry);
+                var launchThread = new Thread(() => _processManager.Launch(_lastRanEntry));
+                launchThread.Start();
             }
         }
 

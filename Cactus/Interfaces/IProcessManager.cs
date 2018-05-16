@@ -1,14 +1,11 @@
 ﻿using Cactus.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cactus.Interfaces
 {
     public interface IProcessManager
     {
-        int Launch(EntryModel entry);
+        bool AreProcessesRunning { get; }
+        void Launch(EntryModel entry);
     }
 }
