@@ -3,9 +3,20 @@
 - Make all of the windows for Add/Edit/About
 - Make a "Debug" window where people can see all of the logged messages without
   having to open the application through the command line.
-- Test out that /data/ folder is removed and copied correctly.
 - Make application only allow one instance.
+- Check vertical and horizontal window expansions when there
+  are too many entries or the strings in label/flags are too long.
+- Display dialog boxes for important messages.
+- Play with "Edit Entry" window, fix it up, bindings, etc
 
 - Long Term:
   Go through all of the code and add wrappers around any IO or
   other operations so that the code can be unit tested.
+
+Document:
+- The Diablo II root directory is considered a replaceable directory. Which means that
+  the direction of file copies are coming in one direction, from the storage directory,
+  into the root directory. Thus, if you want to update any files in the root directory
+  (/data folder, .dlls, etc), Make sure to do this in the storage directory and not
+  the root. The file switching/replacement only happens when you switch between entries
+  that have different labels.

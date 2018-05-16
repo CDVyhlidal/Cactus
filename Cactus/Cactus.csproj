@@ -98,6 +98,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Interfaces\IEditWindowViewModel.cs" />
     <Compile Include="Interfaces\IFileSwitcher.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Interfaces\IMainWindowViewModel.cs" />
@@ -113,7 +114,12 @@
     <Compile Include="ProcessManager.cs" />
     <Compile Include="RegistryService.cs" />
     <Compile Include="VersionManager.cs" />
+    <Compile Include="ViewModels\EditWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Page Include="Views\EditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -126,6 +132,9 @@
     <Compile Include="FileSwitcher.cs" />
     <Compile Include="Interfaces\IEntryManager.cs" />
     <Compile Include="DependencyContainer.cs" />
+    <Compile Include="Views\EditView.xaml.cs">
+      <DependentUpon>EditView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>

@@ -1,9 +1,11 @@
 ﻿using Cactus.Interfaces;
 using Cactus.Models;
+using Cactus.Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace Cactus.ViewModels
 {
@@ -18,9 +20,9 @@ namespace Cactus.ViewModels
         public RelayCommand AddCommand { get; private set; }
         public RelayCommand EditCommand { get; private set; }
         public RelayCommand DeleteCommand { get; private set; }
+        public RelayCommand CopyCommand { get; private set; }
         public RelayCommand UpCommand { get; private set; }
         public RelayCommand DownCommand { get; private set; }
-        public RelayCommand AboutCommand { get; private set; }
         public RelayCommand LaunchCommand { get; private set; }
 
         public MainWindowViewModel(IEntryManager entryManager, IFileSwitcher fileSwitcher)
@@ -31,9 +33,9 @@ namespace Cactus.ViewModels
             AddCommand = new RelayCommand(Add);
             EditCommand = new RelayCommand(Edit);
             DeleteCommand = new RelayCommand(Delete);
+            CopyCommand = new RelayCommand(Copy);
             UpCommand = new RelayCommand(Up);
             DownCommand = new RelayCommand(Down);
-            AboutCommand = new RelayCommand(About);
             LaunchCommand = new RelayCommand(Launch);
         }
 
@@ -60,12 +62,19 @@ namespace Cactus.ViewModels
 
         public void Edit()
         {
-            Console.WriteLine("Edit");
+            var editWindow = new EditView();
+            editWindow.Owner = Application.Current.MainWindow;
+            editWindow.Show();
         }
 
         public void Delete()
         {
             Console.WriteLine("Delete");
+        }
+
+        public void Copy()
+        {
+            Console.WriteLine("Copy");
         }
 
         public void Up()
@@ -76,11 +85,6 @@ namespace Cactus.ViewModels
         public void Down()
         {
             Console.WriteLine("Down");
-        }
-
-        public void About()
-        {
-            Console.WriteLine("About");
         }
 
         public void Launch()

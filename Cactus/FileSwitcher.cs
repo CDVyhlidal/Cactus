@@ -9,7 +9,7 @@ namespace Cactus
 {
     /// <summary>
     /// This class is responsible for the file switching that occurs when
-    /// the userrequests to run a version of Diablo II.
+    /// the user requests to run a version of Diablo II.
     /// </summary>
     public class FileSwitcher : IFileSwitcher
     {
@@ -78,19 +78,11 @@ namespace Cactus
                     return;
                 }
 
-                // Update Registry
                 _registryService.Update(_currentEntry);
-
-                // Switch Files
                 SwitchFiles();
-
-                // mark entry as last ran and store
                 _entries.MarkAsLastRan(_lastRanEntry, _currentEntry);
-
-                // Save Entries
                 _entries.SaveEntries();
 
-                // launch the app
                 var launchThread = new Thread(() => _processManager.Launch(_lastRanEntry));
                 launchThread.Start();
             }
@@ -152,7 +144,7 @@ namespace Cactus
                 if (Directory.Exists(rootDataDirectory))
                 {
                     _logger.LogInfo("Deleting /data/ directory in root directory");
-                    Directory.Delete(rootDataDirectory);
+                    Directory.Delete(rootDataDirectory, true);
                 }
 
                 // if the data folder exists in the target version directory, copy it over to root
