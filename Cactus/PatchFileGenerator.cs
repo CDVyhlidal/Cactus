@@ -1,9 +1,5 @@
 ﻿using Cactus.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cactus
 {
@@ -23,6 +19,8 @@ namespace Cactus
         public List<string> GetRequiredFiles(string version)
         {
             var requiredFiles = new List<string>();
+
+            requiredFiles.AddRange(_commonFiles);
 
             if (!_versionManager.Is100(version))
             {

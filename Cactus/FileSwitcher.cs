@@ -180,7 +180,7 @@ namespace Cactus
                             string mpqPath = Path.Combine(rootDirectory, mpqFile);
                             string targetMpqPath = mpqPath + ".bak";
 
-                            _logger.LogInfo($"Moving: {mpqPath} -> {targetMpqPath}");
+                            _logger.LogInfo($"Moving: {targetMpqPath} -> {mpqPath}");
                             File.Move(targetMpqPath, mpqPath);
                         }
                     }
