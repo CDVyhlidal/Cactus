@@ -16,6 +16,9 @@ namespace Cactus.ViewModels
 
         public EntryModel SelectedEntry { get; set; }
 
+        // Child View Models
+        private IEditWindowViewModel _editWindowViewModel;
+
         // Commands
         public RelayCommand AddCommand { get; private set; }
         public RelayCommand EditCommand { get; private set; }
@@ -25,10 +28,11 @@ namespace Cactus.ViewModels
         public RelayCommand DownCommand { get; private set; }
         public RelayCommand LaunchCommand { get; private set; }
 
-        public MainWindowViewModel(IEntryManager entryManager, IFileSwitcher fileSwitcher)
+        public MainWindowViewModel(IEntryManager entryManager, IFileSwitcher fileSwitcher, IEditWindowViewModel editWindowViewModel)
         {
             _entryManager = entryManager;
             _fileSwitcher = fileSwitcher;
+            _editWindowViewModel = editWindowViewModel;
 
             AddCommand = new RelayCommand(Add);
             EditCommand = new RelayCommand(Edit);
@@ -62,8 +66,13 @@ namespace Cactus.ViewModels
 
         public void Edit()
         {
-            var editWindow = new EditView();
-            editWindow.Owner = Application.Current.MainWindow;
+            _editWindowViewModel.CurrentEntry = SelectedEntry;
+
+            var editWindow = new EditView()
+            {
+                Owner = Application.Current.MainWindow
+            };
+
             editWindow.Show();
         }
 

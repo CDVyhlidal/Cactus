@@ -6,7 +6,7 @@ namespace Cactus
 {
     public class VersionManager : IVersionManager
     {
-        private Dictionary<string, VersionModel> Versions = new Dictionary<string, VersionModel>()
+        private static Dictionary<string, VersionModel> Versions = new Dictionary<string, VersionModel>()
         {
             { "1.00", new VersionModel() { Version = "1.00", Order = 1 } },
             { "1.01", new VersionModel() { Version = "1.01", Order = 2 } },
@@ -36,6 +36,43 @@ namespace Cactus
             { "1.14b", new VersionModel() { Version = "1.14b", Order = 26, IsAlsoExpansion = true } },
             { "1.14d", new VersionModel() { Version = "1.14d", Order = 27, IsAlsoExpansion = true } },
         };
+
+        // TODO: All of this classic/expansion version logic can probably be simplified/optimized.
+        private static List<VersionModel> _classicVersions;
+        public List<VersionModel> ClassicVersions
+        {
+            get
+            {
+                if (_classicVersions != null) return _classicVersions;
+
+                _classicVersions = new List<VersionModel>();
+                foreach(var version in Versions)
+                {
+                    _classicVersions.Add(version.Value);
+                }
+                return _classicVersions;
+            }
+        }
+
+        private static List<VersionModel> _expansionVersions;
+        public List<VersionModel> ExpansionVersions
+        {
+            get
+            {
+                if (_expansionVersions != null) return _expansionVersions;
+
+                _expansionVersions = new List<VersionModel>();
+                foreach (var version in Versions)
+                {
+                    if (version.Value.IsAlsoExpansion)
+                    {
+                        _expansionVersions.Add(version.Value);
+                    }
+                }
+                return _expansionVersions;
+            }
+        }
+
 
         public bool Is100(string version)
         {

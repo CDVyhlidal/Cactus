@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Cactus.Models;
 
 namespace Cactus.Interfaces
 {
     public interface IEditWindowViewModel
     {
+        EntryModel CurrentEntry { get; set; }
     }
 }

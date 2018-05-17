@@ -7,11 +7,16 @@
 - Check vertical and horizontal window expansions when there
   are too many entries or the strings in label/flags are too long.
 - Display dialog boxes for important messages.
-- Play with "Edit Entry" window, fix it up, bindings, etc
+- When label is renamed, also rename folder on hard drive.
+- Should I stille expose "Last Ran" option?
+- Should I still keep a separation between classic and expansion versions?
+- Make sure window stays on top after I finish editing an entry.
 
 - Long Term:
   Go through all of the code and add wrappers around any IO or
   other operations so that the code can be unit tested.
+- Edit/Add window shouldnt have close event on code behind since
+  the app is suppose to be fully MVVM.
 
 Document:
 - The Diablo II root directory is considered a replaceable directory. Which means that

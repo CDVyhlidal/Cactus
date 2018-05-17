@@ -1,7 +1,13 @@
-﻿namespace Cactus.Interfaces
+﻿using Cactus.Models;
+using System.Collections.Generic;
+
+namespace Cactus.Interfaces
 {
     public interface IVersionManager
     {
+        List<VersionModel> ClassicVersions { get; }
+        List<VersionModel> ExpansionVersions { get; }
+
         bool Is100(string version);
         bool Is107(string version);
         bool Is107Beta(string version);

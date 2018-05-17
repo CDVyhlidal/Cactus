@@ -22,25 +22,25 @@
         </Grid.ColumnDefinitions>
 
         <Label Content="Label" Grid.Row="0" />
-        <TextBox Grid.Row="0" Grid.Column="1"/>
+        <TextBox Name="txtLabel" Text="{Binding CurrentEntry.Label}" Grid.Row="0" Grid.Column="1"/>
 
         <Label Content="Version" Grid.Row="1"/>
-        <ComboBox Grid.Row="1" Grid.Column="1"/>
+        <ComboBox Name="cmbVersions" ItemsSource="{Binding Versions}" DisplayMemberPath="Version" SelectedValue="{Binding SelectVersion}" Grid.Row="1" Grid.Column="1"/>
 
         <Label Content="Path" Grid.Row="2"/>
-        <TextBox Grid.Row="2" Grid.Column="1"/>
+        <TextBox Name="txtPath" Text="{Binding CurrentEntry.Path}" Grid.Row="2" Grid.Column="1"/>
 
         <Label Content="Flags" Grid.Row="3"/>
-        <TextBox Grid.Row="3" Grid.Column="1"/>
+        <TextBox Name="txtFlags" Text="{Binding CurrentEntry.Flags}" Grid.Row="3" Grid.Column="1"/>
 
         <StackPanel Grid.Row="4" Grid.Column="0">
-            <CheckBox Content="Expansion"/>
-            <CheckBox Content="Last Ran"/>
+            <CheckBox Name="chkIsExpansion" IsChecked="{Binding CurrentEntry.IsExpansion}" Content="Expansion"/>
+            <CheckBox Name="chkWasLastRan" IsChecked="{Binding CurrentEntry.WasLastRan}" Content="Last Ran"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="4" Grid.Column="1">
-            <Button Content="Edit" IsDefault="True"/>
-            <Button Content="Cancel" IsCancel="True"/>
+            <Button Name="btnOk" Content="Edit" IsDefault="True" Command="{Binding OkCommand}" Click="CloseWindow_Click"/>
+            <Button Name="btnCancel" Content="Cancel" IsCancel="True" Click="CloseWindow_Click"/>
         </StackPanel>
     </Grid>
 </Window>

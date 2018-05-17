@@ -81,6 +81,7 @@ namespace Cactus
                 _registryService.Update(_currentEntry);
                 SwitchFiles();
                 _entries.MarkAsLastRan(_lastRanEntry, _currentEntry);
+                _lastRanEntry = _currentEntry;
                 _entries.SaveEntries();
 
                 var launchThread = new Thread(() => _processManager.Launch(_lastRanEntry));
