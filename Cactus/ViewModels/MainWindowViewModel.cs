@@ -109,17 +109,27 @@ namespace Cactus.ViewModels
 
         public void Copy()
         {
-            Console.WriteLine("Copy");
+            if (SelectedEntry == null)
+            {
+                MessageBox.Show("No entry to copy was selected.");
+                return;
+            }
+
+            _entryManager.Copy(SelectedEntry);
+            _entryManager.SaveEntries();
+
+            // Get new entries so UI refreshes.
+            Entries = new ObservableCollection<EntryModel>(_entryManager.GetEntries());
         }
 
         public void Up()
         {
-            Console.WriteLine("Up");
+            MessageBox.Show("This button has not been implemented yet.");
         }
 
         public void Down()
         {
-            Console.WriteLine("Down");
+            MessageBox.Show("This button has not been implemented yet.");
         }
 
         public void Launch()

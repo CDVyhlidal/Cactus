@@ -4,6 +4,7 @@ using Microsoft.VisualBasic.FileIO;
 using System;
 using System.IO;
 using System.Threading;
+using System.Windows;
 
 namespace Cactus
 {
@@ -41,7 +42,13 @@ namespace Cactus
 
             if (_currentEntry == null)
             {
-                _logger.LogWarning("No element was selected. Skipping.");
+                MessageBox.Show("No entry was selected. Choose an entry and try again.");
+                return;
+            }
+
+            if (String.IsNullOrWhiteSpace(_currentEntry.Label))
+            {
+                MessageBox.Show("Cannot run an entry that has no label.");
                 return;
             }
 
@@ -90,7 +97,7 @@ namespace Cactus
                 // Only identical versions can be launched.
                 if (_processManager.AreProcessesRunning)
                 {
-                    _logger.LogWarning("Another process related to another game mode/version is running. Ignoring switch request.");
+                    MessageBox.Show("Another process related to another game mode/version is running. Ignoring switch request.");
                     return;
                 }
 
@@ -117,7 +124,7 @@ namespace Cactus
 
                 if (!File.Exists(targetFile))
                 {
-                    _logger.LogError($"The target file doesn't exist: {targetFile}");
+                    MessageBox.Show($"The target file doesn't exist:\n\n{targetFile}");
                     return false;
                 }
             }

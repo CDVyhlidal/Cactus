@@ -47,32 +47,38 @@ namespace Cactus.ViewModels
                 return;
             }
 
-            var oldStorageDirectory = _pathBuilder.GetStorageDirectory(_oldEntry);
-            var newStorageDirectory = _pathBuilder.GetStorageDirectory(CurrentEntry);
-
-            if (Directory.Exists(oldStorageDirectory))
+            // If the oldEntry's label is null, that means that the user made a copy of an
+            // entry and now is trying to rename it. No renaming of directories needs to
+            // happen here. Just saving.
+            if (!String.IsNullOrWhiteSpace(_oldEntry.Label))
             {
-                // If this entry is currently running, then we can't complete this
-                // operation since the game is still using that directory/save path.
-                if (CurrentEntry.WasLastRan && _processManager.AreProcessesRunning)
-                {
-                    Console.WriteLine("You can't edit this entry since the game is currently running and using its save directory.");
-                    Console.WriteLine("Please close all instances of Diablo II and try again.");
+                var oldStorageDirectory = _pathBuilder.GetStorageDirectory(_oldEntry);
+                var newStorageDirectory = _pathBuilder.GetStorageDirectory(CurrentEntry);
 
-                    ReverseChanges();
-                    return;
+                if (Directory.Exists(oldStorageDirectory))
+                {
+                    // If this entry is currently running, then we can't complete this
+                    // operation since the game is still using that directory/save path.
+                    if (CurrentEntry.WasLastRan && _processManager.AreProcessesRunning)
+                    {
+                        Console.WriteLine("You can't edit this entry since the game is currently running and using its save directory.");
+                        Console.WriteLine("Please close all instances of Diablo II and try again.");
+
+                        ReverseChanges();
+                        return;
+                    }
+
+                    if (oldStorageDirectory != newStorageDirectory)
+                    {
+                        Directory.Move(oldStorageDirectory, newStorageDirectory);
+                    }
                 }
 
-                if (oldStorageDirectory != newStorageDirectory)
+                // If this was the last ran entry, then we need to also update the registry path.
+                if (CurrentEntry.WasLastRan)
                 {
-                    Directory.Move(oldStorageDirectory, newStorageDirectory);
+                    _registryService.Update(CurrentEntry);
                 }
-            }
-
-            // If this was the last ran entry, then we need to also update the registry path.
-            if (CurrentEntry.WasLastRan)
-            {
-                _registryService.Update(CurrentEntry);
             }
 
             _entryManager.SaveEntries();

@@ -67,6 +67,19 @@ namespace Cactus
             }
         }
 
+        public void Copy(EntryModel entry)
+        {
+            var newEntry = new EntryModel
+            {
+                Path = entry.Path,
+                Version = entry.Version,
+                Flags = entry.Flags,
+                IsExpansion = entry.IsExpansion
+            };
+
+            _entries.Add(newEntry);
+        }
+
         /// <summary>
         /// This marks this specific entry as the last ran. Useful in situations where
         /// the user never ran a version before through this application.

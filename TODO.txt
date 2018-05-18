@@ -24,6 +24,8 @@ UI Selection Changes
   the app is suppose to be fully MVVM.
   
 - Allow double click to launch
+- All message boxes should be displayed with "Cactus" as title.
+  Make a common messagebox function for this.
 
 Tests
 ----
