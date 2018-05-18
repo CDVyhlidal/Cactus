@@ -7,8 +7,7 @@
 - Check vertical and horizontal window expansions when there
   are too many entries or the strings in label/flags are too long.
 - Display dialog boxes for important messages.
-- When label is renamed, also rename folder on hard drive.
-- Should I stille expose "Last Ran" option?
+- Should I still expose "Last Ran" option?
 - Should I still keep a separation between classic and expansion versions?
 - Make sure window stays on top after I finish editing an entry.
 
@@ -25,3 +24,6 @@ Document:
   (/data folder, .dlls, etc), Make sure to do this in the storage directory and not
   the root. The file switching/replacement only happens when you switch between entries
   that have different labels.
+
+- You cannot edit an entry that is currently being ran. Only entries that are not currently
+  running can be renamed.

@@ -73,7 +73,7 @@ namespace Cactus.ViewModels
                 Owner = Application.Current.MainWindow
             };
 
-            editWindow.Show();
+            editWindow.ShowDialog();
         }
 
         public void Delete()
