@@ -5,8 +5,7 @@ namespace Cactus.Interfaces
 {
     public interface IVersionManager
     {
-        List<VersionModel> ClassicVersions { get; }
-        List<VersionModel> ExpansionVersions { get; }
+        Dictionary<string, VersionModel> Versions { get; }
 
         bool Is100(string version);
         bool Is107(string version);

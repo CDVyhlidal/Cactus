@@ -17,11 +17,9 @@ namespace Cactus.ViewModels
         private IProcessManager _processManager;
 
         public EntryModel CurrentEntry { get; set; }
-
-        // Keep the old label since if the user renames the label,
-        // we will need to know the old one in order to rename the
-        // directory on disk.
-        private string _oldLabel;
+        
+        // Keep the old entry since we need it to restore all of the UI if the user cancels.
+        private EntryModel _oldEntry;
 
         public RelayCommand OkCommand { get; private set; }
         public RelayCommand CancelCommand { get; private set; }
@@ -42,7 +40,7 @@ namespace Cactus.ViewModels
 
         private void Ok()
         {
-            var oldStorageDirectory = _pathBuilder.GetStorageDirectory(CurrentEntry, _oldLabel);
+            var oldStorageDirectory = _pathBuilder.GetStorageDirectory(_oldEntry);
             var newStorageDirectory = _pathBuilder.GetStorageDirectory(CurrentEntry);
 
             if (Directory.Exists(oldStorageDirectory))
@@ -72,14 +70,8 @@ namespace Cactus.ViewModels
 
             _entryManager.SaveEntries();
 
-            // Clear old label so next rename works.
-            _oldLabel = null;
-        }
-
-        private void ReverseChanges()
-        {
-            Label = _oldLabel;
-            _oldLabel = null;
+            // Clear old entry so next updates work properly.
+            _oldEntry = null;
         }
 
         private void Cancel()
@@ -87,13 +79,34 @@ namespace Cactus.ViewModels
             ReverseChanges();
         }
 
+        private void ReverseChanges()
+        {
+            CurrentEntry.Label = _oldEntry.Label;
+            CurrentEntry.Version = _oldEntry.Version;
+            CurrentEntry.Path = _oldEntry.Path;
+            CurrentEntry.Flags = _oldEntry.Flags;
+            CurrentEntry.IsExpansion = _oldEntry.IsExpansion;
+            CurrentEntry.WasLastRan = _oldEntry.WasLastRan;
+
+            _oldEntry = null;
+        }
+
         public string Label
         {
             get
             {
-                if (_oldLabel == null)
+                // Kinda dirty but we are using the label as the way to backup the entire object.
+                if (_oldEntry == null)
                 {
-                    _oldLabel = CurrentEntry.Label;
+                    _oldEntry = new EntryModel
+                    {
+                        Flags = CurrentEntry.Flags,
+                        Label = CurrentEntry.Label,
+                        IsExpansion = CurrentEntry.IsExpansion,
+                        Path = CurrentEntry.Path,
+                        Version = CurrentEntry.Version,
+                        WasLastRan = CurrentEntry.WasLastRan
+                    };
                 }
                 return CurrentEntry.Label;
             }
@@ -103,33 +116,23 @@ namespace Cactus.ViewModels
             }
         }
 
-        public List<VersionModel> Versions
+        public Dictionary<string, VersionModel> Versions
         {
             get
             {
-                return _versionManager.ClassicVersions;
+                return _versionManager.Versions;
             }
         }
 
-        // TODO: Can probably be simplified/optimized.
-        public VersionModel SelectVersion
+        public string SelectVersion
         {
             get
             {
-                var versions = _versionManager.ClassicVersions;
-
-                foreach (var version in versions)
-                {
-                    if (version.Version == CurrentEntry.Version)
-                    {
-                        return version;
-                    }
-                }
-                return versions[0];
+                return _versionManager.Versions[CurrentEntry.Version].Version;
             }
             set
             {
-                CurrentEntry.Version = value.Version;
+                CurrentEntry.Version = value;
             }
         }
     }

@@ -8,7 +8,6 @@
   are too many entries or the strings in label/flags are too long.
 - Display dialog boxes for important messages.
 - Should I still expose "Last Ran" option?
-- Should I still keep a separation between classic and expansion versions?
 - Make sure window stays on top after I finish editing an entry.
 
 - Long Term:
@@ -16,6 +15,12 @@
   other operations so that the code can be unit tested.
 - Edit/Add window shouldnt have close event on code behind since
   the app is suppose to be fully MVVM.
+
+Tests
+----
+- Test situation where a user has an entry that was last ran but then they delete
+  it and then run another entry. How does the file replacement, registry update,
+  actually work... should be ok though, but double check.
 
 Document:
 - The Diablo II root directory is considered a replaceable directory. Which means that

@@ -18,16 +18,6 @@ namespace Cactus
             return targetRootDirectory;
         }
 
-        /// <summary>
-        /// Similar to the above function but we will call the directory according to our preferred label.
-        /// </summary>
-        public string GetStorageDirectory(EntryModel entry, string preferredLabel)
-        {
-            string baseGameType = entry.IsExpansion ? "Expansion" : "Classic";
-            string targetRootDirectory = Path.Combine(Path.GetDirectoryName(entry.Path), baseGameType, preferredLabel);
-            return targetRootDirectory;
-        }
-
         public string GetSaveDirectory(EntryModel entry)
         {
             string targetRootDirectory = GetStorageDirectory(entry);

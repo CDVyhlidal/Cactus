@@ -25,7 +25,7 @@
         <TextBox Name="txtLabel" Text="{Binding Label}" Grid.Row="0" Grid.Column="1"/>
 
         <Label Content="Version" Grid.Row="1"/>
-        <ComboBox Name="cmbVersions" ItemsSource="{Binding Versions}" DisplayMemberPath="Version" SelectedValue="{Binding SelectVersion}" Grid.Row="1" Grid.Column="1"/>
+        <ComboBox Name="cmbVersions" ItemsSource="{Binding Versions.Keys}" SelectedValue="{Binding SelectVersion}" Grid.Row="1" Grid.Column="1"/>
 
         <Label Content="Path" Grid.Row="2"/>
         <TextBox Name="txtPath" Text="{Binding CurrentEntry.Path}" Grid.Row="2" Grid.Column="1"/>
