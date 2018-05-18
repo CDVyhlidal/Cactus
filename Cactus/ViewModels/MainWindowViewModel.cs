@@ -15,6 +15,7 @@ namespace Cactus.ViewModels
         private IFileSwitcher _fileSwitcher;
 
         public EntryModel SelectedEntry { get; set; }
+        public ObservableCollection<EntryModel> _entries;
 
         // Child View Models
         private IEditWindowViewModel _editWindowViewModel;
@@ -55,17 +56,33 @@ namespace Cactus.ViewModels
         {
             get
             {
-                return _entryManager.GetObservableEntries();
+                if (_entries != null) return _entries;
+                return new ObservableCollection<EntryModel>(_entryManager.GetEntries());
+            }
+            set
+            {
+                _entries = value;
+                RaisePropertyChanged("Entries");
             }
         }
 
         public void Add()
         {
-            Console.WriteLine("Add");
+            var addWindow = new AddView()
+            {
+                Owner = Application.Current.MainWindow
+            };
+
+            addWindow.ShowDialog();
+
+            // Get new entries so UI refreshes.
+            Entries = new ObservableCollection<EntryModel>(_entryManager.GetEntries());
         }
 
         public void Edit()
         {
+            if (SelectedEntry == null) return;
+
             _editWindowViewModel.CurrentEntry = SelectedEntry;
 
             var editWindow = new EditView()
@@ -78,7 +95,13 @@ namespace Cactus.ViewModels
 
         public void Delete()
         {
-            Console.WriteLine("Delete");
+            if (SelectedEntry == null) return;
+
+            _entryManager.Delete(SelectedEntry);
+            _entryManager.SaveEntries();
+
+            // Get new entries so UI refreshes.
+            Entries = new ObservableCollection<EntryModel>(_entryManager.GetEntries());
         }
 
         public void Copy()

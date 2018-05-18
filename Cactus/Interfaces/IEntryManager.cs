@@ -11,7 +11,8 @@ namespace Cactus.Interfaces
     public interface IEntryManager
     {
         EntryModel GetLastRan();
-        ObservableCollection<EntryModel> GetObservableEntries();
+        void Add(EntryModel entry);
+        void Delete(EntryModel entry);
         List<EntryModel> GetEntries();
         void MarkAsLastRan(EntryModel oldEntry, EntryModel newEntry);
         void SaveEntries();

@@ -28,6 +28,7 @@ namespace Cactus
             container.Register(Component.For<IRegistryService>().ImplementedBy<RegistryService>());
             container.Register(Component.For<IMainWindowViewModel>().ImplementedBy<MainWindowViewModel>());
             container.Register(Component.For<IEditWindowViewModel>().ImplementedBy<EditWindowViewModel>());
+            container.Register(Component.For<IAddWindowViewModel>().ImplementedBy<AddWindowViewModel>());
             container.Register(Component.For<IPatchFileGenerator>().ImplementedBy<PatchFileGenerator>());
             container.Register(Component.For<IPathBuilder>().ImplementedBy<PathBuilder>());
             return container;
@@ -46,6 +47,14 @@ namespace Cactus
             get
             {
                 return _container.Resolve<IEditWindowViewModel>();
+            }
+        }
+
+        public IAddWindowViewModel AddWindow
+        {
+            get
+            {
+                return _container.Resolve<IAddWindowViewModel>();
             }
         }
     }

@@ -3,11 +3,11 @@
 namespace Cactus.Views
 {
     /// <summary>
-    /// Interaction logic for EditView.xaml
+    /// Interaction logic for AddView.xaml
     /// </summary>
-    public partial class EditView : Window
+    public partial class AddView : Window
     {
-        public EditView()
+        public AddView()
         {
             InitializeComponent();
         }

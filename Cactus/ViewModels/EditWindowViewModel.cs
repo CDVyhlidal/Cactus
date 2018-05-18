@@ -40,6 +40,13 @@ namespace Cactus.ViewModels
 
         private void Ok()
         {
+            if (String.IsNullOrWhiteSpace(CurrentEntry.Label))
+            {
+                Console.WriteLine("Label cannot be empty. Aborting operation.");
+                ReverseChanges();
+                return;
+            }
+
             var oldStorageDirectory = _pathBuilder.GetStorageDirectory(_oldEntry);
             var newStorageDirectory = _pathBuilder.GetStorageDirectory(CurrentEntry);
 

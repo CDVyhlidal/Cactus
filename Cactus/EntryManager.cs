@@ -1,5 +1,6 @@
 ﻿using Cactus.Interfaces;
 using Cactus.Models;
+using GalaSoft.MvvmLight;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace Cactus
     /// - Adding, Editing, and Deletion of Entries
     /// - Saving to Json File
     /// </summary>
-    public class EntryManager : IEntryManager
+    public class EntryManager : ViewModelBase, IEntryManager
     {
         private string _jsonFile = "Entries.json";
         private string _jsonDirectory;
@@ -38,6 +39,32 @@ namespace Cactus
                 if (entry.WasLastRan) return entry;
             }
             return null;
+        }
+
+        public void Add(EntryModel entry)
+        {
+            _entries.Add(entry);
+        }
+
+        public void Delete(EntryModel entry)
+        {
+            EntryModel elementToRemove = null;
+
+            foreach (var e in _entries)
+            {
+                if (e.Label == entry.Label && e.Path == entry.Path &&
+                    e.Flags == entry.Flags && e.Version == e.Version &&
+                    e.IsExpansion == entry.IsExpansion)
+                {
+                    elementToRemove = e;
+                    break;
+                }
+            }
+
+            if (elementToRemove != null)
+            {
+                _entries.Remove(elementToRemove);
+            }
         }
 
         public void MarkAsLastRan(EntryModel oldEntry, EntryModel newEntry)
@@ -70,12 +97,6 @@ namespace Cactus
         {
             string serializedEntries = JsonConvert.SerializeObject(_entries, Formatting.Indented);
             File.WriteAllText(_jsonPath, serializedEntries);
-        }
-
-        public ObservableCollection<EntryModel> GetObservableEntries()
-        {
-            var collection = new ObservableCollection<EntryModel>(_entries);
-            return collection;
         }
     }
 }

@@ -1,6 +1,5 @@
 - Make more checks when switching files/mpq etc so that it doesn't
   throw an exception if the file doesn't exist.
-- Make all of the windows for Add/Edit/About
 - Make a "Debug" window where people can see all of the logged messages without
   having to open the application through the command line.
 - Make application only allow one instance.
@@ -9,6 +8,8 @@
 - Display dialog boxes for important messages.
 - Should I still expose "Last Ran" option?
 - Make sure window stays on top after I finish editing an entry.
+- Is label is empty, don't add, dont modify (implemented), but
+  should we let the window continue to close and still display the message?
 
 - Long Term:
   Go through all of the code and add wrappers around any IO or
