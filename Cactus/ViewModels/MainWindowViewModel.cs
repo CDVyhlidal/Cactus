@@ -29,6 +29,9 @@ namespace Cactus.ViewModels
         public RelayCommand DownCommand { get; private set; }
         public RelayCommand LaunchCommand { get; private set; }
 
+        private readonly string _appName = "Cactus";
+        private readonly string _version = "0.0.1";
+
         public MainWindowViewModel(IEntryManager entryManager, IFileSwitcher fileSwitcher, IEditWindowViewModel editWindowViewModel)
         {
             _entryManager = entryManager;
@@ -48,7 +51,7 @@ namespace Cactus.ViewModels
         {
             get
             {
-                return "Cactus";
+                return $"{_appName} - {_version}";
             }
         }
 

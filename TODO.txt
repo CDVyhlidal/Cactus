@@ -3,13 +3,19 @@
 - Make a "Debug" window where people can see all of the logged messages without
   having to open the application through the command line.
 - Make application only allow one instance.
-- Check vertical and horizontal window expansions when there
-  are too many entries or the strings in label/flags are too long.
 - Display dialog boxes for important messages.
-- Should I still expose "Last Ran" option?
 - Make sure window stays on top after I finish editing an entry.
-- Is label is empty, don't add, dont modify (implemented), but
+- Is label is empty, we won't add or modify the entry, but
   should we let the window continue to close and still display the message?
+- Should edit window use individual properties that are extracted from selected entry?
+  That way we could do more sanity checks on the data before the actual underlying
+  object gets modified.
+  
+UI Selection Changes
+- Restore selected entry after we click add and then cancel
+- Automatically select added entry
+- Automatically select the first entry after we delete an entry if available.
+- Automatically select last ran entry on app launch.
 
 - Long Term:
   Go through all of the code and add wrappers around any IO or
