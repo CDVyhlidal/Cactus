@@ -13,7 +13,8 @@ namespace Cactus.Interfaces
         void Add(EntryModel entry);
         void Delete(EntryModel entry);
         List<EntryModel> GetEntries();
-        void MarkAsLastRan(EntryModel oldEntry, EntryModel newEntry);
+        void MarkLastRan(EntryModel entry);
+        void SwapLastRan(EntryModel oldEntry, EntryModel newEntry);
         void SaveEntries();
     }
 }

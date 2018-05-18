@@ -1,7 +1,7 @@
 Cactus 0.0.1
 Jonathan Vasquez (fearedbliss) <jon@xyinn.org>
 Apache License 2.0
-Saturday, May 12, 2018
+Thursday, May 17, 2018
 ------------------------------------------------
 
 Description
@@ -33,6 +33,22 @@ Useful Additions
 
 - Singling - https://github.com/fearedbliss/singling
 
+Instructions
+---------------
+1. Run the "Cactus.exe" that is located in the "Release" folder.
+2. Have fun.
+
+
+
+
+
+
+
+
+
+
+
+--------------
 Initial Setup
 ---------------
 The following YouTube video is now available: https://www.youtube.com/watch?v=JgUVmZmnjSI

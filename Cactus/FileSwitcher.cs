@@ -50,6 +50,22 @@ namespace Cactus
             if (_lastRanEntry == null)
             {
                 _logger.LogInfo("No version was ever ran. Running this and setting it as main version.");
+
+                // Set registry
+                _registryService.Update(_currentEntry);
+
+                // Set this entry as last ran
+                _entries.MarkLastRan(_currentEntry);
+
+                // Make last ran entry this entry
+                _lastRanEntry = _currentEntry;
+
+                // Save
+                _entries.SaveEntries();
+
+                // Launch
+                var launchThread = new Thread(() => _processManager.Launch(_lastRanEntry));
+                launchThread.Start();
             }
             else if (_lastRanEntry.Label == _currentEntry.Label && _lastRanEntry.IsExpansion == _currentEntry.IsExpansion)
             {
@@ -80,7 +96,7 @@ namespace Cactus
 
                 _registryService.Update(_currentEntry);
                 SwitchFiles();
-                _entries.MarkAsLastRan(_lastRanEntry, _currentEntry);
+                _entries.SwapLastRan(_lastRanEntry, _currentEntry);
                 _lastRanEntry = _currentEntry;
                 _entries.SaveEntries();
 

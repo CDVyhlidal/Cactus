@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27703.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cactus", "Cactus\Cactus.csproj", "{43C097A3-253F-4E85-BCAA-610037B23BE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CactusTests", "CactusTests\CactusTests.csproj", "{4D1BD3D7-8284-463F-8CC0-29BC3675C9F9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{43C097A3-253F-4E85-BCAA-610037B23BE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43C097A3-253F-4E85-BCAA-610037B23BE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43C097A3-253F-4E85-BCAA-610037B23BE0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4D1BD3D7-8284-463F-8CC0-29BC3675C9F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4D1BD3D7-8284-463F-8CC0-29BC3675C9F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4D1BD3D7-8284-463F-8CC0-29BC3675C9F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4D1BD3D7-8284-463F-8CC0-29BC3675C9F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

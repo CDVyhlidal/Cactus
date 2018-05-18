@@ -67,7 +67,19 @@ namespace Cactus
             }
         }
 
-        public void MarkAsLastRan(EntryModel oldEntry, EntryModel newEntry)
+        /// <summary>
+        /// This marks this specific entry as the last ran. Useful in situations where
+        /// the user never ran a version before through this application.
+        /// </summary>
+        public void MarkLastRan(EntryModel entry)
+        {
+            entry.WasLastRan = true;
+        }
+
+        /// <summary>
+        /// Switches the two entries as the last ran. Useful when switching versions.
+        /// </summary>
+        public void SwapLastRan(EntryModel oldEntry, EntryModel newEntry)
         {
             oldEntry.WasLastRan = false;
             newEntry.WasLastRan = true;
