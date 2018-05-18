@@ -1,7 +1,7 @@
 Cactus 0.0.1
 Jonathan Vasquez (fearedbliss) <jon@xyinn.org>
 Apache License 2.0
-Thursday, May 17, 2018
+Friday, May 18, 2018
 ------------------------------------------------
 
 Description
@@ -36,50 +36,36 @@ Useful Additions
 Instructions
 ---------------
 1. Run the "Cactus.exe" that is located in the "Release" folder.
-2. Have fun.
+2. Click "Add"
 
+The first version that you add AND run must be the version that's currently
+in your Diablo II directory. So for example, if my D:\Games\Diablo II is where
+I installed Diablo II, and it currently has 1.14d, I would want to add, and run
+this version immediately through Cactus. This allows Cactus to register everything
+correctly so that things can switch properly.
 
+My first version will look like this:
 
+Label: "1.14d Vanilla"
+Version: "1.14d"
+Path: "D:\Games\Diablo II\Game.exe"
+Flags: "-w -ns"
+Expansion: [Checked]
 
+What this says is that I want to run version 1.14d of the game,
+and the files that I will be using are located in a folder called,
+"1.14d Vanilla" inside of the "Expansion" sub directory (The check box controls
+where it looks in Classic/ or Expansion folders). The flags the game will be
+launched are "-w -ns" and the path of main executable is "D:\Games\Diablo II\Game.exe".
+What Cactus does is that when it switches between versions, it deletes all of the files
+that the old entry requires from the "D:\Games\Diablo II\ directory, and then it goes
+to the directory with the Label, and copies the requires files for that particular
+version to the "D:\Games\Diablo II\" directory.
 
+If it's the first time you are running the game and you don't have the files backed up
+for this version, Cactus will automatically create a folder and copy all of those files
+over.
 
+3. Click the new entry and click Launch.
 
-
-
-
-
---------------
-Initial Setup
----------------
-The following YouTube video is now available: https://www.youtube.com/watch?v=JgUVmZmnjSI
-
-Since BVS doesn't know what version you have installed, we will need to set things up correctly
-for the first launch. After this, everything will be synchronized and work correctly.
-
-Assumptions
--------------
-- You installed Diablo II in C:\Program Files\Diablo II\
-- The current version of Diablo II in that directory is 1.07.
-
-1. Drop the "Bliss_Version_Switcher.jar" file into your Diablo II folder.
-2. Open BVS
-3. Click "Add" and fill in the information required and press Add.
-   > Check the "Expansion" check box if you want to play LoD (This doesn't affect the character creation, just what files the game uses).
-   > Select the version that is currently in the Diablo II folder (In our example, it is 1.07).
-   > Type in the label for what you want call this folder. Your saves and backed up files for this version will be located in here.
-   > Click "Set Path" and navigate to where your Game.exe is located and select it.
-   > Type in any flags you want if needed (Example: -w -ns -direct -txt). You can leave this blank.
-
-4. Start Diablo II by clicking "Launch"
-
-That's it. If everything went well, you should see your Diablo II game launch. If you aren't using the modified Game.exes in the Singling pack
-that backported the no-cd changes from 1.12 back to older versions, then make sure you have
-your Play Disc/LoD Disc inside your CD Drive (Or use ISOs that are mounted).
-
-If you downloaded the Bliss Complete Collection, then you can just drop any version
-of Diablo II from in there into the corresponding [Classic/Expansion] folder. Add another entry in BVS, and then will be able to switch to that
-version as well. The "Bliss Complete Collection" also includes Singling, GlideWrapper, and any other needed utilities.
-
-Other Information
-======
-Please check out the HELP.txt file for more scenarios, help, and advice.
+4. Enjoy.

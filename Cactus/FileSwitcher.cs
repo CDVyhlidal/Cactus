@@ -67,6 +67,9 @@ namespace Cactus
                 // Make last ran entry this entry
                 _lastRanEntry = _currentEntry;
 
+                // Backup files since this is the first time the user is running Cactus.
+                CopyFilesToStorage();
+
                 // Save
                 _entries.SaveEntries();
 
@@ -133,6 +136,58 @@ namespace Cactus
         }
 
         /// <summary>
+        /// This copies the files from the root directory over to the storage directory.
+        /// This is primarily used when the user never ran D2 before and needs the files
+        /// from the root directory to be automatically backed up the first time they run
+        /// the game.
+        /// </summary>
+        private void CopyFilesToStorage()
+        {
+            try
+            {
+                var requiredFiles = _patchFileGenerator.GetRequiredFiles(_lastRanEntry.Version);
+
+                string rootDirectory = _pathBuilder.GetRootDirectory(_lastRanEntry);
+                string targetDirectory = _pathBuilder.GetStorageDirectory(_lastRanEntry);
+
+                if (!Directory.Exists(targetDirectory))
+                { 
+                    Directory.CreateDirectory(targetDirectory);
+                }
+
+                // Create save directory (user will need to migrate/copy over files as they please)
+                string storageSaveDirectory = _pathBuilder.GetSaveDirectory(_lastRanEntry);
+                if (!Directory.Exists(storageSaveDirectory))
+                {
+                    Directory.CreateDirectory(storageSaveDirectory);
+                }
+
+                // Copy required files to storage directory
+                foreach (var file in requiredFiles)
+                {
+                    var sourceFile = Path.Combine(rootDirectory, file);
+                    var targetFile = Path.Combine(targetDirectory, file);
+                    _logger.LogInfo($"Copying: {sourceFile} -> {targetFile}");
+                    File.Copy(sourceFile, targetFile, true);
+                }
+
+                // Copy data files to storage directory if needed
+                string rootDataDirectory = _pathBuilder.GetRootDataDirectory(_lastRanEntry);
+                string storageDirectory = _pathBuilder.GetStorageDataDirectory(_lastRanEntry);
+
+                if (Directory.Exists(rootDataDirectory))
+                {
+                    _logger.LogInfo("Copying /data/ directory to root directory");
+                    FileSystem.CopyDirectory(rootDataDirectory, storageDirectory, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Switches the files in the root directory with the ones needed for this specific entry.
         /// </summary>
         private void SwitchFiles()
@@ -149,7 +204,7 @@ namespace Cactus
                 foreach (var file in currentVersionRequiredFiles)
                 {
                     var targetFile = Path.Combine(rootDirectory, file);
-                    Console.WriteLine("Deleting: " + targetFile);
+                    _logger.LogInfo("Deleting: " + targetFile);
                     File.Delete(targetFile);
                 }
 
@@ -158,8 +213,8 @@ namespace Cactus
                 {
                     var sourceFile = Path.Combine(copyFromDirectory, file);
                     var targetFile = Path.Combine(rootDirectory, file);
-                    Console.WriteLine($"Copying: {sourceFile} -> {targetFile}");
-                    File.Copy(sourceFile, targetFile);
+                    _logger.LogInfo($"Copying: {sourceFile} -> {targetFile}");
+                    File.Copy(sourceFile, targetFile, true);
                 }
 
                 // if the data folder exists in the root directory, remove it
@@ -176,7 +231,7 @@ namespace Cactus
                 if (Directory.Exists(storageDataDirectory))
                 {
                     _logger.LogInfo("Copying /data/ directory to root directory");
-                    FileSystem.CopyDirectory(storageDataDirectory, rootDataDirectory);
+                    FileSystem.CopyDirectory(storageDataDirectory, rootDataDirectory, true);
                 }
 
                 // Move the MPQ files away if it's Classic, but make sure they are in the root if it's expansion.
@@ -214,6 +269,12 @@ namespace Cactus
                         }
                     }
                 }
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                MessageBox.Show("A file is still being used (You are probably switching entries too fast?). " +
+                                "Switch back to the previous version and wait a few seconds after you exit the game " +
+                               $"so that Windows stops using the file.\n\nError\n--------\n{ex.Message}");
             }
             catch (Exception ex)
             {

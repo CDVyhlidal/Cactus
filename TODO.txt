@@ -10,12 +10,14 @@
 - Should edit window use individual properties that are extracted from selected entry?
   That way we could do more sanity checks on the data before the actual underlying
   object gets modified.
+- Should data directory be automatically backed up after all instances of d2 are finished?
   
 UI Selection Changes
 - Restore selected entry after we click add and then cancel
 - Automatically select added entry
 - Automatically select the first entry after we delete an entry if available.
 - Automatically select last ran entry on app launch.
+- When you copy an entry, automatically switch selection to it.
 
 - Long Term:
   Go through all of the code and add wrappers around any IO or

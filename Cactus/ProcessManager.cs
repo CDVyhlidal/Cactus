@@ -1,11 +1,14 @@
 ﻿using Cactus.Interfaces;
 using Cactus.Models;
+using System;
 using System.Diagnostics;
 
 namespace Cactus
 {
     public class ProcessManager : IProcessManager
     {
+        private int _processCount;
+
         public bool AreProcessesRunning
         {
             get
@@ -14,19 +17,26 @@ namespace Cactus
             }
         }
 
-        private int _processCount;
-
         public void Launch(EntryModel entry)
         {
-            var processInfo = new ProcessStartInfo
+            try
             {
-                FileName = entry.Path,
-                Arguments = entry.Flags
-            };
+                _processCount++;
 
-            _processCount++;
-            var process = Process.Start(processInfo);
-            process.WaitForExit();
+                var processInfo = new ProcessStartInfo
+                {
+                    FileName = entry.Path,
+                    Arguments = entry.Flags
+                };
+
+                var process = Process.Start(processInfo);
+                process.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
             _processCount--;
         }
     }
