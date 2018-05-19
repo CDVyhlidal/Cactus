@@ -32,8 +32,8 @@ namespace Cactus
     public class EntryManager : ViewModelBase, IEntryManager
     {
         private readonly string _jsonFile = "Entries.json";
-        private string _jsonDirectory;
-        private string _jsonPath;
+        private readonly string _jsonDirectory;
+        private readonly string _jsonPath;
         private List<EntryModel> _entries;
         private ILogger _logger;
 

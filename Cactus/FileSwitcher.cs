@@ -38,6 +38,12 @@ namespace Cactus
         private EntryModel _currentEntry;
         private EntryModel _lastRanEntry;
 
+        private enum Mode
+        {
+            Classic,
+            Expansion
+        }
+
         public FileSwitcher(IEntryManager entries, IPatchFileGenerator patchFileGenerator,
                             IProcessManager processManager, IRegistryService registryService,
                             ILogger logger, IPathBuilder pathBuilder)
@@ -53,45 +59,35 @@ namespace Cactus
         public void Run(EntryModel entry)
         {
             _currentEntry = entry;
-
-            if (String.IsNullOrWhiteSpace(_currentEntry.Label))
-            {
-                MessageBox.Show("Cannot run an entry that has no label.");
-                return;
-            }
-
             _lastRanEntry = _entries.GetLastRan();
 
             if (_lastRanEntry == null)
             {
                 _logger.LogInfo("No version was ever ran. Running this and setting it as main version.");
 
-                // Set registry
                 _registryService.Update(_currentEntry);
-
-                // Set this entry as last ran
                 _entries.MarkLastRan(_currentEntry);
-
-                // Make last ran entry this entry
                 _lastRanEntry = _currentEntry;
 
                 // Backup files since this is the first time the user is running Cactus.
                 CopyFilesToStorage();
 
-                // Save
                 _entries.SaveEntries();
 
-                // Launch
-                var launchThread = new Thread(() => _processManager.Launch(_lastRanEntry));
-                launchThread.Start();
+                LaunchGame();
             }
-            else if (_lastRanEntry.Label == _currentEntry.Label && _lastRanEntry.IsExpansion == _currentEntry.IsExpansion)
+            else if (_lastRanEntry.Label == _currentEntry.Label && _lastRanEntry.IsExpansion == _currentEntry.IsExpansion &&
+                     _lastRanEntry.Path == _currentEntry.Path && _lastRanEntry.Version == _currentEntry.Version)
             {
                 _logger.LogInfo("Running the same version, no change needed.");
 
-                // TODO: If the labels and game mode is the same, but just the flags are different, then allow the launch.
-                var launchThread = new Thread(() => _processManager.Launch(_lastRanEntry));
-                launchThread.Start();
+                // Will be using the CurrentEntry in this situation since even though the
+                // current entry is equal to the last ran entry, the launch flags may differ
+                _lastRanEntry = _currentEntry;
+
+                // The user can launch two different entries that are identical (Except for flags since
+                // you may have different flags for the same label) without switching files completely.
+                LaunchGame();
             }
             else
             {
@@ -108,7 +104,7 @@ namespace Cactus
                 // Only identical versions can be launched.
                 if (_processManager.AreProcessesRunning)
                 {
-                    MessageBox.Show("Another process related to another game mode/version is running. Ignoring switch request.");
+                    MessageBox.Show("Another process related to another game mode/version is running.");
                     return;
                 }
 
@@ -118,8 +114,7 @@ namespace Cactus
                 _lastRanEntry = _currentEntry;
                 _entries.SaveEntries();
 
-                var launchThread = new Thread(() => _processManager.Launch(_lastRanEntry));
-                launchThread.Start();
+                LaunchGame();
             }
         }
 
@@ -159,7 +154,7 @@ namespace Cactus
                 string targetDirectory = _pathBuilder.GetStorageDirectory(_lastRanEntry);
 
                 if (!Directory.Exists(targetDirectory))
-                { 
+                {
                     Directory.CreateDirectory(targetDirectory);
                 }
 
@@ -248,16 +243,7 @@ namespace Cactus
                     // If our last entry is Expansion and current entry is Classic, then move files.
                     if (!_currentEntry.IsExpansion)
                     {
-                        var expansionMpqs = _patchFileGenerator.ExpansionMpqs;
-
-                        foreach (var mpqFile in expansionMpqs)
-                        {
-                            string mpqPath = Path.Combine(rootDirectory, mpqFile);
-                            string targetMpqPath = mpqPath + ".bak";
-
-                            _logger.LogInfo($"Moving: {mpqPath} -> {targetMpqPath}");
-                            File.Move(mpqPath, targetMpqPath);
-                        }
+                        SwitchMpqs(Mode.Classic);
                     }
                 }
                 else
@@ -265,16 +251,7 @@ namespace Cactus
                     // If our last entry is Classic and current entry is Expansion, then move files.
                     if (_currentEntry.IsExpansion)
                     {
-                        var expansionMpqs = _patchFileGenerator.ExpansionMpqs;
-
-                        foreach (var mpqFile in expansionMpqs)
-                        {
-                            string mpqPath = Path.Combine(rootDirectory, mpqFile);
-                            string targetMpqPath = mpqPath + ".bak";
-
-                            _logger.LogInfo($"Moving: {targetMpqPath} -> {mpqPath}");
-                            File.Move(targetMpqPath, mpqPath);
-                        }
+                        SwitchMpqs(Mode.Expansion);
                     }
                 }
             }
@@ -288,6 +265,34 @@ namespace Cactus
             {
                 _logger.LogError(ex.Message);
             }
+        }
+
+        /// <summary>
+        /// Switches the Expansion MPQs in order to Enable/Disable Expansion or Classic modes.
+        /// </summary>
+        /// <param name="mode">Mode you want to switch to</param>
+        private void SwitchMpqs(Mode mode)
+        {
+            string rootDirectory = _pathBuilder.GetRootDirectory(_lastRanEntry);
+            var expansionMpqs = _patchFileGenerator.ExpansionMpqs;
+
+            foreach (var mpqFile in expansionMpqs)
+            {
+                string basePath = Path.Combine(rootDirectory, mpqFile);
+                string backupMpqPath = basePath + ".bak";
+
+                string sourceMpqPath = mode == Mode.Classic ? basePath : backupMpqPath;
+                string targetMpqPath = mode == Mode.Classic ? backupMpqPath : basePath;
+
+                _logger.LogInfo($"Moving: {sourceMpqPath} -> {targetMpqPath}");
+                File.Move(sourceMpqPath, targetMpqPath);
+            }
+        }
+
+        private void LaunchGame()
+        {
+            var launchThread = new Thread(() => _processManager.Launch(_lastRanEntry));
+            launchThread.Start();
         }
     }
 }

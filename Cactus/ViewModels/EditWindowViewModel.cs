@@ -32,7 +32,8 @@ namespace Cactus.ViewModels
         private IProcessManager _processManager;
 
         public EntryModel CurrentEntry { get; set; }
-        
+        public EntryModel LastRanEntry { get; set; }
+
         // Keep the old entry since we need it to restore all of the UI if the user cancels.
         private EntryModel _oldEntry;
 
@@ -66,31 +67,45 @@ namespace Cactus.ViewModels
             // made a copy of an entry and now is trying to rename it.
             if (!String.IsNullOrWhiteSpace(_oldEntry.Label))
             {
-                var oldStorageDirectory = _pathBuilder.GetStorageDirectory(_oldEntry);
-                var newStorageDirectory = _pathBuilder.GetStorageDirectory(CurrentEntry);
-
-                // We can skip renaming if it's the same label.
-                // No renaming of directories needs to happen here. Just saving.
-                if (oldStorageDirectory != newStorageDirectory)
+                // If we are switching the last ran state from on to off,
+                // then we will not rename the directory, since if we do this,
+                // we may effectively be renaming the storage folder which should
+                // remain isolated.
+                if (_oldEntry.WasLastRan == CurrentEntry.WasLastRan)
                 {
-                    if (Directory.Exists(oldStorageDirectory))
+                    var oldStorageDirectory = _pathBuilder.GetStorageDirectory(_oldEntry);
+                    var newStorageDirectory = _pathBuilder.GetStorageDirectory(CurrentEntry);
+
+                    // We can skip renaming if it's the same label.
+                    // No renaming of directories needs to happen here. Just saving.
+                    if (oldStorageDirectory != newStorageDirectory)
                     {
-                        // If this entry is currently running, then we can't complete this
-                        // operation since the game is still using that directory/save path.
-                        if (CurrentEntry.WasLastRan && _processManager.AreProcessesRunning)
+                        if (Directory.Exists(oldStorageDirectory))
                         {
-                            Console.WriteLine("You can't edit this entry since the game is currently running and using its save directory.");
-                            Console.WriteLine("Please close all instances of Diablo II and try again.");
+                            // If this entry is currently running, then we can't complete this
+                            // operation since the game is still using that directory/save path.
+                            if (CurrentEntry.WasLastRan && _processManager.AreProcessesRunning)
+                            {
+                                Console.WriteLine("You can't edit this entry since the game is currently running and using its save directory.");
+                                Console.WriteLine("Please close all instances of Diablo II and try again.");
 
-                            ReverseChanges();
-                            return;
-                        }
+                                ReverseChanges();
+                                return;
+                            }
 
-                        if (oldStorageDirectory != newStorageDirectory)
-                        {
-                            Directory.Move(oldStorageDirectory, newStorageDirectory);
+                            if (oldStorageDirectory != newStorageDirectory)
+                            {
+                                Directory.Move(oldStorageDirectory, newStorageDirectory);
+                            }
                         }
                     }
+                }
+
+                // If this entry was switched from not being the last ran to being the last ran,
+                // Then we need to disable whichever entry was last ran if there was one.
+                if (!_oldEntry.WasLastRan && CurrentEntry.WasLastRan && LastRanEntry != null)
+                {
+                    LastRanEntry.WasLastRan = false;
                 }
 
                 // If this was the last ran entry, then we need to also update the registry path.

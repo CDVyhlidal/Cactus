@@ -41,29 +41,27 @@ Blizzard released a new patch but it isn't in the Bliss Complete Collection
 Simply run the LOD updater either from the Standalone updater or from Battle.net.
 
 1. Update the game either through Battle.net or the Standalone Updater.
-2. Go to your Diablo II root directory
-3. Copy the required files that the new updater installed into a folder
-   with the label you want to use in Cactus later.
-4. Create an empty 'save' folder in the Storage Directory.
-5. Switch to this new version.
-   
-   In this example we are assuming that:
-   Diablo II Root Directory = D:\Games\Diablo II
-   Storage Directory = D:\Games\Diablo II\Expansion\MooMooFarm 1.15\
-   
-   1. Update the game
-   2. Go to the Diablo II Root Directory
-   3. Copy the required files to your Storage Directory. Since this directory
-      doesn't exist, go ahead and create it. If you don't know which are the
-      required files, then go to any entry in the Storage Directory and copy
-      whatever files are listed there from your Root Directory.
-   4. Create an empty "save" folder in the Storage Directory
-   5. Add an entry to Cactus with the Label "MooMooFarm 1.15" and version "1.15".
-   6. Done!
 
-   If the version doesn't exist in Cactus because the application hasn't been updated,
-   you might be able to get everything working by using the previous version (Since
-   maybe the requires files stayed the same.
+In Cactus:
+2. Copy the current "last ran" entry
+3. Edit the copy and name it the same as what it originally was called.
+4. Select the current "last ran" entry and click Edit.
+5. Uncheck the "Last Ran" checkbox, give it a new label, and switch the
+   version to the new version.
+
+   The new label given will be where Cactus will backup the new
+   required files and where your new characters will be saved to.
+
+   If the version doesn't exist in Cactus because the application hasn't
+   been updated, you might be able to get everything working by using
+   the previous version (Since maybe the required files stayed the same).
+
+6. If you have an old 'data' folder in the Diablo II root directory that you
+   want to backup, do it now. Cactus will automatically backup this directory
+   if it finds it when there are no "Last Ran" entries. Since this is a new
+   Diablo II version, you should delete it.
+
+7. Click Launch and Enjoy!
 
 Troubleshooting
 ================
@@ -92,7 +90,7 @@ If you screw up the install and your Diablo II directory files get messed up,
 just relax.. you don't need to reinstall. Just extract the files from the Bundle
 for the version you want and drop them into your Diablo II folder (Replacing the
 existing files in there). You already have the MPQ files, so simply replacing
-the dlls should do the trick, and re-running that version in BVS should fix it.
+the dlls should do the trick, and re-running that version in Cactus should fix it.
 
 If your MPQs get screwed... well then good game. Go get the disks.
 

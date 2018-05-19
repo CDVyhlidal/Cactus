@@ -15,13 +15,12 @@
 using Cactus.Models;
 using Cactus.Interfaces;
 using System.IO;
-using System;
 
 namespace Cactus
 {
     public class PathBuilder : IPathBuilder
     {
-        ILogger _logger;
+        private readonly ILogger _logger;
 
         public PathBuilder(ILogger logger)
         {

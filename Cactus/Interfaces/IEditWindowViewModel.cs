@@ -19,5 +19,6 @@ namespace Cactus.Interfaces
     public interface IEditWindowViewModel
     {
         EntryModel CurrentEntry { get; set; }
+        EntryModel LastRanEntry { get; set; }
     }
 }

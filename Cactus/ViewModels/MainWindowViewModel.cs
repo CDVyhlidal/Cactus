@@ -17,6 +17,7 @@ using Cactus.Models;
 using Cactus.Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -41,7 +42,7 @@ namespace Cactus.ViewModels
         public RelayCommand LaunchCommand { get; private set; }
 
         private readonly string _appName = "Cactus";
-        private readonly string _version = "0.0.4";
+        private readonly string _version = "1.0.0";
 
         public MainWindowViewModel(IEntryManager entryManager, IFileSwitcher fileSwitcher, IAddWindowViewModel addWindowViewModel, IEditWindowViewModel editWindowViewModel)
         {
@@ -75,7 +76,7 @@ namespace Cactus.ViewModels
         {
             get
             {
-               return _entries;
+                return _entries;
             }
             set
             {
@@ -121,6 +122,7 @@ namespace Cactus.ViewModels
             }
 
             _editWindowViewModel.CurrentEntry = SelectedEntry;
+            _editWindowViewModel.LastRanEntry = GetLastRanEntry();
 
             var editWindow = new EditView()
             {
@@ -208,9 +210,9 @@ namespace Cactus.ViewModels
 
             }
 
-            if (SelectedEntry.Path == null)
+            if (String.IsNullOrWhiteSpace(SelectedEntry.Path) || String.IsNullOrWhiteSpace(SelectedEntry.Label))
             {
-                MessageBox.Show("This entry has no Path set.");
+                MessageBox.Show("This entry has no path or label set.");
                 return;
             }
 
@@ -224,13 +226,24 @@ namespace Cactus.ViewModels
 
         private void SelectLastRanEntry()
         {
+            var lastRanEntry = GetLastRanEntry();
+            if (lastRanEntry != null)
+            {
+                SelectedEntry = lastRanEntry;
+            }
+        }
+
+        private EntryModel GetLastRanEntry()
+        {
             foreach (var entry in _entries)
             {
                 if (entry.WasLastRan)
                 {
-                    SelectedEntry = entry;
+                    return entry;
                 }
             }
+            return null;
         }
     }
 }
+

@@ -1,4 +1,4 @@
-Cactus 0.0.4
+Cactus 1.0.0
 Jonathan Vasquez (fearedbliss) <jon@xyinn.org>
 Apache License 2.0
 Saturday, May 19, 2018
@@ -18,32 +18,18 @@ Requirements
 ---------------
 - .NET Framework 4.6.1 +
 
-Playing Previous Versions
+Installation/Instructions
 ---------------
-- In order to play versions before 1.12, there is nothing you need to do other than
-  install the game with a 1.00, 1.03, or 1.07 disk (Basically any installer before
-  the 1.12+ bnet installer).
-  
-  If you installed D2 with the Battle.net installer, you can install Singling (or do it manually by
-  following the video below) which has the dlls that includes the fix.
-  
-  Corresponding video tutorial:
-  https://www.youtube.com/watch?v=tz1J4FyuBHE
-  
-Useful Additions
----------------
-- Bliss Complete Collection - https://xyinn.org/diablo/Bliss_Complete_Collection.7z
+1. Place the "Cactus.exe" and all of the .dlls in the "Release" folder into the
+   root of your Diablo II directory. If you don't do this, you will have issues
+   with using any 'data' folders (that are used with -direct -txt), and also
+   any battle.net updates you do will fail with an error saying that your
+   "D2XP_IX86_1xx_114a.mpq" file is corrupted. You don't need to copy any .pdb, .xml,
+   or any other files since those are only used for debugging purposes.
 
-  Contains:
-  > All the versions of Diablo II from 1.00 - 1.14d.
-  > Singling - No Gameplay Changes. Only Game Fixes and Minor Enhancements [Including Multiple D2s, No CD, Allow Hardcore, Etc]
-  > Vanilla Frosting - My Diablo II Single Player mod that merges the best from all the versions in a balanced way.
-  > GlideWrapper
+2. Run Cactus
 
-Instructions
----------------
-1. Run the "Cactus.exe" that is located in the "Release" folder.
-2. Click "Add"
+3. Click "Add"
 
 The first version that you add AND run must be the version that's currently
 in your Diablo II directory. So for example, if my D:\Games\Diablo II is where
@@ -73,14 +59,30 @@ If it's the first time you are running the game and you don't have the files bac
 for this version, Cactus will automatically create a folder and copy all of those files
 over.
 
-3. Click the new entry and click Launch.
+4. Click the new entry and click Launch.
 
-4. Enjoy.
+5. Enjoy.
 
-Data Folder
+Playing Previous Versions
 ---------------
-If you are using a 'data' folder, you will need to put Cactus.exe and all of its
-files in the root of your Diablo II directory with the Game.exe. This is because
-when Diablo II loads through Cactus, Diablo II will look for the 'data' directory
-in the directory that Cactus used to launch it. This isn't the fault of Cactus
-but rather with the way Diablo II is retrieving the data directory.
+- In order to play versions before 1.12, there is nothing you need to do other than
+  install the game with a 1.00, 1.03, or 1.07 disk (Basically any installer before
+  the 1.12+ bnet installer).
+  
+  If you installed D2 with the Battle.net installer, you can install Singling
+  (or do it manually by following the video below) which has the dlls that
+  includes the fix.
+  
+  Corresponding video tutorial:
+  https://www.youtube.com/watch?v=tz1J4FyuBHE
+  
+Useful Additions
+---------------
+- Bliss Complete Collection - https://xyinn.org/diablo/Bliss_Complete_Collection.7z
+
+  Contains:
+  > All the versions of Diablo II from 1.00 - 1.14d.
+  > Singling - No Gameplay Changes. Only Game Fixes and Minor Enhancements
+               [Including Multiple D2s, No CD, Allow Hardcore, Etc]
+  > Vanilla Frosting - My Diablo II Single Player mod that merges the best from all the versions in a balanced way.
+  > GlideWrapper

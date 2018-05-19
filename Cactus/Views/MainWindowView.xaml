@@ -9,7 +9,8 @@
         DataContext="{Binding MainWindow, Source={StaticResource Locator}}">
 
     <StackPanel Margin="10">
-        <ListView Name="EntriesListView" Height="185" Margin="0 0 0 10" ItemsSource="{Binding Entries}" SelectedItem="{Binding SelectedEntry}" SelectionMode="Single">
+        <ListView Name="EntriesListView" Height="185" Margin="0 0 0 10" ItemsSource="{Binding Entries}" SelectedItem="{Binding SelectedEntry}"
+                  SelectionMode="Single" MouseDoubleClick="EntriesListView_DoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="60" DisplayMemberBinding="{Binding Version}" Header="Version"/>

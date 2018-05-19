@@ -35,12 +35,6 @@ namespace Cactus
             var requiredFiles = new List<string>();
 
             requiredFiles.AddRange(_commonFiles);
-
-            if (!_versionManager.Is100(version))
-            {
-                requiredFiles.AddRange(_updateFile);
-            }
-
             requiredFiles.AddRange(_thirdPartyLibraries);
 
             if (_versionManager.Is114OrNewer(version))
@@ -96,11 +90,6 @@ namespace Cactus
         {
             "Diablo II.exe",
             "Game.exe"
-        };
-
-        private readonly List<string> _updateFile = new List<string>()
-        {
-            "BNUpdate.exe"
         };
 
         private readonly List<string> _required107BetaFiles = new List<string>()

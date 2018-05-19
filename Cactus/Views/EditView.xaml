@@ -34,7 +34,8 @@
         <TextBox Name="txtFlags" Text="{Binding CurrentEntry.Flags}" Grid.Row="3" Grid.Column="1"/>
 
         <StackPanel Grid.Row="4" Grid.Column="0">
-            <CheckBox Name="chkIsExpansion" IsChecked="{Binding CurrentEntry.IsExpansion}" Content="Expansion" Margin="3 7 0 0"/>
+            <CheckBox Name="chkIsExpansion" IsChecked="{Binding CurrentEntry.IsExpansion}" Content="Expansion" Margin="3 0 0 0"/>
+            <CheckBox Name="chkWasLastRan" IsChecked="{Binding CurrentEntry.WasLastRan}" Content="Last Ran" Margin="3 0 0 0"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="4" Grid.Column="1">

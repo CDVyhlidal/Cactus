@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using Cactus.Interfaces;
 using System.Windows;
 
 namespace Cactus
@@ -21,6 +22,12 @@ namespace Cactus
         public MainWindowView()
         {
             InitializeComponent();
+        }
+
+        private void EntriesListView_DoubleClick(object sender, RoutedEventArgs e)
+        {
+            var viewModel = DataContext as IMainWindowViewModel;
+            viewModel.Launch();
         }
     }
 }
