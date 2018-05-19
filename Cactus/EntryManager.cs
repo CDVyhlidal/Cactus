@@ -149,11 +149,16 @@ namespace Cactus
         {
             try
             {
+                if (_entries != null) return _entries;
+
                 if (File.Exists(_jsonPath))
                 {
-                    if (_entries != null) return _entries;
                     var serializedEntries = File.ReadAllText(_jsonPath);
                     _entries = JsonConvert.DeserializeObject<List<EntryModel>>(serializedEntries);
+                }
+                else
+                {
+                    _entries = new List<EntryModel>();
                 }
             }
             catch (Exception ex)

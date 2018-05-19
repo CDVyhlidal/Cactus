@@ -36,6 +36,9 @@ namespace Cactus.ViewModels
         public string Flags { get; set; }
         public bool IsExpansion { get; set; }
 
+        // Allow parent view model to retrieve this property.
+        public EntryModel AddedEntry { get; set; }
+
         public RelayCommand OkCommand { get; private set; }
         public RelayCommand CancelCommand { get; private set; }
 
@@ -68,6 +71,8 @@ namespace Cactus.ViewModels
             {
                 _entryManager.Add(entry);
                 _entryManager.SaveEntries();
+
+                AddedEntry = entry;
             }
             else
             {

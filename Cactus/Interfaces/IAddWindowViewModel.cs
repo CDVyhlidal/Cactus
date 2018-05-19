@@ -12,9 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using Cactus.Models;
+
 namespace Cactus.Interfaces
 {
     public interface IAddWindowViewModel
     {
+        EntryModel AddedEntry { get; set; }
     }
 }

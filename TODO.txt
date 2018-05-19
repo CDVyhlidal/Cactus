@@ -1,39 +1,22 @@
-- Make more checks when switching files/mpq etc so that it doesn't
-  throw an exception if the file doesn't exist.
-- Make a "Debug" window where people can see all of the logged messages without
-  having to open the application through the command line.
+Higher Priority
+--------------
 - Make application only allow one instance.
 - Display dialog boxes for important messages.
+	> Is label is empty, we won't add or modify the entry, but
+	  should we let the window continue to close and still display the message?
+	
+Lower Priority
+--------------
+- Allow double click to launch
+- Make more checks when switching files/mpq etc so that it doesn't
+  throw an exception if the file doesn't exist.
 - Make sure window stays on top after I finish editing an entry.
-- Is label is empty, we won't add or modify the entry, but
-  should we let the window continue to close and still display the message?
 - Should edit window use individual properties that are extracted from selected entry?
   That way we could do more sanity checks on the data before the actual underlying
   object gets modified.
 - Should data directory be automatically backed up after all instances of d2 are finished?
-  
-UI Selection Changes
-- Restore selected entry after we click add and then cancel
-- Automatically select added entry
-- Automatically select the first entry after we delete an entry if available.
-- Automatically select last ran entry on app launch.
-- When you copy an entry, automatically switch selection to it.
-
-- Long Term:
-  Go through all of the code and add wrappers around any IO or
-  other operations so that the code can be unit tested.
-- Edit/Add window shouldnt have close event on code behind since
-  the app is suppose to be fully MVVM.
-  
-- Allow double click to launch
 - All message boxes should be displayed with "Cactus" as title.
   Make a common messagebox function for this.
-
-Tests
-----
-- Test situation where a user has an entry that was last ran but then they delete
-  it and then run another entry. How does the file replacement, registry update,
-  actually work... should be ok though, but double check.
 
 Document:
 - The Diablo II root directory is considered a replaceable directory. Which means that

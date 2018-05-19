@@ -28,6 +28,7 @@ namespace Cactus.ViewModels
         private IFileSwitcher _fileSwitcher;
 
         // Child View Models
+        private IAddWindowViewModel _addWindowViewModel;
         private IEditWindowViewModel _editWindowViewModel;
 
         // Commands
@@ -42,10 +43,11 @@ namespace Cactus.ViewModels
         private readonly string _appName = "Cactus";
         private readonly string _version = "0.0.2";
 
-        public MainWindowViewModel(IEntryManager entryManager, IFileSwitcher fileSwitcher, IEditWindowViewModel editWindowViewModel)
+        public MainWindowViewModel(IEntryManager entryManager, IFileSwitcher fileSwitcher, IAddWindowViewModel addWindowViewModel, IEditWindowViewModel editWindowViewModel)
         {
             _entryManager = entryManager;
             _fileSwitcher = fileSwitcher;
+            _addWindowViewModel = addWindowViewModel;
             _editWindowViewModel = editWindowViewModel;
 
             AddCommand = new RelayCommand(Add);
@@ -103,6 +105,8 @@ namespace Cactus.ViewModels
             };
 
             addWindow.ShowDialog();
+
+            SelectedEntry = _addWindowViewModel.AddedEntry;
 
             RefreshEntriesList();
         }
