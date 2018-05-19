@@ -15,11 +15,19 @@
 using Cactus.Models;
 using Cactus.Interfaces;
 using System.IO;
+using System;
 
 namespace Cactus
 {
     public class PathBuilder : IPathBuilder
     {
+        ILogger _logger;
+
+        public PathBuilder(ILogger logger)
+        {
+            _logger = logger;
+        }
+
         public string GetRootDirectory(EntryModel entry)
         {
             return Path.GetDirectoryName(entry.Path);

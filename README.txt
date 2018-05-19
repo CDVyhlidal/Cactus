@@ -1,4 +1,4 @@
-Cactus 0.0.1
+Cactus 0.0.3
 Jonathan Vasquez (fearedbliss) <jon@xyinn.org>
 Apache License 2.0
 Friday, May 18, 2018
@@ -6,19 +6,26 @@ Friday, May 18, 2018
 
 Description
 ---------------
-This is a C#/.NET based application that will help you manage/launch multiple versions of Diablo II from a single window.
+This is a C#/.NET based application that will help you manage/launch
+multiple versions of Diablo II from a single window.
 
-This means you can easily install and play every single version of Diablo II from 1.00 to the latest 1.14d (and any other future versions)
-while maximizing your disk space (Since you won't have to keep having multiple copies of your MPQs), and having complete character isolation.
+This means you can easily install and play every single version of Diablo II
+from 1.00 to the latest 1.14d (and any other future versions) while maximizing
+your disk space (Since you won't have to keep having multiple copies of your MPQs),
+and having complete character isolation.
 
 Requirements
 ---------------
 - .NET Framework 4.6.1 +
-- In order to play versions before 1.12, there is nothing you need to do other than install the game with a 1.00, 1.03, or 1.07 disk
-  (Basically any installer before the 1.12+ bnet installer).
+
+Playing Previous Versions
+---------------
+- In order to play versions before 1.12, there is nothing you need to do other than
+  install the game with a 1.00, 1.03, or 1.07 disk (Basically any installer before
+  the 1.12+ bnet installer).
   
-  If you installed D2 with the bnet installer, you will need to read the following thread to get it to work with older versions:
-  https://www.diabloii.net/forums/threads/tech-support-installing-from-bnet-1-14d-installer-doesnt-allow-switching-back-to-1-13d.960439/
+  If you installed D2 with the Battle.net installer, you can install Singling (or do it manually by
+  following the video below) which has the dlls that includes the fix.
   
   Corresponding video tutorial:
   https://www.youtube.com/watch?v=tz1J4FyuBHE
@@ -26,12 +33,12 @@ Requirements
 Useful Additions
 ---------------
 - Bliss Complete Collection - https://xyinn.org/diablo/Bliss_Complete_Collection.7z
-  > Contains all the versions of Diablo II from 1.00 - 1.14d.
-  > Contains Singling [Game Fixes and Minor Enhancements [Including Multiple D2s, No CD, Allow Hardcore, Etc]
-  > GlideWrapper
-  > Additional Utilities
 
-- Singling - https://github.com/fearedbliss/singling
+  Contains:
+  > All the versions of Diablo II from 1.00 - 1.14d.
+  > Singling - No Gameplay Changes. Only Game Fixes and Minor Enhancements [Including Multiple D2s, No CD, Allow Hardcore, Etc]
+  > Vanilla Frosting - My Diablo II Single Player mod that merges the best from all the versions in a balanced way.
+  > GlideWrapper
 
 Instructions
 ---------------
@@ -69,3 +76,11 @@ over.
 3. Click the new entry and click Launch.
 
 4. Enjoy.
+
+Data Folder
+---------------
+If you are using a 'data' folder, you will need to put Cactus.exe and all of its
+files in the root of your Diablo II directory with the Game.exe. This is because
+when Diablo II loads through Cactus, Diablo II will look for the 'data' directory
+in the directory that Cactus used to launch it. This isn't the fault of Cactus
+but rather with the way Diablo II is retrieving the data directory.

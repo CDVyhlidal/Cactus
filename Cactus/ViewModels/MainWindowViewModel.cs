@@ -41,7 +41,7 @@ namespace Cactus.ViewModels
         public RelayCommand LaunchCommand { get; private set; }
 
         private readonly string _appName = "Cactus";
-        private readonly string _version = "0.0.3";
+        private readonly string _version = "0.0.4";
 
         public MainWindowViewModel(IEntryManager entryManager, IFileSwitcher fileSwitcher, IAddWindowViewModel addWindowViewModel, IEditWindowViewModel editWindowViewModel)
         {
@@ -59,6 +59,7 @@ namespace Cactus.ViewModels
             LaunchCommand = new RelayCommand(Launch);
 
             RefreshEntriesList();
+            SelectLastRanEntry();
         }
 
         public string Title
@@ -137,10 +138,22 @@ namespace Cactus.ViewModels
                 return;
             }
 
-            _entryManager.Delete(SelectedEntry);
+            int deletedIndex = _entryManager.Delete(SelectedEntry);
             _entryManager.SaveEntries();
 
             RefreshEntriesList();
+
+            if (_entries.Count != 0)
+            {
+                int targetIndex = 0;
+
+                // If there are still entries but it isn't the ceiling entry, then adjust one up.
+                if (deletedIndex != 0)
+                {
+                    targetIndex = deletedIndex - 1;
+                }
+                SelectedEntry = _entries[targetIndex];
+            }
         }
 
         public void Copy()
@@ -195,12 +208,29 @@ namespace Cactus.ViewModels
 
             }
 
+            if (SelectedEntry.Path == null)
+            {
+                MessageBox.Show("This entry has no Path set.");
+                return;
+            }
+
             _fileSwitcher.Run(SelectedEntry);
         }
 
         private void RefreshEntriesList()
         {
             Entries = new ObservableCollection<EntryModel>(_entryManager.GetEntries());
+        }
+
+        private void SelectLastRanEntry()
+        {
+            foreach (var entry in _entries)
+            {
+                if (entry.WasLastRan)
+                {
+                    SelectedEntry = entry;
+                }
+            }
         }
     }
 }

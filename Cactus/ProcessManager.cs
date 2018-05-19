@@ -16,6 +16,7 @@ using Cactus.Interfaces;
 using Cactus.Models;
 using System;
 using System.Diagnostics;
+using System.Windows;
 
 namespace Cactus
 {
@@ -48,7 +49,7 @@ namespace Cactus
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                MessageBox.Show($"There was an error launching the application.\n\n{ex.Message}\n\nLaunch Path: {entry.Path}");
             }
 
             _processCount--;

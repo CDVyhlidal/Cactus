@@ -59,17 +59,21 @@ namespace Cactus
             _entries.Add(entry);
         }
 
-        public void Delete(EntryModel entry)
+        public int Delete(EntryModel entry)
         {
+            int removedIndex = -1;
             EntryModel elementToRemove = null;
 
-            foreach (var e in _entries)
+            for (int i = 0; i < _entries.Count; i++)
             {
+                var e = _entries[i];
+
                 if (e.Label == entry.Label && e.Path == entry.Path &&
                     e.Flags == entry.Flags && e.Version == e.Version &&
                     e.IsExpansion == entry.IsExpansion)
                 {
                     elementToRemove = e;
+                    removedIndex = i;
                     break;
                 }
             }
@@ -78,6 +82,8 @@ namespace Cactus
             {
                 _entries.Remove(elementToRemove);
             }
+
+            return removedIndex;
         }
 
         public EntryModel Copy(EntryModel entry)

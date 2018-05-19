@@ -19,6 +19,7 @@ using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows;
 
 namespace Cactus.ViewModels
 {
@@ -54,37 +55,41 @@ namespace Cactus.ViewModels
 
         private void Ok()
         {
-            if (String.IsNullOrWhiteSpace(CurrentEntry.Label))
+            if (String.IsNullOrWhiteSpace(CurrentEntry.Label) || String.IsNullOrWhiteSpace(CurrentEntry.Path))
             {
-                Console.WriteLine("Label cannot be empty. Aborting operation.");
+                MessageBox.Show("Either your Label or your Path are empty.");
                 ReverseChanges();
                 return;
             }
 
-            // If the oldEntry's label is null, that means that the user made a copy of an
-            // entry and now is trying to rename it. No renaming of directories needs to
-            // happen here. Just saving.
+            // If the oldEntry's label is null, that means that the user
+            // made a copy of an entry and now is trying to rename it.
             if (!String.IsNullOrWhiteSpace(_oldEntry.Label))
             {
                 var oldStorageDirectory = _pathBuilder.GetStorageDirectory(_oldEntry);
                 var newStorageDirectory = _pathBuilder.GetStorageDirectory(CurrentEntry);
 
-                if (Directory.Exists(oldStorageDirectory))
+                // We can skip renaming if it's the same label.
+                // No renaming of directories needs to happen here. Just saving.
+                if (oldStorageDirectory != newStorageDirectory)
                 {
-                    // If this entry is currently running, then we can't complete this
-                    // operation since the game is still using that directory/save path.
-                    if (CurrentEntry.WasLastRan && _processManager.AreProcessesRunning)
+                    if (Directory.Exists(oldStorageDirectory))
                     {
-                        Console.WriteLine("You can't edit this entry since the game is currently running and using its save directory.");
-                        Console.WriteLine("Please close all instances of Diablo II and try again.");
+                        // If this entry is currently running, then we can't complete this
+                        // operation since the game is still using that directory/save path.
+                        if (CurrentEntry.WasLastRan && _processManager.AreProcessesRunning)
+                        {
+                            Console.WriteLine("You can't edit this entry since the game is currently running and using its save directory.");
+                            Console.WriteLine("Please close all instances of Diablo II and try again.");
 
-                        ReverseChanges();
-                        return;
-                    }
+                            ReverseChanges();
+                            return;
+                        }
 
-                    if (oldStorageDirectory != newStorageDirectory)
-                    {
-                        Directory.Move(oldStorageDirectory, newStorageDirectory);
+                        if (oldStorageDirectory != newStorageDirectory)
+                        {
+                            Directory.Move(oldStorageDirectory, newStorageDirectory);
+                        }
                     }
                 }
 

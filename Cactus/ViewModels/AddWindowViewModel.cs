@@ -16,8 +16,8 @@ using Cactus.Interfaces;
 using Cactus.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace Cactus.ViewModels
 {
@@ -67,7 +67,7 @@ namespace Cactus.ViewModels
                 IsExpansion = IsExpansion
             };
 
-            if (Label != null)
+            if (Label != null && Path != null)
             {
                 _entryManager.Add(entry);
                 _entryManager.SaveEntries();
@@ -76,7 +76,7 @@ namespace Cactus.ViewModels
             }
             else
             {
-                Console.WriteLine("Label must not be empty.");
+                MessageBox.Show("Either the Label or the Path are empty.");
             }
 
             ResetUI();
