@@ -54,12 +54,6 @@ namespace Cactus
         {
             _currentEntry = entry;
 
-            if (_currentEntry == null)
-            {
-                MessageBox.Show("No entry was selected. Choose an entry and try again.");
-                return;
-            }
-
             if (String.IsNullOrWhiteSpace(_currentEntry.Label))
             {
                 MessageBox.Show("Cannot run an entry that has no label.");

@@ -41,7 +41,7 @@ namespace Cactus.ViewModels
         public RelayCommand LaunchCommand { get; private set; }
 
         private readonly string _appName = "Cactus";
-        private readonly string _version = "0.0.2";
+        private readonly string _version = "0.0.3";
 
         public MainWindowViewModel(IEntryManager entryManager, IFileSwitcher fileSwitcher, IAddWindowViewModel addWindowViewModel, IEditWindowViewModel editWindowViewModel)
         {
@@ -113,7 +113,11 @@ namespace Cactus.ViewModels
 
         public void Edit()
         {
-            if (SelectedEntry == null) return;
+            if (SelectedEntry == null)
+            {
+                MessageBox.Show("No entry to edit was selected.");
+                return;
+            }
 
             _editWindowViewModel.CurrentEntry = SelectedEntry;
 
@@ -127,7 +131,11 @@ namespace Cactus.ViewModels
 
         public void Delete()
         {
-            if (SelectedEntry == null) return;
+            if (SelectedEntry == null)
+            {
+                MessageBox.Show("No entry to delete was selected.");
+                return;
+            }
 
             _entryManager.Delete(SelectedEntry);
             _entryManager.SaveEntries();
@@ -154,7 +162,7 @@ namespace Cactus.ViewModels
         {
             if (SelectedEntry == null)
             {
-                MessageBox.Show("No entry to move was selected.");
+                MessageBox.Show("No entry to move up was selected.");
                 return;
             }
 
@@ -168,7 +176,7 @@ namespace Cactus.ViewModels
         {
             if (SelectedEntry == null)
             {
-                MessageBox.Show("No entry to copy was selected.");
+                MessageBox.Show("No entry to move down was selected.");
                 return;
             }
 
@@ -180,6 +188,13 @@ namespace Cactus.ViewModels
 
         public void Launch()
         {
+            if (SelectedEntry == null)
+            {
+                MessageBox.Show("No entry to launch was selected.");
+                return;
+
+            }
+
             _fileSwitcher.Run(SelectedEntry);
         }
 
