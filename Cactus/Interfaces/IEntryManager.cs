@@ -26,7 +26,9 @@ namespace Cactus.Interfaces
         EntryModel GetLastRan();
         void Add(EntryModel entry);
         void Delete(EntryModel entry);
-        void Copy(EntryModel entry);
+        EntryModel Copy(EntryModel entry);
+        void MoveUp(EntryModel entry);
+        void MoveDown(EntryModel entry);
         List<EntryModel> GetEntries();
         void MarkLastRan(EntryModel entry);
         void SwapLastRan(EntryModel oldEntry, EntryModel newEntry);

@@ -34,7 +34,7 @@ namespace Cactus
         private readonly string _jsonFile = "Entries.json";
         private string _jsonDirectory;
         private string _jsonPath;
-        private List<EntryModel> _entries = new List<EntryModel>();
+        private List<EntryModel> _entries;
         private ILogger _logger;
 
         public EntryManager(ILogger logger)
@@ -80,7 +80,7 @@ namespace Cactus
             }
         }
 
-        public void Copy(EntryModel entry)
+        public EntryModel Copy(EntryModel entry)
         {
             var newEntry = new EntryModel
             {
@@ -91,6 +91,40 @@ namespace Cactus
             };
 
             _entries.Add(newEntry);
+            return newEntry;
+        }
+
+        public void MoveUp(EntryModel entry)
+        {
+            int selectedEntryIndex = _entries.FindIndex(_ => _ == entry);
+
+            // If we are already at the top, then nothing needs to be done.
+            if (selectedEntryIndex != 0)
+            {
+                // Find previous entry and swap
+                int previousEntryIndex = selectedEntryIndex - 1;
+
+                var previousEntry = _entries[previousEntryIndex];
+                _entries[previousEntryIndex] = entry;
+                _entries[selectedEntryIndex] = previousEntry;
+            }
+        }
+
+        public void MoveDown(EntryModel entry)
+        {
+            int selectedEntryIndex = _entries.FindIndex(_ => _ == entry);
+            int lastIndex = _entries.Count - 1;
+
+            // If we are already at the bottom, then nothing needs to be done.
+            if (selectedEntryIndex != lastIndex)
+            {
+                // Find next entry and swap
+                int nextEntryIndex = selectedEntryIndex + 1;
+
+                var nextEntry = _entries[nextEntryIndex];
+                _entries[nextEntryIndex] = entry;
+                _entries[selectedEntryIndex] = nextEntry;
+            }
         }
 
         /// <summary>
@@ -117,6 +151,7 @@ namespace Cactus
             {
                 if (File.Exists(_jsonPath))
                 {
+                    if (_entries != null) return _entries;
                     var serializedEntries = File.ReadAllText(_jsonPath);
                     _entries = JsonConvert.DeserializeObject<List<EntryModel>>(serializedEntries);
                 }

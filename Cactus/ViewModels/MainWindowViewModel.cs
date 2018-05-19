@@ -27,9 +27,6 @@ namespace Cactus.ViewModels
         private IEntryManager _entryManager;
         private IFileSwitcher _fileSwitcher;
 
-        public EntryModel SelectedEntry { get; set; }
-        public ObservableCollection<EntryModel> _entries;
-
         // Child View Models
         private IEditWindowViewModel _editWindowViewModel;
 
@@ -58,6 +55,8 @@ namespace Cactus.ViewModels
             UpCommand = new RelayCommand(Up);
             DownCommand = new RelayCommand(Down);
             LaunchCommand = new RelayCommand(Launch);
+
+            RefreshEntriesList();
         }
 
         public string Title
@@ -68,17 +67,31 @@ namespace Cactus.ViewModels
             }
         }
 
+        private ObservableCollection<EntryModel> _entries;
         public ObservableCollection<EntryModel> Entries
         {
             get
             {
-                if (_entries != null) return _entries;
-                return new ObservableCollection<EntryModel>(_entryManager.GetEntries());
+               return _entries;
             }
             set
             {
                 _entries = value;
                 RaisePropertyChanged("Entries");
+            }
+        }
+
+        private EntryModel _selectedEntry;
+        public EntryModel SelectedEntry
+        {
+            get
+            {
+                return _selectedEntry;
+            }
+            set
+            {
+                _selectedEntry = value;
+                RaisePropertyChanged("SelectedEntry");
             }
         }
 
@@ -91,8 +104,7 @@ namespace Cactus.ViewModels
 
             addWindow.ShowDialog();
 
-            // Get new entries so UI refreshes.
-            Entries = new ObservableCollection<EntryModel>(_entryManager.GetEntries());
+            RefreshEntriesList();
         }
 
         public void Edit()
@@ -116,8 +128,7 @@ namespace Cactus.ViewModels
             _entryManager.Delete(SelectedEntry);
             _entryManager.SaveEntries();
 
-            // Get new entries so UI refreshes.
-            Entries = new ObservableCollection<EntryModel>(_entryManager.GetEntries());
+            RefreshEntriesList();
         }
 
         public void Copy()
@@ -128,26 +139,49 @@ namespace Cactus.ViewModels
                 return;
             }
 
-            _entryManager.Copy(SelectedEntry);
+            var newEntry = _entryManager.Copy(SelectedEntry);
             _entryManager.SaveEntries();
 
-            // Get new entries so UI refreshes.
-            Entries = new ObservableCollection<EntryModel>(_entryManager.GetEntries());
+            RefreshEntriesList();
+            SelectedEntry = newEntry;
         }
 
         public void Up()
         {
-            MessageBox.Show("This button has not been implemented yet.");
+            if (SelectedEntry == null)
+            {
+                MessageBox.Show("No entry to move was selected.");
+                return;
+            }
+
+            _entryManager.MoveUp(SelectedEntry);
+            _entryManager.SaveEntries();
+
+            RefreshEntriesList();
         }
 
         public void Down()
         {
-            MessageBox.Show("This button has not been implemented yet.");
+            if (SelectedEntry == null)
+            {
+                MessageBox.Show("No entry to copy was selected.");
+                return;
+            }
+
+            _entryManager.MoveDown(SelectedEntry);
+            _entryManager.SaveEntries();
+
+            RefreshEntriesList();
         }
 
         public void Launch()
         {
             _fileSwitcher.Run(SelectedEntry);
+        }
+
+        private void RefreshEntriesList()
+        {
+            Entries = new ObservableCollection<EntryModel>(_entryManager.GetEntries());
         }
     }
 }
