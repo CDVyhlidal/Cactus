@@ -71,11 +71,6 @@ namespace Cactus
             return FindIndex("1.07") == FindIndex(version);
         }
 
-        public bool Is107Beta(string version)
-        {
-            return FindIndex("1.07.41") == FindIndex(version);
-        }
-
         public bool Is114OrNewer(string version)
         {
             return FindIndex(version) > FindIndex("1.13d");

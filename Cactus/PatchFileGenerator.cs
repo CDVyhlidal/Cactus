@@ -47,12 +47,6 @@ namespace Cactus
                 // Every other version is the same (1.00-1.13), just 1.00 and 1.07 don't have a Patch_D2.mpq.
                 requiredFiles.AddRange(_requiredPre114Files);
 
-                // 1.07.41 (1.07 Beta. Normal 1.07 (Retail) = 1.07.44) has a few extra files.
-                if (_versionManager.Is107Beta(version))
-                {
-                    requiredFiles.AddRange(_required107BetaFiles);
-                }
-
                 if (_versionManager.RequiresPatchFile(version))
                 {
                     requiredFiles.Add(_patchMpqFile);
@@ -90,13 +84,6 @@ namespace Cactus
         {
             "Diablo II.exe",
             "Game.exe"
-        };
-
-        private readonly List<string> _required107BetaFiles = new List<string>()
-        {
-            "D2OpenGL.dll",
-            "D2Server.dll",
-            "Keyhook.dll"
         };
 
         private readonly List<string> _requiredPre114Files = new List<string>()
