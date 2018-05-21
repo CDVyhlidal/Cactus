@@ -25,9 +25,9 @@ namespace Cactus.ViewModels
     {
         private IEntryManager _entryManager;
         private IVersionManager _versionManager;
-        private IRegistryService _registryService;
-        private IPathBuilder _pathBuilder;
-        private IProcessManager _processManager;
+        private readonly IRegistryService _registryService;
+        private readonly IPathBuilder _pathBuilder;
+        private readonly IProcessManager _processManager;
 
         // Properties for new entry
         public string Label { get; set; }
@@ -35,6 +35,7 @@ namespace Cactus.ViewModels
         public string Path { get; set; }
         public string Flags { get; set; }
         public bool IsExpansion { get; set; }
+        public bool IsPlugy { get; set; }
 
         // Allow parent view model to retrieve this property.
         public EntryModel AddedEntry { get; set; }
@@ -64,7 +65,8 @@ namespace Cactus.ViewModels
                 Version = Version,
                 Path = Path,
                 Flags = Flags,
-                IsExpansion = IsExpansion
+                IsExpansion = IsExpansion,
+                IsPlugy = IsPlugy
             };
 
             if (Label != null && Path != null)
@@ -94,6 +96,7 @@ namespace Cactus.ViewModels
             Path = null;
             Flags = null;
             IsExpansion = false;
+            IsPlugy = false;
         }
 
         public Dictionary<string, VersionModel> Versions

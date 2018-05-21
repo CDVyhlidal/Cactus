@@ -201,7 +201,7 @@ namespace Cactus
                 var targetVersionRequiredFiles = _patchFileGenerator.GetRequiredFiles(_currentEntry.Version);
 
                 string rootDirectory = _pathBuilder.GetRootDirectory(_lastRanEntry);
-                string copyFromDirectory = _pathBuilder.GetStorageDirectory(_currentEntry);
+                string storageDirectory = _pathBuilder.GetStorageDirectory(_currentEntry);
 
                 // get the files for the current version and remove them from the root directory
                 foreach (var file in currentVersionRequiredFiles)
@@ -214,7 +214,7 @@ namespace Cactus
                 // get the files for the target version and copy them to the root directory
                 foreach (var file in targetVersionRequiredFiles)
                 {
-                    var sourceFile = Path.Combine(copyFromDirectory, file);
+                    var sourceFile = Path.Combine(storageDirectory, file);
                     var targetFile = Path.Combine(rootDirectory, file);
                     _logger.LogInfo($"Copying: {sourceFile} -> {targetFile}");
                     File.Copy(sourceFile, targetFile, true);
@@ -225,7 +225,7 @@ namespace Cactus
 
                 if (Directory.Exists(rootDataDirectory))
                 {
-                    _logger.LogInfo("Deleting /data/ directory in root directory");
+                    _logger.LogInfo("Deleting old /data/ directory from root directory");
                     Directory.Delete(rootDataDirectory, true);
                 }
 
@@ -253,6 +253,55 @@ namespace Cactus
                     {
                         SwitchMpqs(Mode.Expansion);
                     }
+                }
+
+                // Switch PlugY files if needed
+                string plugyRootDirectory = _pathBuilder.GetPlugyRootDirectory(_currentEntry);
+                string plugyStorageDirectory = _pathBuilder.GetPlugyStorageDirectory(_currentEntry);
+
+                // Clean up old PlugY files if they exist
+                // TODO: This could be in its own function.
+                var plugyRequiredFiles = _patchFileGenerator.GetPlugyRequiredFiles;
+
+                if (Directory.Exists(plugyRootDirectory))
+                {
+                    _logger.LogInfo("Deleting old /PlugY/ directory from root directory");
+                    Directory.Delete(plugyRootDirectory, true);
+                }
+
+                foreach (var file in plugyRequiredFiles)
+                {
+                    var targetFile = Path.Combine(rootDirectory, file);
+                    if (File.Exists(file))
+                    {
+                        _logger.LogInfo("Deleting: " + targetFile);
+                        File.Delete(file);
+                    }
+                }
+
+                // Install PlugY if needed
+                if (_currentEntry.IsPlugy)
+                {
+                    if (Directory.Exists(plugyStorageDirectory))
+                    {
+                        _logger.LogInfo("Copying /PlugY/ directory to root directory");
+                        FileSystem.CopyDirectory(plugyStorageDirectory, plugyRootDirectory);
+                    }
+
+                    foreach (var file in plugyRequiredFiles)
+                    {
+                        var sourceFile = Path.Combine(storageDirectory, file);
+                        var targetFile = Path.Combine(rootDirectory, file);
+                        if (File.Exists(sourceFile))
+                        {
+                            _logger.LogInfo($"Copying: {sourceFile} -> {targetFile}");
+                            File.Copy(sourceFile, targetFile, true);
+                        }
+                    }
+
+                    // Delay the app a bit so things can settle on the disk
+                    // Or else the user may get an error when starting PlugY.
+                    Thread.Sleep(2000);
                 }
             }
             catch (UnauthorizedAccessException ex)

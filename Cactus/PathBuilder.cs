@@ -55,5 +55,15 @@ namespace Cactus
         {
             return Path.Combine(GetStorageDirectory(entry), "data");
         }
+
+        public string GetPlugyRootDirectory(EntryModel entry)
+        {
+            return Path.Combine(GetRootDirectory(entry), "PlugY");
+        }
+
+        public string GetPlugyStorageDirectory(EntryModel entry)
+        {
+            return Path.Combine(GetStorageDirectory(entry), "PlugY");
+        }
     }
 }

@@ -152,7 +152,8 @@ namespace Cactus.ViewModels
                         IsExpansion = CurrentEntry.IsExpansion,
                         Path = CurrentEntry.Path,
                         Version = CurrentEntry.Version,
-                        WasLastRan = CurrentEntry.WasLastRan
+                        WasLastRan = CurrentEntry.WasLastRan,
+                        IsPlugy = CurrentEntry.IsPlugy
                     };
                 }
                 return CurrentEntry.Label;
@@ -180,6 +181,18 @@ namespace Cactus.ViewModels
             set
             {
                 CurrentEntry.Version = value;
+            }
+        }
+
+        public bool IsPlugy
+        {
+            get
+            {
+                return CurrentEntry.IsPlugy;
+            }
+            set
+            {
+                CurrentEntry.IsPlugy = value;
             }
         }
     }

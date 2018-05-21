@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cactus.Views"
         mc:Ignorable="d"
-        Title="Edit Entry" Height="200" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterOwner"
+        Title="Edit Entry" Height="240" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterOwner"
         DataContext="{Binding EditWindow, Source={StaticResource Locator}}">
 
     <Grid>
@@ -15,30 +15,33 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="80"/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <Label Content="Label" Grid.Row="0" />
-        <TextBox Name="txtLabel" Text="{Binding Label}" Grid.Row="0" Grid.Column="1"/>
+        <TextBox Name="txtLabel" Text="{Binding Label}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
 
         <Label Content="Version" Grid.Row="1"/>
-        <ComboBox Name="cmbVersions" ItemsSource="{Binding Versions.Keys}" SelectedValue="{Binding SelectVersion}" Grid.Row="1" Grid.Column="1"/>
+        <ComboBox Name="cmbVersions" ItemsSource="{Binding Versions.Keys}" SelectedValue="{Binding SelectVersion}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
 
         <Label Content="Path" Grid.Row="2"/>
-        <TextBox Name="txtPath" Text="{Binding CurrentEntry.Path}" Grid.Row="2" Grid.Column="1"/>
+        <TextBox Name="txtPath" Text="{Binding CurrentEntry.Path}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
 
         <Label Content="Flags" Grid.Row="3"/>
-        <TextBox Name="txtFlags" Text="{Binding CurrentEntry.Flags}" Grid.Row="3" Grid.Column="1"/>
+        <TextBox Name="txtFlags" Text="{Binding CurrentEntry.Flags}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
 
-        <StackPanel Grid.Row="4" Grid.Column="0">
-            <CheckBox Name="chkIsExpansion" IsChecked="{Binding CurrentEntry.IsExpansion}" Content="Expansion" Margin="3 0 0 0"/>
-            <CheckBox Name="chkWasLastRan" IsChecked="{Binding CurrentEntry.WasLastRan}" Content="Last Ran" Margin="3 0 0 0"/>
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3">
+            <CheckBox Name="chkIsExpansion" IsChecked="{Binding CurrentEntry.IsExpansion}" Content="Expansion" Margin="5 7 0 0"/>
+            <CheckBox Name="chkIsPlugy" IsChecked="{Binding IsPlugy}" Content="PlugY" Margin="7 7 0 0"/>
+            <CheckBox Name="chkWasLastRan" IsChecked="{Binding CurrentEntry.WasLastRan}" Content="Last Ran" Margin="7 7 0 0"/>
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="4" Grid.Column="1">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
             <Button Name="btnOk" Content="Edit" IsDefault="True" Command="{Binding OkCommand}" Click="CloseWindow_Click" Padding="10 0 10 0" Margin="0 3 5 3"/>
             <Button Name="btnCancel" Content="Cancel" IsCancel="True" Command="{Binding CancelCommand}" Click="CloseWindow_Click" Padding="10 0 10 0" Margin="0 3 10 3"/>
         </StackPanel>

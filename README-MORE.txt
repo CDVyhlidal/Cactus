@@ -20,6 +20,24 @@ Diablo II/Expansion/<label>
 Diablo II/Expansion/<label>/data
 Diablo II/Expansion/<label>/save
 
+PlugY support (11.02)
+---------------
+If you are using PlugY, then make sure to point your Path to "PlugY.exe"
+rather than "Game.exe". Also, Cactus copies all of the PlugY information
+in one direction only (From the Storage Directory -> Root Directory).
+So, if you wanna make any changes to PlugY, make sure that you switch to
+another entry, edit the PlugY files in the storage directory, and then
+switch back to it. If you don't have more than one entry/version, then just
+edit the settings in both the Storage Directory, and the Root Directory.
+
+Cactus also slightly delays the execution of automatically launching PlugY
+when you first switch to an entry that has PlugY support. This is because the
+filesystem might copy the files in an asynchronous way which means that PlugY
+will try to launch before all of it's files are available, if this happens, you
+will get a "Read memory error". If you get this, just try to launch it again..
+but with the slight delay implemented in the application, you probably won't
+ever get this.. but never say never.
+
 Moving Existing Characters and DLLs to new locations:
 ---------------
 If you have any existing characters, just take the characters from your

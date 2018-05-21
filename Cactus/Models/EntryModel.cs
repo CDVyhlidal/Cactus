@@ -26,6 +26,7 @@ namespace Cactus.Models
         private string _path;
         private string _flags;
         private bool _isExpansion;
+        private bool _isPlugy;
 
         [JsonProperty("Label", Order = 1)]
         public string Label
@@ -108,6 +109,20 @@ namespace Cactus.Models
             {
                 _wasLastRan = value;
                 RaisePropertyChanged("WasLastRan");
+            }
+        }
+
+        [JsonProperty("IsPlugy", Order = 7)]
+        public bool IsPlugy
+        {
+            get
+            {
+                return _isPlugy;
+            }
+            set
+            {
+                _isPlugy = value;
+                RaisePropertyChanged("IsPlugy");
             }
         }
     }

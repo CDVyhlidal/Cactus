@@ -20,5 +20,6 @@ namespace Cactus.Interfaces
     {
         List<string> GetRequiredFiles(string version);
         List<string> ExpansionMpqs { get; }
+        List<string> GetPlugyRequiredFiles { get; }
     }
 }

@@ -70,6 +70,23 @@ namespace Cactus
             }
         }
 
+        public List<string> GetPlugyRequiredFiles
+        {
+            get
+            {
+                var requiredFiles = new List<string>()
+                {
+                    "PlugY.exe",
+                    "PlugY.ini",
+                    "PlugY.dll",
+                    "PatchD2File.exe",
+                    "RestoreD2File.exe"
+                };
+
+                return requiredFiles;
+            }
+        }
+
         private readonly List<string> _thirdPartyLibraries = new List<string>()
         {
             "binkw32.dll",

@@ -23,5 +23,7 @@ namespace Cactus.Interfaces
         string GetSaveDirectory(EntryModel entry);
         string GetRootDataDirectory(EntryModel entry);
         string GetStorageDataDirectory(EntryModel entry);
+        string GetPlugyRootDirectory(EntryModel entry);
+        string GetPlugyStorageDirectory(EntryModel entry);
     }
 }
