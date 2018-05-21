@@ -21,7 +21,15 @@ namespace Cactus
     {
         public MainWindowView()
         {
-            InitializeComponent();
+            if (!ProcessManager.IsMainApplicationRunning())
+            {
+                InitializeComponent();
+            }
+            else
+            {
+                MessageBox.Show("Only one instance of Cactus is allowed!");
+                Application.Current.Shutdown();
+            }
         }
 
         private void EntriesListView_DoubleClick(object sender, RoutedEventArgs e)

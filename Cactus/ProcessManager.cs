@@ -32,6 +32,22 @@ namespace Cactus
             }
         }
 
+        /// <summary>
+        /// Checks to see if Cactus is already running.
+        /// </summary>
+        /// <remarks>
+        /// This is a very very simple implementation of making sure only one process
+        /// of Cactus runs. If the user is running an application that is also called
+        /// "Cactus", this would trigger a false positive.
+        /// </remarks>
+        public static bool IsMainApplicationRunning()
+        {
+            var currentProcess = Process.GetCurrentProcess();
+            var currentProcesses = Process.GetProcessesByName(currentProcess.ProcessName);
+
+            return currentProcesses.Length > 1;
+        }
+
         public void Launch(EntryModel entry)
         {
             try

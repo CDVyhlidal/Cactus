@@ -20,24 +20,6 @@ Diablo II/Expansion/<label>
 Diablo II/Expansion/<label>/data
 Diablo II/Expansion/<label>/save
 
-PlugY support (11.02)
----------------
-If you are using PlugY, then make sure to point your Path to "PlugY.exe"
-rather than "Game.exe". Also, Cactus copies all of the PlugY information
-in one direction only (From the Storage Directory -> Root Directory).
-So, if you wanna make any changes to PlugY, make sure that you switch to
-another entry, edit the PlugY files in the storage directory, and then
-switch back to it. If you don't have more than one entry/version, then just
-edit the settings in both the Storage Directory, and the Root Directory.
-
-Cactus also slightly delays the execution of automatically launching PlugY
-when you first switch to an entry that has PlugY support. This is because the
-filesystem might copy the files in an asynchronous way which means that PlugY
-will try to launch before all of it's files are available, if this happens, you
-will get a "Read memory error". If you get this, just try to launch it again..
-but with the slight delay implemented in the application, you probably won't
-ever get this.. but never say never.
-
 Moving Existing Characters and DLLs to new locations:
 ---------------
 If you have any existing characters, just take the characters from your
@@ -61,9 +43,9 @@ Simply run the LOD updater either from the Standalone updater or from Battle.net
 1. Update the game either through Battle.net or the Standalone Updater.
 
 In Cactus:
-2. Copy the current "last ran" entry
+2. Copy the current "Last Ran" entry
 3. Edit the copy and name it the same as what it originally was called.
-4. Select the current "last ran" entry and click Edit.
+4. Select the current "Last Ran" entry and click Edit.
 5. Uncheck the "Last Ran" checkbox, give it a new label, and switch the
    version to the new version.
 
@@ -112,8 +94,8 @@ the dlls should do the trick, and re-running that version in Cactus should fix i
 
 If your MPQs get screwed... well then good game. Go get the disks.
 
-Multiple Versions
+Multiple Diablo II Windows
 ---------------
 If you want to run multiple versions of Diablo II, It is the same process as before.
 You can get this feature by downloading Singling. It contains the changes needed in
-order to allow multiple D2 windows to be launched.
+order to allow multiple D2 windows to be launched for several important versions.

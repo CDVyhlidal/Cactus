@@ -13,6 +13,11 @@
                   SelectionMode="Single" MouseDoubleClick="EntriesListView_DoubleClick">
             <ListView.View>
                 <GridView>
+                    <GridView.ColumnHeaderContainerStyle>
+                        <Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+                            <Setter Property="IsHitTestVisible" Value="False"/>
+                        </Style>
+                    </GridView.ColumnHeaderContainerStyle>
                     <GridViewColumn Width="60" DisplayMemberBinding="{Binding Version}" Header="Version"/>
                     <GridViewColumn Width="50" Header="Exp">
                         <GridViewColumn.CellTemplate>

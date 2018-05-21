@@ -35,8 +35,8 @@
         <Label Content="Flags" Grid.Row="3"/>
         <TextBox Name="txtFlags" Text="{Binding Flags}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
 
-        <StackPanel Grid.Row="4" Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="3">
-            <CheckBox Name="chkIsExpansion" IsChecked="{Binding IsExpansion}" Content="Expansion" Margin="5 7 0 0"/>
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Margin="0 0 15 0">
+            <CheckBox Name="chkIsExpansion" IsChecked="{Binding IsExpansion}" Content="Expansion" Margin="0 7 0 0"/>
             <CheckBox Name="chkIsPlugy" IsChecked="{Binding IsPlugy}" Content="PlugY" Margin="7 7 0 0"/>
         </StackPanel>
 
