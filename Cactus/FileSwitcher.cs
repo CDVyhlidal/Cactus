@@ -16,7 +16,9 @@ using Cactus.Interfaces;
 using Cactus.Models;
 using Microsoft.VisualBasic.FileIO;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Security.Principal;
 using System.Threading;
 using System.Windows;
 
@@ -29,7 +31,7 @@ namespace Cactus
     public class FileSwitcher : IFileSwitcher
     {
         private IEntryManager _entries;
-        private IPatchFileGenerator _patchFileGenerator;
+        private IFileGenerator _fileGenerator;
         private IProcessManager _processManager;
         private IRegistryService _registryService;
         private ILogger _logger;
@@ -44,12 +46,12 @@ namespace Cactus
             Expansion
         }
 
-        public FileSwitcher(IEntryManager entries, IPatchFileGenerator patchFileGenerator,
+        public FileSwitcher(IEntryManager entries, IFileGenerator fileGenerator,
                             IProcessManager processManager, IRegistryService registryService,
                             ILogger logger, IPathBuilder pathBuilder)
         {
             _entries = entries;
-            _patchFileGenerator = patchFileGenerator;
+            _fileGenerator = fileGenerator;
             _processManager = processManager;
             _registryService = registryService;
             _logger = logger;
@@ -120,7 +122,7 @@ namespace Cactus
 
         private bool HasRequiredFiles()
         {
-            var requiredFiles = _patchFileGenerator.GetRequiredFiles(_currentEntry.Version);
+            var requiredFiles = _fileGenerator.GetRequiredFiles(_currentEntry.Version);
             string targetRootDirectory = _pathBuilder.GetStorageDirectory(_currentEntry);
 
             // Check that each of the files we need exist in the target path
@@ -148,7 +150,7 @@ namespace Cactus
         {
             try
             {
-                var requiredFiles = _patchFileGenerator.GetRequiredFiles(_lastRanEntry.Version);
+                var requiredFiles = _fileGenerator.GetRequiredFiles(_lastRanEntry.Version);
 
                 string rootDirectory = _pathBuilder.GetRootDirectory(_lastRanEntry);
                 string targetDirectory = _pathBuilder.GetStorageDirectory(_lastRanEntry);
@@ -197,45 +199,23 @@ namespace Cactus
         {
             try
             {
-                var currentVersionRequiredFiles = _patchFileGenerator.GetRequiredFiles(_lastRanEntry.Version);
-                var targetVersionRequiredFiles = _patchFileGenerator.GetRequiredFiles(_currentEntry.Version);
+                var currentVersionRequiredFiles = _fileGenerator.GetRequiredFiles(_lastRanEntry.Version);
+                var targetVersionRequiredFiles = _fileGenerator.GetRequiredFiles(_currentEntry.Version);
 
                 string rootDirectory = _pathBuilder.GetRootDirectory(_lastRanEntry);
                 string storageDirectory = _pathBuilder.GetStorageDirectory(_currentEntry);
 
-                // get the files for the current version and remove them from the root directory
-                foreach (var file in currentVersionRequiredFiles)
-                {
-                    var targetFile = Path.Combine(rootDirectory, file);
-                    _logger.LogInfo("Deleting: " + targetFile);
-                    File.Delete(targetFile);
-                }
+                // Get the files for the current version and remove them from the root directory
+                DeleteRequiredFiles(rootDirectory, currentVersionRequiredFiles);
 
-                // get the files for the target version and copy them to the root directory
-                foreach (var file in targetVersionRequiredFiles)
-                {
-                    var sourceFile = Path.Combine(storageDirectory, file);
-                    var targetFile = Path.Combine(rootDirectory, file);
-                    _logger.LogInfo($"Copying: {sourceFile} -> {targetFile}");
-                    File.Copy(sourceFile, targetFile, true);
-                }
-
-                // if the data folder exists in the root directory, remove it
+                // Get the files for the target version and copy them to the root directory
+                InstallRequiredFiles(rootDirectory, storageDirectory, targetVersionRequiredFiles);
+ 
+                // Install data folder if needed.
                 var rootDataDirectory = _pathBuilder.GetRootDataDirectory(_lastRanEntry);
-
-                if (Directory.Exists(rootDataDirectory))
-                {
-                    _logger.LogInfo("Deleting old /data/ directory from root directory");
-                    Directory.Delete(rootDataDirectory, true);
-                }
-
-                // if the data folder exists in the target version directory, copy it over to root
                 var storageDataDirectory = _pathBuilder.GetStorageDataDirectory(_currentEntry);
-                if (Directory.Exists(storageDataDirectory))
-                {
-                    _logger.LogInfo("Copying /data/ directory to root directory");
-                    FileSystem.CopyDirectory(storageDataDirectory, rootDataDirectory, true);
-                }
+
+                CleanlyInstallExtraFolder("data", rootDataDirectory, storageDataDirectory);
 
                 // Move the MPQ files away if it's Classic, but make sure they are in the root if it's expansion.
                 if (_lastRanEntry.IsExpansion)
@@ -255,54 +235,8 @@ namespace Cactus
                     }
                 }
 
-                // Switch PlugY files if needed
-                string plugyRootDirectory = _pathBuilder.GetPlugyRootDirectory(_currentEntry);
-                string plugyStorageDirectory = _pathBuilder.GetPlugyStorageDirectory(_currentEntry);
-
-                // Clean up old PlugY files if they exist
-                // TODO: This could be in its own function.
-                var plugyRequiredFiles = _patchFileGenerator.GetPlugyRequiredFiles;
-
-                if (Directory.Exists(plugyRootDirectory))
-                {
-                    _logger.LogInfo("Deleting old /PlugY/ directory from root directory");
-                    Directory.Delete(plugyRootDirectory, true);
-                }
-
-                foreach (var file in plugyRequiredFiles)
-                {
-                    var targetFile = Path.Combine(rootDirectory, file);
-                    if (File.Exists(file))
-                    {
-                        _logger.LogInfo("Deleting: " + targetFile);
-                        File.Delete(file);
-                    }
-                }
-
-                // Install PlugY if needed
-                if (_currentEntry.IsPlugy)
-                {
-                    if (Directory.Exists(plugyStorageDirectory))
-                    {
-                        _logger.LogInfo("Copying /PlugY/ directory to root directory");
-                        FileSystem.CopyDirectory(plugyStorageDirectory, plugyRootDirectory);
-                    }
-
-                    foreach (var file in plugyRequiredFiles)
-                    {
-                        var sourceFile = Path.Combine(storageDirectory, file);
-                        var targetFile = Path.Combine(rootDirectory, file);
-                        if (File.Exists(sourceFile))
-                        {
-                            _logger.LogInfo($"Copying: {sourceFile} -> {targetFile}");
-                            File.Copy(sourceFile, targetFile, true);
-                        }
-                    }
-
-                    // Delay the app a bit so things can settle on the disk
-                    // Or else the user may get an error when starting PlugY.
-                    Thread.Sleep(2000);
-                }
+                InstallPlugy(rootDirectory, storageDirectory);
+                InstallMedianXl(rootDirectory, storageDirectory);
             }
             catch (UnauthorizedAccessException ex)
             {
@@ -323,7 +257,7 @@ namespace Cactus
         private void SwitchMpqs(Mode mode)
         {
             string rootDirectory = _pathBuilder.GetRootDirectory(_lastRanEntry);
-            var expansionMpqs = _patchFileGenerator.ExpansionMpqs;
+            var expansionMpqs = _fileGenerator.ExpansionMpqs;
 
             foreach (var mpqFile in expansionMpqs)
             {
@@ -340,8 +274,112 @@ namespace Cactus
 
         private void LaunchGame()
         {
-            var launchThread = new Thread(() => _processManager.Launch(_lastRanEntry));
+            WindowsIdentity user = WindowsIdentity.GetCurrent();
+            WindowsPrincipal principal = new WindowsPrincipal(user);
+            bool isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
+
+            var launchThread = new Thread(() => _processManager.Launch(_lastRanEntry, isAdmin));
             launchThread.Start();
+        }
+
+        private void InstallPlugy(string rootDirectory, string storageDirectory)
+        {
+            _logger.LogInfo("Running PlugY hook ...");
+
+            string plugyRootDirectory = _pathBuilder.GetPlugyRootDirectory(_currentEntry);
+            string plugyStorageDirectory = _pathBuilder.GetPlugyStorageDirectory(_currentEntry);
+            var requiredFiles = _fileGenerator.GetPlugyRequiredFiles;
+
+            DeleteRequiredFiles(rootDirectory, requiredFiles);
+            DeleteExtraFolder("PlugY", plugyRootDirectory);
+
+            if (_currentEntry.IsPlugy)
+            {
+                InstallRequiredFiles(rootDirectory, storageDirectory, requiredFiles);
+                InstallExtraFolder("PlugY", plugyRootDirectory, plugyStorageDirectory);
+            }
+
+            // Delay the app a bit so things can settle on the disk
+            // Or else the user may get an error when starting PlugY.
+            Thread.Sleep(2000);
+        }
+
+        private void InstallMedianXl(string rootDirectory, string storageDirectory)
+        {
+            _logger.LogInfo("Running Median XL hook ...");
+            var requiredFiles = _fileGenerator.GetMedianXlRequiredFiles;
+
+            DeleteRequiredFiles(rootDirectory, requiredFiles);
+
+            if (_currentEntry.IsMedianXl)
+            {
+                InstallRequiredFiles(rootDirectory, storageDirectory, requiredFiles);
+            }
+        }
+
+        private void InstallRequiredFiles(string rootDirectory, string storageDirectory, List<string> requiredFiles)
+        {
+            // In with the new
+            foreach (var file in requiredFiles)
+            {
+                var sourceFile = Path.Combine(storageDirectory, file);
+                var targetFile = Path.Combine(rootDirectory, file);
+                if (File.Exists(sourceFile))
+                {
+                    _logger.LogInfo($"Copying: {sourceFile} -> {targetFile}");
+                    File.Copy(sourceFile, targetFile, true);
+                }
+            }
+        }
+
+        private void DeleteRequiredFiles(string rootDirectory, List<string> requiredFiles)
+        {
+            // Out with the old
+            foreach (var file in requiredFiles)
+            {
+                var targetFile = Path.Combine(rootDirectory, file);
+                if (File.Exists(file))
+                {
+                    _logger.LogInfo("Deleting: " + targetFile);
+                    File.Delete(file);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Cleanly install the required files into the root directory.
+        /// </summary>
+        private void CleanlyInstallRequiredFiles(string rootDirectory, string storageDirectory, List<string> requiredFiles)
+        {
+            DeleteRequiredFiles(rootDirectory, requiredFiles);
+            InstallRequiredFiles(rootDirectory, storageDirectory, requiredFiles);
+        }
+
+        private void InstallExtraFolder(string folderName, string extraFolderRootDirectory, string extraFolderStorageDirectory)
+        {
+            if (Directory.Exists(extraFolderStorageDirectory))
+            {
+                _logger.LogInfo($"Copying /{folderName}/ directory to root directory");
+                FileSystem.CopyDirectory(extraFolderStorageDirectory, extraFolderRootDirectory, true);
+            }
+        }
+
+        private void DeleteExtraFolder(string folderName, string extraFolderRootDirectory)
+        {
+            if (Directory.Exists(extraFolderRootDirectory))
+            {
+                _logger.LogInfo($"Deleting old /{folderName}/ directory from root directory");
+                Directory.Delete(extraFolderRootDirectory, true);
+            }
+        }
+
+        /// <summary>
+        /// Cleanly installs an extra folder (/data/, /PlugY/, etc) into the root directory.
+        /// </summary>
+        private void CleanlyInstallExtraFolder(string folderName, string extraFolderRootDirectory, string extraFolderStorageDirectory)
+        {
+            DeleteExtraFolder(folderName, extraFolderRootDirectory);
+            InstallExtraFolder(folderName, extraFolderRootDirectory, extraFolderStorageDirectory);
         }
     }
 }

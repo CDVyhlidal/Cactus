@@ -16,10 +16,11 @@ using System.Collections.Generic;
 
 namespace Cactus.Interfaces
 {
-    public interface IPatchFileGenerator
+    public interface IFileGenerator
     {
         List<string> GetRequiredFiles(string version);
         List<string> ExpansionMpqs { get; }
         List<string> GetPlugyRequiredFiles { get; }
+        List<string> GetMedianXlRequiredFiles { get; }
     }
 }

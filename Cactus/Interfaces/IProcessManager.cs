@@ -19,6 +19,6 @@ namespace Cactus.Interfaces
     public interface IProcessManager
     {
         bool AreProcessesRunning { get; }
-        void Launch(EntryModel entry);
+        void Launch(EntryModel entry, bool isAdmin);
     }
 }

@@ -48,7 +48,7 @@ namespace Cactus
             return currentProcesses.Length > 1;
         }
 
-        public void Launch(EntryModel entry)
+        public void Launch(EntryModel entry, bool isAdmin)
         {
             try
             {
@@ -59,6 +59,11 @@ namespace Cactus
                     FileName = entry.Path,
                     Arguments = entry.Flags
                 };
+
+                if (isAdmin)
+                {
+                    processInfo.Verb = "runas";
+                }
 
                 var process = Process.Start(processInfo);
                 process.WaitForExit();

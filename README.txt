@@ -1,4 +1,4 @@
-Cactus 1.0.3
+Cactus 1.0.4
 Jonathan Vasquez (fearedbliss) <jon@xyinn.org>
 Apache License 2.0
 Wednesday, May 23, 2018
@@ -161,3 +161,13 @@ will try to launch before all of it's files are available, if this happens, you
 will get a "Read memory error". If you get this, just try to launch it again..
 but with the slight delay implemented in the application, you probably won't
 ever get this.. but never say never.
+
+Median XL support (Tested on 13.2 with 1.13c base)
+---------------
+Median XL is fully supported. When launching the game, Median XL requires
+admin privileges or else it will give you a "failed to retrieve process" error.
+Just run Cactus in admin mode and the permissions will trickle down.
+
+Also on Windows 10 I was getting an access violation after I closed the
+Median XL process. You can solve this by running the Game.exe in either
+Windows XP (SP3) or Windows 7 compatibility mode.

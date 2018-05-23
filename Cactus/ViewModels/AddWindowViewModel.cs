@@ -29,6 +29,9 @@ namespace Cactus.ViewModels
         private readonly IPathBuilder _pathBuilder;
         private readonly IProcessManager _processManager;
 
+        // Latest version currently (Used for resetting the UI and selecting latest)
+        private readonly string _latestVersion = "1.14d";
+
         // Properties for new entry
         public string Label { get; set; }
         public string Version { get; set; }
@@ -36,6 +39,7 @@ namespace Cactus.ViewModels
         public string Flags { get; set; }
         public bool IsExpansion { get; set; }
         public bool IsPlugy { get; set; }
+        public bool IsMedianXl { get; set; }
 
         // Allow parent view model to retrieve this property.
         public EntryModel AddedEntry { get; set; }
@@ -66,7 +70,8 @@ namespace Cactus.ViewModels
                 Path = Path,
                 Flags = Flags,
                 IsExpansion = IsExpansion,
-                IsPlugy = IsPlugy
+                IsPlugy = IsPlugy,
+                IsMedianXl = IsMedianXl
             };
 
             if (Label != null && Path != null)
@@ -92,11 +97,12 @@ namespace Cactus.ViewModels
         private void ResetUI()
         {
             Label = null;
-            Version = "1.00";
+            Version = _latestVersion;
             Path = null;
             Flags = null;
             IsExpansion = false;
             IsPlugy = false;
+            IsMedianXl = false;
         }
 
         public Dictionary<string, VersionModel> Versions

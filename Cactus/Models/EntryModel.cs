@@ -27,6 +27,7 @@ namespace Cactus.Models
         private string _flags;
         private bool _isExpansion;
         private bool _isPlugy;
+        private bool _isMedianXl;
 
         [JsonProperty("Label", Order = 1)]
         public string Label
@@ -123,6 +124,20 @@ namespace Cactus.Models
             {
                 _isPlugy = value;
                 RaisePropertyChanged("IsPlugy");
+            }
+        }
+
+        [JsonProperty("IsMedianXl", Order = 8)]
+        public bool IsMedianXl
+        {
+            get
+            {
+                return _isMedianXl;
+            }
+            set
+            {
+                _isMedianXl= value;
+                RaisePropertyChanged("IsMedianXl");
             }
         }
     }

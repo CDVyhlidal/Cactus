@@ -134,6 +134,8 @@ namespace Cactus.ViewModels
             CurrentEntry.Flags = _oldEntry.Flags;
             CurrentEntry.IsExpansion = _oldEntry.IsExpansion;
             CurrentEntry.WasLastRan = _oldEntry.WasLastRan;
+            CurrentEntry.IsPlugy = _oldEntry.IsPlugy;
+            CurrentEntry.IsMedianXl = _oldEntry.IsMedianXl;
 
             _oldEntry = null;
         }
@@ -153,7 +155,8 @@ namespace Cactus.ViewModels
                         Path = CurrentEntry.Path,
                         Version = CurrentEntry.Version,
                         WasLastRan = CurrentEntry.WasLastRan,
-                        IsPlugy = CurrentEntry.IsPlugy
+                        IsPlugy = CurrentEntry.IsPlugy,
+                        IsMedianXl = CurrentEntry.IsMedianXl
                     };
                 }
                 return CurrentEntry.Label;
@@ -193,6 +196,18 @@ namespace Cactus.ViewModels
             set
             {
                 CurrentEntry.IsPlugy = value;
+            }
+        }
+
+        public bool IsMedianXl
+        {
+            get
+            {
+                return CurrentEntry.IsMedianXl;
+            }
+            set
+            {
+                CurrentEntry.IsMedianXl = value;
             }
         }
     }

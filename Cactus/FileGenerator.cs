@@ -21,11 +21,11 @@ namespace Cactus
     /// This class is responsible for returning a list of all of
     /// the files corresponding to a specific patch.
     /// </summary>
-    public class PatchFileGenerator : IPatchFileGenerator
+    public class FileGenerator : IFileGenerator
     {
         private IVersionManager _versionManager;
 
-        public PatchFileGenerator(IVersionManager versionManager)
+        public FileGenerator(IVersionManager versionManager)
         {
             _versionManager = versionManager;
         }
@@ -81,6 +81,20 @@ namespace Cactus
                     "PlugY.dll",
                     "PatchD2File.exe",
                     "RestoreD2File.exe"
+                };
+
+                return requiredFiles;
+            }
+        }
+
+        public List<string> GetMedianXlRequiredFiles
+        {
+            get
+            {
+                var requiredFiles = new List<string>()
+                {
+                    "MXL.dll",
+                    "msvcr110.dll"
                 };
 
                 return requiredFiles;

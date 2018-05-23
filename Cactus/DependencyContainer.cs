@@ -43,7 +43,7 @@ namespace Cactus
             container.Register(Component.For<IMainWindowViewModel>().ImplementedBy<MainWindowViewModel>());
             container.Register(Component.For<IEditWindowViewModel>().ImplementedBy<EditWindowViewModel>());
             container.Register(Component.For<IAddWindowViewModel>().ImplementedBy<AddWindowViewModel>());
-            container.Register(Component.For<IPatchFileGenerator>().ImplementedBy<PatchFileGenerator>());
+            container.Register(Component.For<IFileGenerator>().ImplementedBy<FileGenerator>());
             container.Register(Component.For<IPathBuilder>().ImplementedBy<PathBuilder>());
             return container;
         }

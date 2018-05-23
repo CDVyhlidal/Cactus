@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cactus.Views"
         mc:Ignorable="d"
-        Title="Add Entry" Height="240" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterOwner"
+        Title="Add Entry" Height="290" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterOwner"
         DataContext="{Binding AddWindow, Source={StaticResource Locator}}">
 
-    <Grid>
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -16,9 +16,10 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="60"/>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -35,14 +36,26 @@
         <Label Content="Flags" Grid.Row="3"/>
         <TextBox Name="txtFlags" Text="{Binding Flags}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
 
-        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Margin="0 0 15 0">
-            <CheckBox Name="chkIsExpansion" IsChecked="{Binding IsExpansion}" Content="Expansion" Margin="0 7 0 0"/>
-            <CheckBox Name="chkIsPlugy" IsChecked="{Binding IsPlugy}" Content="PlugY" Margin="7 7 0 0"/>
-        </StackPanel>
+        <GroupBox Header="Options" Grid.Row="4" Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="0 0 0 10">
+            <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <CheckBox Name="chkIsExpansion" IsChecked="{Binding IsExpansion}" Content="Expansion"/>
+                <CheckBox Name="chkIsPlugy" IsChecked="{Binding IsPlugy}" Content="PlugY" Grid.Row="1" Grid.Column="0"/>
+                <CheckBox Name="chkIsMedianXl" IsChecked="{Binding IsMedianXl}" Content="Median XL" Grid.Row="1" Grid.Column="1"/>
+            </Grid>
+        </GroupBox>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
-            <Button Name="btnOk" Content="Add" IsDefault="True" Command="{Binding OkCommand}" Click="CloseWindow_Click" Padding="10 0 10 0" Margin="0 3 5 3"/>
-            <Button Name="btnCancel" Content="Cancel" IsCancel="True" Command="{Binding CancelCommand}" Click="CloseWindow_Click" Padding="10 0 10 0" Margin="0 3 10 3"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3">
+            <Button Name="btnOk" Content="Add" IsDefault="True" Command="{Binding OkCommand}" Click="CloseWindow_Click" Padding="10 0 10 0" Margin="0 0 5 0"/>
+            <Button Name="btnCancel" Content="Cancel" IsCancel="True" Command="{Binding CancelCommand}" Click="CloseWindow_Click" Padding="10 0 10 0"/>
         </StackPanel>
     </Grid>
 </Window>
