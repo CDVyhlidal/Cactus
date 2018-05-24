@@ -70,37 +70,6 @@ namespace Cactus
             }
         }
 
-        public List<string> GetPlugyRequiredFiles
-        {
-            get
-            {
-                var requiredFiles = new List<string>()
-                {
-                    "PlugY.exe",
-                    "PlugY.ini",
-                    "PlugY.dll",
-                    "PatchD2File.exe",
-                    "RestoreD2File.exe"
-                };
-
-                return requiredFiles;
-            }
-        }
-
-        public List<string> GetMedianXlRequiredFiles
-        {
-            get
-            {
-                var requiredFiles = new List<string>()
-                {
-                    "MXL.dll",
-                    "msvcr110.dll"
-                };
-
-                return requiredFiles;
-            }
-        }
-
         private readonly List<string> _thirdPartyLibraries = new List<string>()
         {
             "binkw32.dll",
@@ -146,5 +115,36 @@ namespace Cactus
             "BlizzardError.exe",
             "SystemSurvey.exe"
         };
+
+        public List<string> GetPlugyRequiredFiles
+        {
+            get
+            {
+                var requiredFiles = new List<string>()
+                {
+                    "PlugY.exe",
+                    "PlugY.ini",
+                    "PlugY.dll",
+                    "PatchD2File.exe",
+                    "RestoreD2File.exe"
+                };
+
+                return requiredFiles;
+            }
+        }
+
+        public List<string> GetMedianXlRequiredFiles
+        {
+            get
+            {
+                var requiredFiles = new List<string>()
+                {
+                    "MXL.dll",
+                    "msvcr110.dll"
+                };
+
+                return requiredFiles;
+            }
+        }
     }
 }

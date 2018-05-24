@@ -42,7 +42,7 @@ namespace Cactus.ViewModels
         public RelayCommand LaunchCommand { get; private set; }
 
         private readonly string _appName = "Cactus";
-        private readonly string _version = "1.0.4";
+        private readonly string _version = "1.0.5";
 
         public MainWindowViewModel(IEntryManager entryManager, IFileSwitcher fileSwitcher, IAddWindowViewModel addWindowViewModel, IEditWindowViewModel editWindowViewModel)
         {

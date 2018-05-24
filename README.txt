@@ -1,4 +1,4 @@
-Cactus 1.0.4
+Cactus 1.0.5
 Jonathan Vasquez (fearedbliss) <jon@xyinn.org>
 Apache License 2.0
 Wednesday, May 23, 2018

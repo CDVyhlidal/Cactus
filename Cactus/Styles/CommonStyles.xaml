@@ -16,8 +16,4 @@
     <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
         <Setter Property="Margin" Value="0 3 0 3"/>
     </Style>
-
-    <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
-        <Setter Property="Margin" Value="3 0 0 1"/>
-    </Style>
 </ResourceDictionary>

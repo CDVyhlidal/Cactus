@@ -67,6 +67,13 @@ namespace Cactus
             {
                 _logger.LogInfo("No version was ever ran. Running this and setting it as main version.");
 
+                // Before we switch, make sure to do validation and make sure
+                // the user has the files they need before attempting to switch.
+                if (!HasRequiredFiles())
+                {
+                    return;
+                }
+
                 _registryService.Update(_currentEntry);
                 _entries.MarkLastRan(_currentEntry);
                 _lastRanEntry = _currentEntry;
@@ -95,8 +102,8 @@ namespace Cactus
             {
                 _logger.LogInfo("A different version has been selected. Switching.");
 
-                // Before we switch, make sure to do validation and make sure user
-                // has the files they need before attempting to switch.
+                // Before we switch, make sure to do validation and make sure
+                // the user has the files they need before attempting to switch.
                 if (!HasRequiredFiles())
                 {
                     return;
@@ -124,6 +131,17 @@ namespace Cactus
         {
             var requiredFiles = _fileGenerator.GetRequiredFiles(_currentEntry.Version);
             string targetRootDirectory = _pathBuilder.GetStorageDirectory(_currentEntry);
+
+            // Add any remaining required files for mods that this entry is using
+            if (_currentEntry.IsPlugy)
+            {
+                requiredFiles.AddRange(_fileGenerator.GetPlugyRequiredFiles);
+            }
+
+            if (_currentEntry.IsMedianXl)
+            {
+                requiredFiles.AddRange(_fileGenerator.GetMedianXlRequiredFiles);
+            }
 
             // Check that each of the files we need exist in the target path
             foreach (var file in requiredFiles)
@@ -210,7 +228,7 @@ namespace Cactus
 
                 // Get the files for the target version and copy them to the root directory
                 InstallRequiredFiles(rootDirectory, storageDirectory, targetVersionRequiredFiles);
- 
+
                 // Install data folder if needed.
                 var rootDataDirectory = _pathBuilder.GetRootDataDirectory(_lastRanEntry);
                 var storageDataDirectory = _pathBuilder.GetStorageDataDirectory(_currentEntry);
@@ -282,41 +300,6 @@ namespace Cactus
             launchThread.Start();
         }
 
-        private void InstallPlugy(string rootDirectory, string storageDirectory)
-        {
-            _logger.LogInfo("Running PlugY hook ...");
-
-            string plugyRootDirectory = _pathBuilder.GetPlugyRootDirectory(_currentEntry);
-            string plugyStorageDirectory = _pathBuilder.GetPlugyStorageDirectory(_currentEntry);
-            var requiredFiles = _fileGenerator.GetPlugyRequiredFiles;
-
-            DeleteRequiredFiles(rootDirectory, requiredFiles);
-            DeleteExtraFolder("PlugY", plugyRootDirectory);
-
-            if (_currentEntry.IsPlugy)
-            {
-                InstallRequiredFiles(rootDirectory, storageDirectory, requiredFiles);
-                InstallExtraFolder("PlugY", plugyRootDirectory, plugyStorageDirectory);
-            }
-
-            // Delay the app a bit so things can settle on the disk
-            // Or else the user may get an error when starting PlugY.
-            Thread.Sleep(2000);
-        }
-
-        private void InstallMedianXl(string rootDirectory, string storageDirectory)
-        {
-            _logger.LogInfo("Running Median XL hook ...");
-            var requiredFiles = _fileGenerator.GetMedianXlRequiredFiles;
-
-            DeleteRequiredFiles(rootDirectory, requiredFiles);
-
-            if (_currentEntry.IsMedianXl)
-            {
-                InstallRequiredFiles(rootDirectory, storageDirectory, requiredFiles);
-            }
-        }
-
         private void InstallRequiredFiles(string rootDirectory, string storageDirectory, List<string> requiredFiles)
         {
             // In with the new
@@ -380,6 +363,41 @@ namespace Cactus
         {
             DeleteExtraFolder(folderName, extraFolderRootDirectory);
             InstallExtraFolder(folderName, extraFolderRootDirectory, extraFolderStorageDirectory);
+        }
+
+        private void InstallPlugy(string rootDirectory, string storageDirectory)
+        {
+            _logger.LogInfo("Running PlugY Hook ...");
+
+            string plugyRootDirectory = _pathBuilder.GetPlugyRootDirectory(_currentEntry);
+            string plugyStorageDirectory = _pathBuilder.GetPlugyStorageDirectory(_currentEntry);
+            var requiredFiles = _fileGenerator.GetPlugyRequiredFiles;
+
+            DeleteRequiredFiles(rootDirectory, requiredFiles);
+            DeleteExtraFolder("PlugY", plugyRootDirectory);
+
+            if (_currentEntry.IsPlugy)
+            {
+                InstallRequiredFiles(rootDirectory, storageDirectory, requiredFiles);
+                InstallExtraFolder("PlugY", plugyRootDirectory, plugyStorageDirectory);
+            }
+
+            // Delay the app a bit so things can settle on the disk
+            // Or else the user may get an error when starting PlugY.
+            Thread.Sleep(2000);
+        }
+
+        private void InstallMedianXl(string rootDirectory, string storageDirectory)
+        {
+            _logger.LogInfo("Running Median XL Hook ...");
+            var requiredFiles = _fileGenerator.GetMedianXlRequiredFiles;
+
+            DeleteRequiredFiles(rootDirectory, requiredFiles);
+
+            if (_currentEntry.IsMedianXl)
+            {
+                InstallRequiredFiles(rootDirectory, storageDirectory, requiredFiles);
+            }
         }
     }
 }
