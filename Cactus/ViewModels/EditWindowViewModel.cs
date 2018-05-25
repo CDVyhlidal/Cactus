@@ -17,7 +17,6 @@ using Cactus.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 
@@ -26,7 +25,6 @@ namespace Cactus.ViewModels
     public class EditWindowViewModel : ViewModelBase, IEditWindowViewModel
     {
         private IEntryManager _entryManager;
-        private IVersionManager _versionManager;
         private IRegistryService _registryService;
         private IPathBuilder _pathBuilder;
         private IProcessManager _processManager;
@@ -40,12 +38,10 @@ namespace Cactus.ViewModels
         public RelayCommand OkCommand { get; private set; }
         public RelayCommand CancelCommand { get; private set; }
 
-        public EditWindowViewModel(IEntryManager entryManager, IVersionManager versionManager,
-                                   IRegistryService registryService, IPathBuilder pathBuilder,
-                                   IProcessManager processManager)
+        public EditWindowViewModel(IEntryManager entryManager, IRegistryService registryService,
+                                   IPathBuilder pathBuilder, IProcessManager processManager)
         {
             _entryManager = entryManager;
-            _versionManager = versionManager;
             _registryService = registryService;
             _pathBuilder = pathBuilder;
             _processManager = processManager;
@@ -56,16 +52,18 @@ namespace Cactus.ViewModels
 
         private void Ok()
         {
-            if (String.IsNullOrWhiteSpace(CurrentEntry.Label) || String.IsNullOrWhiteSpace(CurrentEntry.Path))
+            if (string.IsNullOrWhiteSpace(CurrentEntry.Platform) || string.IsNullOrWhiteSpace(CurrentEntry.Path) ||
+                !_entryManager.IsRootDirectoryEqualToOthers(CurrentEntry) ||
+                _pathBuilder.ContainsInvalidCharacters(CurrentEntry.Platform))
             {
-                MessageBox.Show("Either your Label or your Path are empty.");
+                MessageBox.Show("Please make sure all fields are populated, root path should match the rest of your entries (.exe can vary), and no invalid characters.");
                 ReverseChanges();
                 return;
             }
 
-            // If the oldEntry's label is null, that means that the user
+            // If the oldEntry's platform is null, that means that the user
             // made a copy of an entry and now is trying to rename it.
-            if (!String.IsNullOrWhiteSpace(_oldEntry.Label))
+            if (!string.IsNullOrWhiteSpace(_oldEntry.Platform))
             {
                 // If we are switching the last ran state from on to off,
                 // then we will not rename the directory, since if we do this,
@@ -73,30 +71,43 @@ namespace Cactus.ViewModels
                 // remain isolated.
                 if (_oldEntry.WasLastRan == CurrentEntry.WasLastRan)
                 {
-                    var oldStorageDirectory = _pathBuilder.GetStorageDirectory(_oldEntry);
-                    var newStorageDirectory = _pathBuilder.GetStorageDirectory(CurrentEntry);
+                    var oldPlatformDirectory = _pathBuilder.GetPlatformDirectory(_oldEntry);
+                    var newPlatformDirectory = _pathBuilder.GetPlatformDirectory(CurrentEntry);
 
-                    // We can skip renaming if it's the same label.
+                    var oldSavesDirectory = _pathBuilder.GetSaveDirectory(_oldEntry);
+                    var newSavesDirectory = _pathBuilder.GetSaveDirectory(CurrentEntry);
+
+                    // We can skip renaming if it's the same platform.
                     // No renaming of directories needs to happen here. Just saving.
-                    if (oldStorageDirectory != newStorageDirectory)
+                    if (oldPlatformDirectory != newPlatformDirectory)
                     {
-                        if (Directory.Exists(oldStorageDirectory))
+                        // If the target directory name already exists, we can't allow this rename to happen.
+                        if (Directory.Exists(newPlatformDirectory) || Directory.Exists(newSavesDirectory))
                         {
-                            // If this entry is currently running, then we can't complete this
-                            // operation since the game is still using that directory/save path.
-                            if (CurrentEntry.WasLastRan && _processManager.AreProcessesRunning)
-                            {
-                                Console.WriteLine("You can't edit this entry since the game is currently running and using its save directory.");
-                                Console.WriteLine("Please close all instances of Diablo II and try again.");
+                            MessageBox.Show($"A platform/save directory with the name \"{CurrentEntry.Platform}\" already exists.");
+                            ReverseChanges();
+                            return;
+                        }
 
-                                ReverseChanges();
-                                return;
-                            }
+                        // If this entry is currently running, then we can't complete this
+                        // operation since the game is still using that directory/save path.
+                        if (CurrentEntry.WasLastRan && _processManager.AreProcessesRunning)
+                        {
+                            Console.WriteLine("You can't edit this entry since the game is currently running and using its save directory.");
+                            Console.WriteLine("Please close all instances of Diablo II and try again.");
 
-                            if (oldStorageDirectory != newStorageDirectory)
-                            {
-                                Directory.Move(oldStorageDirectory, newStorageDirectory);
-                            }
+                            ReverseChanges();
+                            return;
+                        }
+
+                        if (Directory.Exists(oldPlatformDirectory))
+                        {
+                            Directory.Move(oldPlatformDirectory, newPlatformDirectory);
+                        }
+
+                        if (Directory.Exists(oldSavesDirectory))
+                        {
+                            Directory.Move(oldSavesDirectory, newSavesDirectory);
                         }
                     }
                 }
@@ -128,86 +139,36 @@ namespace Cactus.ViewModels
 
         private void ReverseChanges()
         {
-            CurrentEntry.Label = _oldEntry.Label;
-            CurrentEntry.Version = _oldEntry.Version;
+            CurrentEntry.Platform = _oldEntry.Platform;
             CurrentEntry.Path = _oldEntry.Path;
             CurrentEntry.Flags = _oldEntry.Flags;
             CurrentEntry.IsExpansion = _oldEntry.IsExpansion;
             CurrentEntry.WasLastRan = _oldEntry.WasLastRan;
-            CurrentEntry.IsPlugy = _oldEntry.IsPlugy;
-            CurrentEntry.IsMedianXl = _oldEntry.IsMedianXl;
 
             _oldEntry = null;
         }
 
-        public string Label
+        public string Platform
         {
             get
             {
-                // Kinda dirty but we are using the label as the way to backup the entire object.
+                // Kinda dirty but we are using the platform as the way to backup the entire object.
                 if (_oldEntry == null)
                 {
                     _oldEntry = new EntryModel
                     {
-                        Flags = CurrentEntry.Flags,
-                        Label = CurrentEntry.Label,
-                        IsExpansion = CurrentEntry.IsExpansion,
+                        Platform = CurrentEntry.Platform,
                         Path = CurrentEntry.Path,
-                        Version = CurrentEntry.Version,
-                        WasLastRan = CurrentEntry.WasLastRan,
-                        IsPlugy = CurrentEntry.IsPlugy,
-                        IsMedianXl = CurrentEntry.IsMedianXl
+                        Flags = CurrentEntry.Flags,
+                        IsExpansion = CurrentEntry.IsExpansion,
+                        WasLastRan = CurrentEntry.WasLastRan
                     };
                 }
-                return CurrentEntry.Label;
+                return CurrentEntry.Platform;
             }
             set
             {
-                CurrentEntry.Label = value;
-            }
-        }
-
-        public Dictionary<string, VersionModel> Versions
-        {
-            get
-            {
-                return _versionManager.Versions;
-            }
-        }
-
-        public string SelectVersion
-        {
-            get
-            {
-                return _versionManager.Versions[CurrentEntry.Version].Version;
-            }
-            set
-            {
-                CurrentEntry.Version = value;
-            }
-        }
-
-        public bool IsPlugy
-        {
-            get
-            {
-                return CurrentEntry.IsPlugy;
-            }
-            set
-            {
-                CurrentEntry.IsPlugy = value;
-            }
-        }
-
-        public bool IsMedianXl
-        {
-            get
-            {
-                return CurrentEntry.IsMedianXl;
-            }
-            set
-            {
-                CurrentEntry.IsMedianXl = value;
+                CurrentEntry.Platform = value;
             }
         }
     }

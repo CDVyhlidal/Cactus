@@ -12,15 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using Cactus.Models;
 using System.Collections.Generic;
 
 namespace Cactus.Interfaces
 {
     public interface IFileGenerator
     {
-        List<string> GetRequiredFiles(string version);
+        RequiredFilesModel GetRequiredFiles(EntryModel entry);
         List<string> ExpansionMpqs { get; }
-        List<string> GetPlugyRequiredFiles { get; }
-        List<string> GetMedianXlRequiredFiles { get; }
     }
 }

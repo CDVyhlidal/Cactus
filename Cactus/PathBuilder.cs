@@ -22,6 +22,9 @@ namespace Cactus
     {
         private readonly ILogger _logger;
 
+        private readonly string _platformDirectoryName = "Platforms";
+        private readonly string _savesDirectoryName = "Saves";
+
         public PathBuilder(ILogger logger)
         {
             _logger = logger;
@@ -32,38 +35,39 @@ namespace Cactus
             return Path.GetDirectoryName(entry.Path);
         }
 
-        public string GetStorageDirectory(EntryModel entry)
+        public string GetPlatformDirectory(EntryModel entry)
         {
-            string baseGameType = entry.IsExpansion ? "Expansion" : "Classic";
-            string targetRootDirectory = Path.Combine(Path.GetDirectoryName(entry.Path), baseGameType, entry.Label);
-            return targetRootDirectory;
+            return Path.Combine(GetPlatformsDirectory(entry), entry.Platform);
         }
 
         public string GetSaveDirectory(EntryModel entry)
         {
-            string targetRootDirectory = GetStorageDirectory(entry);
-            string saveDirectory = Path.Combine(targetRootDirectory, "save");
+            string savesDirectory = GetSavesDirectory(entry);
+            string saveDirectory = Path.Combine(savesDirectory, entry.Platform);
             return saveDirectory;
         }
 
-        public string GetRootDataDirectory(EntryModel entry)
+        public bool ContainsInvalidCharacters(string word)
         {
-            return Path.Combine(GetRootDirectory(entry), "data");
+            char[] invalidChars = Path.GetInvalidFileNameChars();
+            foreach (char invalidChar in invalidChars)
+            {
+                if (word.Contains(invalidChar.ToString())) return true;
+            }
+
+            return false;
         }
 
-        public string GetStorageDataDirectory(EntryModel entry)
+        private string GetPlatformsDirectory(EntryModel entry)
         {
-            return Path.Combine(GetStorageDirectory(entry), "data");
+            string rootDirectory = GetRootDirectory(entry);
+            return Path.Combine(rootDirectory, _platformDirectoryName);
         }
 
-        public string GetPlugyRootDirectory(EntryModel entry)
+        private string GetSavesDirectory(EntryModel entry)
         {
-            return Path.Combine(GetRootDirectory(entry), "PlugY");
-        }
-
-        public string GetPlugyStorageDirectory(EntryModel entry)
-        {
-            return Path.Combine(GetStorageDirectory(entry), "PlugY");
+            string rootDirectory = GetRootDirectory(entry);
+            return Path.Combine(rootDirectory, _savesDirectoryName);
         }
     }
 }

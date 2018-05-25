@@ -115,14 +115,12 @@
     <Compile Include="Interfaces\IPathBuilder.cs" />
     <Compile Include="Interfaces\IProcessManager.cs" />
     <Compile Include="Interfaces\IRegistryService.cs" />
-    <Compile Include="Interfaces\IVersionManager.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="Models\VersionModel.cs" />
+    <Compile Include="Models\RequiredFilesModel.cs" />
     <Compile Include="FileGenerator.cs" />
     <Compile Include="PathBuilder.cs" />
     <Compile Include="ProcessManager.cs" />
     <Compile Include="RegistryService.cs" />
-    <Compile Include="VersionManager.cs" />
     <Compile Include="ViewModels\AddWindowViewModel.cs" />
     <Compile Include="ViewModels\EditWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />

@@ -5,30 +5,26 @@ Cactus File Structure
 ---------------
 The directory structure that Cactus uses is as follows:
 
-Diablo II/                        - Your Diablo II Root Directory
-Diablo II/Entries.json            - Your settings will be saved here.
+Diablo II/                         - Your Diablo II Root Directory
+Diablo II/Entries.json             - Your settings will be saved here.
 
-Diablo II/Classic                 - All your classic versions will be in here
-Diablo II/Classic/<label>         - Location of your Diablo II files for this version (Storage Directory)
-Diablo II/Classic/<label>/data    - Data folder (If you have one)
-Diablo II/Classic/<label>/save    - Location of your save file for this specific version of classic
+Diablo II/Platforms/                - All your platforms will be in here (different versions, different mods, etc)
+Diablo II/Platforms/<name>         - Location of your Diablo II files for this version (Platform Directory)
+Diablo II/Platforms/<name>/<*>     - Any remaining directories will automatically also be copied over when you switch versions.
 
-The same applies for expansion:
-
-Diablo II/Expansion
-Diablo II/Expansion/<label>
-Diablo II/Expansion/<label>/data
-Diablo II/Expansion/<label>/save
+Diablo II/Saves/                    - Contains folders that contain your character saves for each platform you have.
+Diablo II/Saves/<name>             - The character saves for the platform with the matching name will be in here.
 
 Moving Existing Characters and DLLs to new locations:
 ---------------
 If you have any existing characters, just take the characters from your
-specific version's save folder and put it into its new location (Example,
+specific version's save folder and put it into the Saves folder under
+a folder name that matches the Platform in question. (Example,
 if you already had some 1.07 expansion characters, you can place them in:
-C:\Program Files\Diablo II\Expansion\1.07\save).
+C:\Program Files\Diablo II\Saves\1.07\).
 
 Path A) If you are using any custom .dlls (Like d2gfx.dll), you can place
-        this dll in its respective folder (Example: ..\Expansion\1.07 folder
+        this dll in its respective folder (Example: ..\Platforms\1.07 folder
         *before switching to that version*).
 
 Path B) If you already switched into that version, you can drop the dll into
@@ -44,24 +40,18 @@ Simply run the LOD updater either from the Standalone updater or from Battle.net
 
 In Cactus:
 2. Copy the current "Last Ran" entry
-3. Edit the copy and name it the same as what it originally was called.
-4. Select the current "Last Ran" entry and click Edit.
-5. Uncheck the "Last Ran" checkbox, give it a new label, and switch the
-   version to the new version.
+3. Edit the copy and give it a new platform name.
 
-   The new label given will be where Cactus will backup the new
-   required files and where your new characters will be saved to.
+   The new platform given will be where Cactus looks for the required files.
+   
+4. Copy the .dlls, .exes, and Patch_D2.mpq from the d2 root directory to the
+   new platform directory (Create the directory since it doesn't exist).
+   
+5. If you have an old 'data' folder in the Diablo II root directory that you
+   want to backup, do it now. Cactus will automatically delete this directory
+   when switching platforms.
 
-   If the version doesn't exist in Cactus because the application hasn't
-   been updated, you might be able to get everything working by using
-   the previous version (Since maybe the required files stayed the same).
-
-6. If you have an old 'data' folder in the Diablo II root directory that you
-   want to backup, do it now. Cactus will automatically backup this directory
-   if it finds it when there are no "Last Ran" entries. Since this is a new
-   Diablo II version, you should delete it.
-
-7. Click Launch and Enjoy!
+6. Click Launch and Enjoy!
 
 Troubleshooting
 ================
@@ -70,7 +60,7 @@ Troubleshooting
 ----------------
 This can happen for multiple reasons. One of them is that the files in
 your D2 root folder are not correct. Cactus will copy the files from the
-corresponding "[Classic/Expansion] / <label>" folder into your Diablo II
+corresponding "[Platforms/<name>" folder into your Diablo II
 root folder before launching if needed. If the files in your back up dirs
 are incorrect, then this may cause an issue.
 

@@ -36,10 +36,12 @@ namespace Cactus
         private readonly string _jsonPath;
         private List<EntryModel> _entries;
         private ILogger _logger;
+        private IPathBuilder _pathBuilder;
 
-        public EntryManager(ILogger logger)
+        public EntryManager(ILogger logger, IPathBuilder pathBuilder)
         {
             _logger = logger;
+            _pathBuilder = pathBuilder;
             _jsonDirectory = Directory.GetCurrentDirectory();
             _jsonPath = Path.Combine(_jsonDirectory, _jsonFile);
             _entries = GetEntries();
@@ -52,6 +54,24 @@ namespace Cactus
                 if (entry.WasLastRan) return entry;
             }
             return null;
+        }
+
+        /// <summary>
+        /// Lets you know if the entry in question is equal to all other root directories.
+        /// </summary>
+        public bool IsRootDirectoryEqualToOthers(EntryModel entry)
+        {
+            foreach (var currentEntry in _entries)
+            {
+                var proposedEntryRoot = _pathBuilder.GetRootDirectory(entry);
+                var currentEntryRoot = _pathBuilder.GetRootDirectory(currentEntry);
+                if (currentEntryRoot != proposedEntryRoot)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public void Add(EntryModel entry)
@@ -68,9 +88,8 @@ namespace Cactus
             {
                 var e = _entries[i];
 
-                if (e.Label == entry.Label && e.Path == entry.Path &&
-                    e.Flags == entry.Flags && e.Version == e.Version &&
-                    e.IsExpansion == entry.IsExpansion)
+                if (e.Platform == entry.Platform && e.Path == entry.Path &&
+                    e.Flags == entry.Flags && e.IsExpansion == entry.IsExpansion)
                 {
                     elementToRemove = e;
                     removedIndex = i;
@@ -91,7 +110,6 @@ namespace Cactus
             var newEntry = new EntryModel
             {
                 Path = entry.Path,
-                Version = entry.Version,
                 Flags = entry.Flags,
                 IsExpansion = entry.IsExpansion
             };

@@ -13,7 +13,9 @@
 // limitations under the License.
 
 using Cactus.Interfaces;
+using Cactus.Models;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Cactus
 {
@@ -23,34 +25,38 @@ namespace Cactus
     /// </summary>
     public class FileGenerator : IFileGenerator
     {
-        private IVersionManager _versionManager;
+        private readonly IPathBuilder _pathBuilder;
 
-        public FileGenerator(IVersionManager versionManager)
+        public FileGenerator(IPathBuilder pathBuilder)
         {
-            _versionManager = versionManager;
+            _pathBuilder = pathBuilder;
         }
 
-        public List<string> GetRequiredFiles(string version)
+        public RequiredFilesModel GetRequiredFiles(EntryModel entry)
         {
-            var requiredFiles = new List<string>();
+            var requiredFiles = new RequiredFilesModel();
+            var platformDirectory = _pathBuilder.GetPlatformDirectory(entry);
 
-            requiredFiles.AddRange(_commonFiles);
-            requiredFiles.AddRange(_thirdPartyLibraries);
-
-            if (_versionManager.Is114OrNewer(version))
+            if (Directory.Exists(platformDirectory))
             {
-                requiredFiles.AddRange(_requiredPost113Files);
-                requiredFiles.Add(_patchMpqFile);
-            }
-            else
-            {
-                // Every other version is the same (1.00-1.13), just 1.00 and 1.07 don't have a Patch_D2.mpq.
-                requiredFiles.AddRange(_requiredPre114Files);
+                var directories = Directory.GetDirectories(platformDirectory);
+                var processedDirectories = new List<string>();
 
-                if (_versionManager.RequiresPatchFile(version))
+                foreach (var directory in directories)
                 {
-                    requiredFiles.Add(_patchMpqFile);
+                    processedDirectories.Add(Path.GetFileName(directory));
                 }
+
+                var files = Directory.GetFiles(platformDirectory);
+                var processedFiles = new List<string>();
+
+                foreach (var file in files)
+                {
+                    processedFiles.Add(Path.GetFileName(file));
+                }
+
+                requiredFiles.Directories = processedDirectories;
+                requiredFiles.Files = processedFiles;
             }
 
             return requiredFiles;
@@ -67,83 +73,6 @@ namespace Cactus
                     "d2xvideo.mpq",
                     "d2xtalk.mpq"
                 };
-            }
-        }
-
-        private readonly List<string> _thirdPartyLibraries = new List<string>()
-        {
-            "binkw32.dll",
-            "ijl11.dll",
-            "SmackW32.dll"
-        };
-
-        // Keeping separate from commonFiles since 1.07 doesn't have it.
-        private const string _patchMpqFile = "Patch_D2.mpq";
-
-        private readonly List<string> _commonFiles = new List<string>()
-        {
-            "Diablo II.exe",
-            "Game.exe"
-        };
-
-        private readonly List<string> _requiredPre114Files = new List<string>()
-        {
-            "Bnclient.dll",
-            "D2Client.dll",
-            "D2CMP.dll",
-            "D2Common.dll",
-            "D2DDraw.dll",
-            "D2Direct3D.dll",
-            "D2Game.dll",
-            "D2Gdi.dll",
-            "D2gfx.dll",
-            "D2Glide.dll",
-            "D2Lang.dll",
-            "D2Launch.dll",
-            "D2MCPClient.dll",
-            "D2Multi.dll",
-            "D2Net.dll",
-            "D2sound.dll",
-            "D2Win.dll",
-            "Fog.dll",
-            "Storm.dll",
-            "D2VidTst.exe"
-        };
-
-        private readonly List<string> _requiredPost113Files = new List<string>()
-        {
-            "BlizzardError.exe",
-            "SystemSurvey.exe"
-        };
-
-        public List<string> GetPlugyRequiredFiles
-        {
-            get
-            {
-                var requiredFiles = new List<string>()
-                {
-                    "PlugY.exe",
-                    "PlugY.ini",
-                    "PlugY.dll",
-                    "PatchD2File.exe",
-                    "RestoreD2File.exe"
-                };
-
-                return requiredFiles;
-            }
-        }
-
-        public List<string> GetMedianXlRequiredFiles
-        {
-            get
-            {
-                var requiredFiles = new List<string>()
-                {
-                    "MXL.dll",
-                    "msvcr110.dll"
-                };
-
-                return requiredFiles;
             }
         }
     }

@@ -37,7 +37,6 @@ namespace Cactus
             container.Register(Component.For<IFileSwitcher>().ImplementedBy<FileSwitcher>());
             container.Register(Component.For<IEntryManager>().ImplementedBy<EntryManager>());
             container.Register(Component.For<IProcessManager>().ImplementedBy<ProcessManager>());
-            container.Register(Component.For<IVersionManager>().ImplementedBy<VersionManager>());
             container.Register(Component.For<ILogger>().ImplementedBy<Logger>());
             container.Register(Component.For<IRegistryService>().ImplementedBy<RegistryService>());
             container.Register(Component.For<IMainWindowViewModel>().ImplementedBy<MainWindowViewModel>());

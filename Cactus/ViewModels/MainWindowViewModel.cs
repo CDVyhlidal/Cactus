@@ -17,7 +17,6 @@ using Cactus.Models;
 using Cactus.Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -42,7 +41,7 @@ namespace Cactus.ViewModels
         public RelayCommand LaunchCommand { get; private set; }
 
         private readonly string _appName = "Cactus";
-        private readonly string _version = "1.0.5";
+        private readonly string _version = "1.1.0";
 
         public MainWindowViewModel(IEntryManager entryManager, IFileSwitcher fileSwitcher, IAddWindowViewModel addWindowViewModel, IEditWindowViewModel editWindowViewModel)
         {
@@ -210,9 +209,9 @@ namespace Cactus.ViewModels
 
             }
 
-            if (String.IsNullOrWhiteSpace(SelectedEntry.Path) || String.IsNullOrWhiteSpace(SelectedEntry.Label))
+            if (string.IsNullOrWhiteSpace(SelectedEntry.Path) || string.IsNullOrWhiteSpace(SelectedEntry.Platform))
             {
-                MessageBox.Show("This entry has no path or label set.");
+                MessageBox.Show("This entry has no platform or path set.");
                 return;
             }
 

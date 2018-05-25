@@ -1,13 +1,14 @@
-Cactus 1.0.5
+Cactus 1.1.0
 Jonathan Vasquez (fearedbliss) <jon@xyinn.org>
 Apache License 2.0
-Wednesday, May 23, 2018
+Friday, May 25, 2018
 ------------------------------------------------
 
 Description
 ---------------
 This is a C#/.NET based application that will help you manage/launch
-multiple versions of Diablo II from a single window.
+Multiple Versions or _Compatible Mods_ of Diablo II (Which I will call "Platforms")
+from a single application.
 
 This means you can easily install and play every single version of Diablo II
 from 1.00 to the latest 1.14d (and any other future versions) while maximizing
@@ -53,31 +54,42 @@ correctly so that things can switch properly.
 
 My first version will look like this:
 
-Label: "1.14d Vanilla"
-Version: "1.14d"
+Platform: "1.14d Vanilla"
 Path: "D:\Games\Diablo II\Game.exe"
 Flags: "-w -ns"
 Expansion: [Checked]
 
-What this says is that I want to run version 1.14d of the game,
-and the files that I will be using are located in a folder called,
-"1.14d Vanilla" inside of the "Expansion" sub directory (The check box controls
-where it looks in Classic/ or Expansion folders). The flags the game will be
-launched are "-w -ns" and the path of main executable is "D:\Games\Diablo II\Game.exe".
+What this says is that I want to run a platform of the game in a folder
+called "1.14d Vanilla". The game will be launched with the "-w -ns" flags,
+and the path of main executable is "D:\Games\Diablo II\Game.exe". This platform
+is also requires the Expansion MPQs since the Expansion checkbox is checked.
 What Cactus does is that when it switches between versions, it deletes all of the files
-that the old entry requires from the "D:\Games\Diablo II\ directory, and then it goes
-to the directory with the Label, and copies the requires files for that particular
-version to the "D:\Games\Diablo II\" directory.
+that the old entry required from the "D:\Games\Diablo II\ directory, and then it goes
+to the Platform with the associated name, and copies the required files for that particular
+platform to the "D:\Games\Diablo II\" directory. Cactus always copies files in one direction,
+thus the files in your Platforms directory never get modified or removed and thus are always
+safe. Cactus also keeps all of your character files for all of your platforms in separate
+directories named after the Platform in question, inside of the "Saves" folder. This means
+that you can easily backup all of your characters quickly by simply copying this folder.
+The "Saves" directory doesn't have to be manually created and will be automatically created
+when you switch an entry (or launch for the first time).
 
-If it's the first time you are running the game and you don't have the files backed up
-for this version, Cactus will automatically create a folder and copy all of those files
-over.
+4. Go to your Diablo II folder and make a folder called "Platforms" and inside of
+   the "Platforms" folder make another folder called "1.14d Vanilla".
 
-4. Click the new entry and click Launch.
+5. Go back to your Diablo II root folder and copy all of the .exes, .dlls,
+   and Patch_D2.mpq (The other MPQs should not be copied) to the "Platforms\1.14d Vanilla"
+   folder.
 
-5. Enjoy.
+6. Go back to Cactus, Click the new entry, and click Launch.
 
-Playing Previous Versions
+7. Enjoy.
+
+Any other versions, just make another folder for it in Platforms and throw your files in
+there. Each platform is completely separate from the previous one so all of the files
+that you need to run that version should be in that folder (Except for the shared MPQs).
+
+Playing Previous Versions (Video: https://www.youtube.com/watch?v=tz1J4FyuBHE)
 ---------------
 If you installed the game with a 1.00, 1.03, or 1.07 CDs/ISOs,
 then there is nothing special you need to do to play older versions
@@ -94,9 +106,6 @@ get a blank error message from the application, an error message saying that
 your mpq is corrupted, and D2VidTst won't run and will not allow you to change video
 modes. It actually isn't corrupted, it's just that the old Diablo II version you are
 trying to switch to doesn't understand the new MPQ attributes.
-
-Corresponding video tutorial:
-https://www.youtube.com/watch?v=tz1J4FyuBHE
 
 Playing Previous Versions: Fixing Graphical Issues (D2VidTst)
 ---------------
@@ -148,16 +157,16 @@ PlugY support (11.02)
 ---------------
 If you are using PlugY, then make sure to point your Path to "PlugY.exe"
 rather than "Game.exe". Also, Cactus copies all of the PlugY information
-in one direction only (From the Storage Directory -> Root Directory).
+in one direction only (From the Platform Directory -> Root Directory).
 So, if you wanna make any changes to PlugY, make sure that you switch to
-another entry, edit the PlugY files in the storage directory, and then
-switch back to it. If you don't have more than one entry/version, then just
-edit the settings in both the Storage Directory, and the Root Directory.
+another entry, edit the PlugY files in the platform directory, and then
+switch back to it. If you don't have more than one platform, then just
+edit the settings in both the Platform Directory, and the Root Directory.
 
 Cactus also slightly delays the execution of automatically launching PlugY
-when you first switch to an entry that has PlugY support. This is because the
-filesystem might copy the files in an asynchronous way which means that PlugY
-will try to launch before all of it's files are available, if this happens, you
+when you first switch to an entry. This is because the filesystem might
+copy the files in an asynchronous way which means that PlugY will try to
+launch before all of it's files are available, if this happens, you
 will get a "Read memory error". If you get this, just try to launch it again..
 but with the slight delay implemented in the application, you probably won't
 ever get this.. but never say never.

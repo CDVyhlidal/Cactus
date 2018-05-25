@@ -33,5 +33,6 @@ namespace Cactus.Interfaces
         void MarkLastRan(EntryModel entry);
         void SwapLastRan(EntryModel oldEntry, EntryModel newEntry);
         void SaveEntries();
+        bool IsRootDirectoryEqualToOthers(EntryModel entry);
     }
 }

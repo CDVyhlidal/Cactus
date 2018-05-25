@@ -18,14 +18,6 @@
                             <Setter Property="IsHitTestVisible" Value="False"/>
                         </Style>
                     </GridView.ColumnHeaderContainerStyle>
-                    <GridViewColumn Width="60" DisplayMemberBinding="{Binding Version}" Header="Version"/>
-                    <GridViewColumn Width="50" Header="Exp">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsHitTestVisible="False" Focusable="False" IsChecked="{Binding IsExpansion}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
                     <GridViewColumn Width="50" Header="Last">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -33,8 +25,15 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding Label}" Header="Label"/>
-                    <GridViewColumn Width="110" DisplayMemberBinding="{Binding Flags}" Header="Flags"/>
+                    <GridViewColumn Width="50" Header="Exp">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsHitTestVisible="False" Focusable="False" IsChecked="{Binding IsExpansion}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="200" DisplayMemberBinding="{Binding Platform}" Header="Platform"/>
+                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding Flags}" Header="Flags"/>
                 </GridView>
             </ListView.View>
         </ListView>

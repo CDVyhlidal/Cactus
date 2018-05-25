@@ -21,43 +21,26 @@ namespace Cactus.Models
     public class EntryModel : ViewModelBase
     {
         private bool _wasLastRan;
-        private string _label;
-        private string _version;
+        private string _platform;
         private string _path;
         private string _flags;
         private bool _isExpansion;
-        private bool _isPlugy;
-        private bool _isMedianXl;
 
-        [JsonProperty("Label", Order = 1)]
-        public string Label
+        [JsonProperty("Platform", Order = 1)]
+        public string Platform
         {
             get
             {
-                return _label;
+                return _platform;
             }
             set
             {
-                _label = value;
-                RaisePropertyChanged("Label");
+                _platform = value;
+                RaisePropertyChanged("Platform");
             }
         }
 
-        [JsonProperty("Version", Order = 2)]
-        public string Version
-        {
-            get
-            {
-                return _version;
-            }
-            set
-            {
-                _version = value;
-                RaisePropertyChanged("Version");
-            }
-        }
-
-        [JsonProperty("Path", Order = 3)]
+        [JsonProperty("Path", Order = 2)]
         public string Path
         {
             get
@@ -71,7 +54,7 @@ namespace Cactus.Models
             }
         }
 
-        [JsonProperty("Flags", Order = 4)]
+        [JsonProperty("Flags", Order = 3)]
         public string Flags
         {
             get
@@ -85,7 +68,7 @@ namespace Cactus.Models
             }
         }
 
-        [JsonProperty("IsExpansion", Order = 5)]
+        [JsonProperty("IsExpansion", Order = 4)]
         public bool IsExpansion
         {
             get
@@ -99,7 +82,7 @@ namespace Cactus.Models
             }
         }
 
-        [JsonProperty("WasLastRan", Order = 6)]
+        [JsonProperty("WasLastRan", Order = 5)]
         public bool WasLastRan
         {
             get
@@ -110,34 +93,6 @@ namespace Cactus.Models
             {
                 _wasLastRan = value;
                 RaisePropertyChanged("WasLastRan");
-            }
-        }
-
-        [JsonProperty("IsPlugy", Order = 7)]
-        public bool IsPlugy
-        {
-            get
-            {
-                return _isPlugy;
-            }
-            set
-            {
-                _isPlugy = value;
-                RaisePropertyChanged("IsPlugy");
-            }
-        }
-
-        [JsonProperty("IsMedianXl", Order = 8)]
-        public bool IsMedianXl
-        {
-            get
-            {
-                return _isMedianXl;
-            }
-            set
-            {
-                _isMedianXl= value;
-                RaisePropertyChanged("IsMedianXl");
             }
         }
     }

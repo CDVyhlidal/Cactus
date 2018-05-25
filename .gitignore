@@ -2,5 +2,5 @@
 bin/
 obj/
 Entries.json
-BnetLog.txt
 *.mpq
+Release/*.txt

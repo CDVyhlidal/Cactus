@@ -16,7 +16,6 @@ using Cactus.Interfaces;
 using Cactus.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System.Collections.Generic;
 using System.Windows;
 
 namespace Cactus.ViewModels
@@ -24,22 +23,15 @@ namespace Cactus.ViewModels
     public class AddWindowViewModel : ViewModelBase, IAddWindowViewModel
     {
         private IEntryManager _entryManager;
-        private IVersionManager _versionManager;
         private readonly IRegistryService _registryService;
         private readonly IPathBuilder _pathBuilder;
         private readonly IProcessManager _processManager;
 
-        // Latest version currently (Used for resetting the UI and selecting latest)
-        private readonly string _latestVersion = "1.14d";
-
         // Properties for new entry
-        public string Label { get; set; }
-        public string Version { get; set; }
+        public string Platform { get; set; }
         public string Path { get; set; }
         public string Flags { get; set; }
-        public bool IsExpansion { get; set; }
-        public bool IsPlugy { get; set; }
-        public bool IsMedianXl { get; set; }
+        public bool IsExpansion { get; set; } = true;
 
         // Allow parent view model to retrieve this property.
         public EntryModel AddedEntry { get; set; }
@@ -47,12 +39,10 @@ namespace Cactus.ViewModels
         public RelayCommand OkCommand { get; private set; }
         public RelayCommand CancelCommand { get; private set; }
 
-        public AddWindowViewModel(IEntryManager entryManager, IVersionManager versionManager,
-                                   IRegistryService registryService, IPathBuilder pathBuilder,
-                                   IProcessManager processManager)
+        public AddWindowViewModel(IEntryManager entryManager, IRegistryService registryService,
+                                  IPathBuilder pathBuilder, IProcessManager processManager)
         {
             _entryManager = entryManager;
-            _versionManager = versionManager;
             _registryService = registryService;
             _pathBuilder = pathBuilder;
             _processManager = processManager;
@@ -65,25 +55,23 @@ namespace Cactus.ViewModels
         {
             var entry = new EntryModel
             {
-                Label = Label,
-                Version = Version,
+                Platform = Platform,
                 Path = Path,
                 Flags = Flags,
-                IsExpansion = IsExpansion,
-                IsPlugy = IsPlugy,
-                IsMedianXl = IsMedianXl
+                IsExpansion = IsExpansion
             };
 
-            if (Label != null && Path != null)
+            if (string.IsNullOrWhiteSpace(Platform) || string.IsNullOrWhiteSpace(Path) ||
+                !_entryManager.IsRootDirectoryEqualToOthers(entry) || _pathBuilder.ContainsInvalidCharacters(entry.Platform))
+            {
+                MessageBox.Show("Please make sure all fields are populated, root path should match the rest of your entries (.exe can vary), and no invalid characters.");
+            }
+            else
             {
                 _entryManager.Add(entry);
                 _entryManager.SaveEntries();
 
                 AddedEntry = entry;
-            }
-            else
-            {
-                MessageBox.Show("Either the Label or the Path are empty.");
             }
 
             ResetUI();
@@ -96,21 +84,10 @@ namespace Cactus.ViewModels
 
         private void ResetUI()
         {
-            Label = null;
-            Version = _latestVersion;
+            Platform = null;
             Path = null;
             Flags = null;
-            IsExpansion = false;
-            IsPlugy = false;
-            IsMedianXl = false;
-        }
-
-        public Dictionary<string, VersionModel> Versions
-        {
-            get
-            {
-                return _versionManager.Versions;
-            }
+            IsExpansion = true;
         }
     }
 }
