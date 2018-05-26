@@ -33,7 +33,7 @@ The Bliss Complete Collection includes all of the following:
 
 Download: https://xyinn.org/diablo/Bliss_Complete_Collection.7z
 
-Installation/Instructions
+Installation/Instructions (Video: https://www.youtube.com/watch?v=i6SfYy1kCJ0)
 ---------------
 1. Place the "Cactus.exe" and all of the .dlls in the "Release" folder into the
    root of your Diablo II directory. If you don't do this, you will have issues
