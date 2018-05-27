@@ -1,7 +1,7 @@
-Cactus 1.1.0
+Cactus 1.2.0
 Jonathan Vasquez (fearedbliss) <jon@xyinn.org>
 Apache License 2.0
-Friday, May 25, 2018
+Saturday, May 26, 2018
 ------------------------------------------------
 
 Description
@@ -28,7 +28,6 @@ The Bliss Complete Collection includes all of the following:
   > No CD Pack for 1.00 - 1.11b
 - Vanilla Frosting (Best of 1.00 - 1.14 in a balanced way)
 - Singling (No gameplay changes, only fixes, unlocks, engine improvements)
-- PlugY
 - GlideWrapper
 
 Download: https://xyinn.org/diablo/Bliss_Complete_Collection.7z

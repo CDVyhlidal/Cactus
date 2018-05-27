@@ -26,11 +26,33 @@ namespace Cactus
     public class FileGenerator : IFileGenerator
     {
         private readonly IPathBuilder _pathBuilder;
+        private readonly ILogger _logger;
 
-        public FileGenerator(IPathBuilder pathBuilder)
+        public FileGenerator(IPathBuilder pathBuilder, ILogger logger)
         {
             _pathBuilder = pathBuilder;
+            _logger = logger;
         }
+
+        private readonly List<string> _protectedDocuments = new List<string>()
+        {
+            "Platforms",
+            "Saves",
+            "save",
+            "d2char.mpq",
+            "d2data.mpq",
+            "d2exp.mpq",
+            "d2music.mpq",
+            "d2sfx.mpq",
+            "d2speech.mpq",
+            "d2video.mpq",
+            "d2xmusic.mpq",
+            "d2xtalk.mpq",
+            "d2xvideo.mpq",
+            "D2.LNG",
+            "Entries.json",
+            "LastRequiredFiles.json"
+        };
 
         public RequiredFilesModel GetRequiredFiles(EntryModel entry)
         {
@@ -44,7 +66,8 @@ namespace Cactus
 
                 foreach (var directory in directories)
                 {
-                    processedDirectories.Add(Path.GetFileName(directory));
+                    var directoryName = Path.GetFileName(directory);
+                    processedDirectories.Add(directoryName);
                 }
 
                 var files = Directory.GetFiles(platformDirectory);
@@ -52,14 +75,66 @@ namespace Cactus
 
                 foreach (var file in files)
                 {
-                    processedFiles.Add(Path.GetFileName(file));
+                    var fileName = Path.GetFileName(file);
+                    processedFiles.Add(fileName);
                 }
 
                 requiredFiles.Directories = processedDirectories;
                 requiredFiles.Files = processedFiles;
+
+                ValidateRequiredFiles(requiredFiles);
             }
 
             return requiredFiles;
+        }
+
+        /// <summary>
+        /// Scans all of the files in the list and removes any files that are protected.
+        /// </summary>
+        public void ValidateRequiredFiles(RequiredFilesModel requiredFiles)
+        {
+            var directoriesToRemove = new List<string>();
+            var filesToRemove = new List<string>();
+
+            foreach (var directory in requiredFiles.Directories)
+            {
+                if (IsProtected(directory))
+                {
+                    directoriesToRemove.Add(directory);
+                }
+            }
+
+            foreach (var file in requiredFiles.Files)
+            {
+                if (IsProtected(file))
+                {
+                    filesToRemove.Add(file);
+                }
+            }
+
+            foreach (var directory in directoriesToRemove)
+            {
+                requiredFiles.Directories.Remove(directory);
+            }
+
+            foreach (var file in filesToRemove)
+            {
+                requiredFiles.Files.Remove(file);
+            }
+        }
+
+        private bool IsProtected(string document)
+        {
+            // No files or directories that are within the protected list are allowed to be tracked/deleted.
+            foreach (var protectedDocument in _protectedDocuments)
+            {
+                if (document.EqualsIgnoreCase(protectedDocument))
+                {
+                    _logger.LogWarning($"Protected file/directory \"{document}\" detected in list. Skipping it for protection.");
+                    return true;
+                }
+            }
+            return false;
         }
 
         public List<string> ExpansionMpqs

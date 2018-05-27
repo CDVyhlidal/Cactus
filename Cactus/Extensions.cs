@@ -12,26 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using Cactus.Interfaces;
-using System.Diagnostics;
+using System;
 
 namespace Cactus
 {
-    public class Logger : ILogger
+    public static class Extensions
     {
-        public void LogInfo(string message)
+        public static bool EqualsIgnoreCase(this string text, string value)
         {
-            Trace.WriteLine($"[Info] {message}");
-        }
-
-        public void LogWarning(string message)
-        {
-            Trace.WriteLine($"[Warning] {message}");
-        }
-
-        public void LogError(string message)
-        {
-            Trace.WriteLine($"[Error] {message}");
+            return string.Equals(text, value, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

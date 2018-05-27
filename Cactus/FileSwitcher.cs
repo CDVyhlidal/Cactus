@@ -35,7 +35,8 @@ namespace Cactus
         private IRegistryService _registryService;
         private ILogger _logger;
         private IPathBuilder _pathBuilder;
-
+        private IJsonManager _jsonManager;
+        
         private EntryModel _currentEntry;
         private EntryModel _lastRanEntry;
 
@@ -45,9 +46,11 @@ namespace Cactus
             Expansion
         }
 
+        private readonly int _fileSwitchingDelay = 4000;
+
         public FileSwitcher(IEntryManager entries, IFileGenerator fileGenerator,
                             IProcessManager processManager, IRegistryService registryService,
-                            ILogger logger, IPathBuilder pathBuilder)
+                            ILogger logger, IPathBuilder pathBuilder, IJsonManager jsonManager)
         {
             _entries = entries;
             _fileGenerator = fileGenerator;
@@ -55,6 +58,7 @@ namespace Cactus
             _registryService = registryService;
             _logger = logger;
             _pathBuilder = pathBuilder;
+            _jsonManager = jsonManager;
         }
 
         public void Run(EntryModel entry)
@@ -75,7 +79,9 @@ namespace Cactus
 
                 LaunchGame();
             }
-            else if (_lastRanEntry.Platform == _currentEntry.Platform && _lastRanEntry.IsExpansion == _currentEntry.IsExpansion && _lastRanEntry.Path == _currentEntry.Path)
+            else if (_lastRanEntry.Platform.EqualsIgnoreCase(_currentEntry.Platform) &&
+                     _lastRanEntry.Path.EqualsIgnoreCase(_currentEntry.Path) &&
+                     _lastRanEntry.IsExpansion == _currentEntry.IsExpansion)
             {
                 _logger.LogInfo("Running the same version, no change needed.");
 
@@ -116,13 +122,21 @@ namespace Cactus
         {
             try
             {
-                var currentVersionRequiredFiles = _fileGenerator.GetRequiredFiles(_lastRanEntry);
-                var targetVersionRequiredFiles = _fileGenerator.GetRequiredFiles(_currentEntry);
-
                 string rootDirectory = _pathBuilder.GetRootDirectory(_lastRanEntry);
                 string platformDirectory = _pathBuilder.GetPlatformDirectory(_currentEntry);
 
-                DeleteRequiredFiles(rootDirectory, currentVersionRequiredFiles);
+                // Retrieve the old required files so we can clean them up when we switch entries.
+                var lastRequiredFiles = _jsonManager.GetLastRequiredFiles();
+
+                if (lastRequiredFiles == null)
+                {
+                    _logger.LogWarning("The last required files file doesn't exist. Using current version as a bases.");
+                    lastRequiredFiles = _fileGenerator.GetRequiredFiles(_lastRanEntry);
+                }
+
+                var targetVersionRequiredFiles = _fileGenerator.GetRequiredFiles(_currentEntry);
+
+                DeleteRequiredFiles(rootDirectory, lastRequiredFiles);
                 InstallRequiredFiles(platformDirectory, rootDirectory, targetVersionRequiredFiles);
 
                 // Make sure save directory exists
@@ -146,8 +160,11 @@ namespace Cactus
                     }
                 }
 
+                // Save the required files for the target since we will use these to clean up when we switch.
+                _jsonManager.SaveLastRequiredFiles(targetVersionRequiredFiles);
+
                 // Delay the app a bit so things can settle on the disk
-                Thread.Sleep(2000);
+                Thread.Sleep(_fileSwitchingDelay);
             }
             catch (UnauthorizedAccessException ex)
             {

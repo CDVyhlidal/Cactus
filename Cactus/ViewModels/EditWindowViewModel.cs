@@ -16,7 +16,6 @@ using Cactus.Interfaces;
 using Cactus.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System;
 using System.IO;
 using System.Windows;
 
@@ -28,6 +27,7 @@ namespace Cactus.ViewModels
         private IRegistryService _registryService;
         private IPathBuilder _pathBuilder;
         private IProcessManager _processManager;
+        private ILogger _logger;
 
         public EntryModel CurrentEntry { get; set; }
         public EntryModel LastRanEntry { get; set; }
@@ -39,12 +39,13 @@ namespace Cactus.ViewModels
         public RelayCommand CancelCommand { get; private set; }
 
         public EditWindowViewModel(IEntryManager entryManager, IRegistryService registryService,
-                                   IPathBuilder pathBuilder, IProcessManager processManager)
+                                   IPathBuilder pathBuilder, IProcessManager processManager, ILogger logger)
         {
             _entryManager = entryManager;
             _registryService = registryService;
             _pathBuilder = pathBuilder;
             _processManager = processManager;
+            _logger = logger;
 
             OkCommand = new RelayCommand(Ok);
             CancelCommand = new RelayCommand(Cancel);
@@ -79,7 +80,7 @@ namespace Cactus.ViewModels
 
                     // We can skip renaming if it's the same platform.
                     // No renaming of directories needs to happen here. Just saving.
-                    if (oldPlatformDirectory != newPlatformDirectory)
+                    if (!oldPlatformDirectory.EqualsIgnoreCase(newPlatformDirectory))
                     {
                         // If the target directory name already exists, we can't allow this rename to happen.
                         if (Directory.Exists(newPlatformDirectory) || Directory.Exists(newSavesDirectory))
@@ -93,8 +94,8 @@ namespace Cactus.ViewModels
                         // operation since the game is still using that directory/save path.
                         if (CurrentEntry.WasLastRan && _processManager.AreProcessesRunning)
                         {
-                            Console.WriteLine("You can't edit this entry since the game is currently running and using its save directory.");
-                            Console.WriteLine("Please close all instances of Diablo II and try again.");
+                            _logger.LogWarning("You can't edit this entry since the game is currently running and using its save directory.");
+                            _logger.LogWarning("Please close all instances of Diablo II and try again.");
 
                             ReverseChanges();
                             return;
@@ -109,6 +110,9 @@ namespace Cactus.ViewModels
                         {
                             Directory.Move(oldSavesDirectory, newSavesDirectory);
                         }
+
+                        // Rename any platforms with the same platform name
+                        _entryManager.RenamePlatform(_oldEntry.Platform, CurrentEntry.Platform);
                     }
                 }
 

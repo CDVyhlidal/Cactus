@@ -44,6 +44,7 @@ namespace Cactus
             container.Register(Component.For<IAddWindowViewModel>().ImplementedBy<AddWindowViewModel>());
             container.Register(Component.For<IFileGenerator>().ImplementedBy<FileGenerator>());
             container.Register(Component.For<IPathBuilder>().ImplementedBy<PathBuilder>());
+            container.Register(Component.For<IJsonManager>().ImplementedBy<JsonManager>());
             return container;
         }
 

@@ -21,5 +21,6 @@ namespace Cactus.Interfaces
     {
         RequiredFilesModel GetRequiredFiles(EntryModel entry);
         List<string> ExpansionMpqs { get; }
+        void ValidateRequiredFiles(RequiredFilesModel requiredFiles);
     }
 }

@@ -7,6 +7,7 @@ The directory structure that Cactus uses is as follows:
 
 Diablo II/                         - Your Diablo II Root Directory
 Diablo II/Entries.json             - Your settings will be saved here.
+Diablo II/LastRequiredFiles.json   - Keeps track of the files that need to be deleted when switching entries.
 
 Diablo II/Platforms/                - All your platforms will be in here (different versions, different mods, etc)
 Diablo II/Platforms/<name>         - Location of your Diablo II files for this version (Platform Directory)

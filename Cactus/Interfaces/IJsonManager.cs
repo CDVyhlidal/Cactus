@@ -12,26 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using Cactus.Interfaces;
-using System.Diagnostics;
+using Cactus.Models;
+using System.Collections.Generic;
 
-namespace Cactus
+namespace Cactus.Interfaces
 {
-    public class Logger : ILogger
+    public interface IJsonManager
     {
-        public void LogInfo(string message)
-        {
-            Trace.WriteLine($"[Info] {message}");
-        }
-
-        public void LogWarning(string message)
-        {
-            Trace.WriteLine($"[Warning] {message}");
-        }
-
-        public void LogError(string message)
-        {
-            Trace.WriteLine($"[Error] {message}");
-        }
+        void SaveEntries(List<EntryModel> entries);
+        List<EntryModel> GetEntries();
+        void SaveLastRequiredFiles(RequiredFilesModel requiredFiles);
+        RequiredFilesModel GetLastRequiredFiles();
     }
 }

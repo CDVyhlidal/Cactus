@@ -34,5 +34,6 @@ namespace Cactus.Interfaces
         void SwapLastRan(EntryModel oldEntry, EntryModel newEntry);
         void SaveEntries();
         bool IsRootDirectoryEqualToOthers(EntryModel entry);
+        void RenamePlatform(string oldPlatformName, string newPlatformName);
     }
 }

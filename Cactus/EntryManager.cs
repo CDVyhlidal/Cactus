@@ -15,10 +15,8 @@
 using Cactus.Interfaces;
 using Cactus.Models;
 using GalaSoft.MvvmLight;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace Cactus
 {
@@ -31,19 +29,16 @@ namespace Cactus
     /// </summary>
     public class EntryManager : ViewModelBase, IEntryManager
     {
-        private readonly string _jsonFile = "Entries.json";
-        private readonly string _jsonDirectory;
-        private readonly string _jsonPath;
         private List<EntryModel> _entries;
         private ILogger _logger;
         private IPathBuilder _pathBuilder;
+        private IJsonManager _jsonManager;
 
-        public EntryManager(ILogger logger, IPathBuilder pathBuilder)
+        public EntryManager(ILogger logger, IPathBuilder pathBuilder, IJsonManager jsonManager)
         {
             _logger = logger;
             _pathBuilder = pathBuilder;
-            _jsonDirectory = Directory.GetCurrentDirectory();
-            _jsonPath = Path.Combine(_jsonDirectory, _jsonFile);
+            _jsonManager = jsonManager;
             _entries = GetEntries();
         }
 
@@ -65,7 +60,7 @@ namespace Cactus
             {
                 var proposedEntryRoot = _pathBuilder.GetRootDirectory(entry);
                 var currentEntryRoot = _pathBuilder.GetRootDirectory(currentEntry);
-                if (currentEntryRoot != proposedEntryRoot)
+                if (!currentEntryRoot.EqualsIgnoreCase(proposedEntryRoot))
                 {
                     return false;
                 }
@@ -88,8 +83,8 @@ namespace Cactus
             {
                 var e = _entries[i];
 
-                if (e.Platform == entry.Platform && e.Path == entry.Path &&
-                    e.Flags == entry.Flags && e.IsExpansion == entry.IsExpansion)
+                if (e.Platform.EqualsIgnoreCase(entry.Platform) && e.Path.EqualsIgnoreCase(entry.Path) &&
+                    e.Flags.EqualsIgnoreCase(entry.Flags) && e.IsExpansion == entry.IsExpansion)
                 {
                     elementToRemove = e;
                     removedIndex = i;
@@ -174,16 +169,7 @@ namespace Cactus
             try
             {
                 if (_entries != null) return _entries;
-
-                if (File.Exists(_jsonPath))
-                {
-                    var serializedEntries = File.ReadAllText(_jsonPath);
-                    _entries = JsonConvert.DeserializeObject<List<EntryModel>>(serializedEntries);
-                }
-                else
-                {
-                    _entries = new List<EntryModel>();
-                }
+                _entries = _jsonManager.GetEntries();
             }
             catch (Exception ex)
             {
@@ -197,8 +183,21 @@ namespace Cactus
 
         public void SaveEntries()
         {
-            string serializedEntries = JsonConvert.SerializeObject(_entries, Formatting.Indented);
-            File.WriteAllText(_jsonPath, serializedEntries);
+            _jsonManager.SaveEntries(_entries);
+        }
+
+        /// <summary>
+        /// Renames all platform references with a particular name, to a new name.
+        /// </summary>
+        public void RenamePlatform(string oldPlatformName, string newPlatformName)
+        {
+            foreach (var entry in _entries)
+            {
+                if (entry.Platform.EqualsIgnoreCase(oldPlatformName))
+                {
+                    entry.Platform = newPlatformName;
+                }
+            }
         }
     }
 }
