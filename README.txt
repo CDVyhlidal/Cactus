@@ -19,18 +19,22 @@ Requirements
 ---------------
 - .NET Framework 4.6.1 +
 
-Useful Additions
+Links
 ---------------
-The Bliss Complete Collection includes all of the following:
+Discord - https://discord.gg/3DD6ZVQ
+Cactus - https://github.com/fearedbliss/Cactus
+Succulent - https://github.com/fearedbliss/Succulent
+Singling - https://github.com/fearedbliss/singling
+Bliss Complete Collection - https://xyinn.org/diablo/Bliss_Complete_Collection.7z
+
+The "Bliss Complete Collection" package listed above includes the following:
 
 - Cactus
-  > All Diablo II versions between 1.00 - 1.14d (Including 1.07.41 beta)
-  > No CD Pack for 1.00 - 1.11b
-- Vanilla Frosting (Best of 1.00 - 1.14 in a balanced way)
-- Singling (No gameplay changes, only fixes, unlocks, engine improvements)
+  > All versions of Diablo II between 1.00 - 1.14d (Including 1.07.41 beta)
+  > GalaXyHaXz's No CD Pack for 1.00 - 1.11b
+- Succulent (A Diablo II Single Player Enhancement)
+- Singling (Contains no gameplay modifications, only fixes and improvements)
 - GlideWrapper
-
-Download: https://xyinn.org/diablo/Bliss_Complete_Collection.7z
 
 Installation/Instructions (Video: https://www.youtube.com/watch?v=i6SfYy1kCJ0)
 ---------------
