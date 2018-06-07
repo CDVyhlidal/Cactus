@@ -1,7 +1,7 @@
-Cactus 1.2.0
+Cactus 1.2.1
 Jonathan Vasquez (fearedbliss) <jon@xyinn.org>
 Apache License 2.0
-Saturday, May 26, 2018
+Released on Thursday, June 7, 2018
 ------------------------------------------------
 
 Description
@@ -183,3 +183,22 @@ Just run Cactus in admin mode and the permissions will trickle down.
 Also on Windows 10 I was getting an access violation after I closed the
 Median XL process. You can solve this by running the Game.exe in either
 Windows XP (SP3) or Windows 7 compatibility mode.
+
+Moving Cactus over to a new computer
+---------------
+If you want to move all of your platforms, characters, and Diablo II folder
+to another machine, you can just copy your entire Diablo II folder as is,
+transport it to your new machine (USB, SSH, etc), and then after that edit
+the Last Ran entry and uncheck the "Last Ran" box. Then run whatever entry
+you want. Unchecking the "Last Ran" box will cause Cactus to reconfigure itself
+(Including registry locations).
+
+Updating files in your Platforms directory
+---------------
+If you update any files in your Platforms directory, then if that entry
+that you updated is the currently running version (Last Ran is checked),
+then you will need to edit the entry, uncheck the "Last Ran" box, and re-run
+it. This will cause Cactus to reinstall that platform so that you will have
+the new files in the Diablo II root directory.  If the platform you updated
+isn't the last ran, then you don't need to do anything else since it will
+install those files properly whenever you switch to it.

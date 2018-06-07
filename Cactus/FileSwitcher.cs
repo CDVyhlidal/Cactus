@@ -46,8 +46,6 @@ namespace Cactus
             Expansion
         }
 
-        private readonly int _fileSwitchingDelay = 4000;
-
         public FileSwitcher(IEntryManager entries, IFileGenerator fileGenerator,
                             IProcessManager processManager, IRegistryService registryService,
                             ILogger logger, IPathBuilder pathBuilder, IJsonManager jsonManager)
@@ -162,9 +160,6 @@ namespace Cactus
 
                 // Save the required files for the target since we will use these to clean up when we switch.
                 _jsonManager.SaveLastRequiredFiles(targetVersionRequiredFiles);
-
-                // Delay the app a bit so things can settle on the disk
-                Thread.Sleep(_fileSwitchingDelay);
             }
             catch (UnauthorizedAccessException ex)
             {
