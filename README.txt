@@ -21,9 +21,7 @@ Requirements
 
 Links
 ---------------
-Discord - https://discord.gg/3DD6ZVQ
 Cactus - https://github.com/fearedbliss/Cactus
-Succulent - https://github.com/fearedbliss/Succulent
 Singling - https://github.com/fearedbliss/singling
 Bliss Complete Collection - https://xyinn.org/diablo/Bliss_Complete_Collection.7z
 
@@ -32,8 +30,7 @@ The "Bliss Complete Collection" package listed above includes the following:
 - Cactus
   > All versions of Diablo II between 1.00 - 1.14d (Including 1.07.41 beta)
   > GalaXyHaXz's No CD Pack for 1.00 - 1.11b
-- Succulent (A Diablo II Single Player Enhancement)
-- Singling (Contains no gameplay modifications, only fixes and improvements)
+- Singling - A collection of non-gameplay modifications and fixes.
 - GlideWrapper
 
 Installation/Instructions (Video: https://www.youtube.com/watch?v=i6SfYy1kCJ0)
