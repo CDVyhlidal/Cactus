@@ -1,0 +1,53 @@
+﻿<Window x:Class="Cactus.Views.AddView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cactus.Views"
+        mc:Ignorable="d"
+        Title="Add Entry" Height="240" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterOwner"
+        DataContext="{Binding AddWindow, Source={StaticResource Locator}}">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Platform"/>
+        <TextBox Name="txtPlatform" Text="{Binding Platform}" Grid.Column="1" Grid.ColumnSpan="2"/>
+
+        <Label Content="Path" Grid.Row="1"/>
+        <TextBox Name="txtPath" Text="{Binding Path}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
+
+        <Label Content="Flags" Grid.Row="2"/>
+        <TextBox Name="txtFlags" Text="{Binding Flags}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+
+        <GroupBox Header="Options" Grid.Row="3" Grid.ColumnSpan="3" Margin="0 0 0 10">
+            <Grid HorizontalAlignment="Center" Grid.ColumnSpan="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <CheckBox Name="chkIsExpansion" IsChecked="{Binding IsExpansion}" Content="Expansion"/>
+            </Grid>
+        </GroupBox>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
+            <Button Name="btnOk" Content="Add" IsDefault="True" Command="{Binding OkCommand}" Click="CloseWindow_Click" Padding="10 0 10 0" Margin="0 0 5 0"/>
+            <Button Name="btnCancel" Content="Cancel" IsCancel="True" Command="{Binding CancelCommand}" Click="CloseWindow_Click" Padding="10 0 10 0"/>
+        </StackPanel>
+    </Grid>
+</Window>

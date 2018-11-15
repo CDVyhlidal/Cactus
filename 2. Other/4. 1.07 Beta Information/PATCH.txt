@@ -1,0 +1,517 @@
+--------------------------------------------------------------------------
+  Diablo II Version History
+--------------------------------------------------------------------------
+- Patch 1.48
+--------------------------------------------------------------------------
+
+     Skill Balance Changes
+
+  Sorceress
+- Boosted the per-level damage bonus for Ice Blast. 
+- Boosted the per-level damage bonus for Fire Ball. 
+- Boosted the per-level damage bonus for Lightning. 
+- Boosted the per-level damage bonus for Nova. 
+- Boosted the per-level damage bonus for Glacial Spike.
+
+  Druid
+- Werebear skill modified to give +50% to hitpoints (not +100%).
+- Maul now gives +20% damage per charge per level (not +25%). Its stun
+  length is shorter and attack bonus is 3% plus, 3% per level (not +20%,
+  10% per level).
+- Increased damage of Fire Claws slightly (+8 per level up to level 9 -
+  it was plus 6). 
+- Damage bonus Fury changed to +50% damage, 5% per level (not 100%, 17%
+  per level).
+
+  Paladin
+- Increased the blocking bonus for Holy Shield. 
+- Increased damage for Fist of the Heavens. 
+
+
+     Modifications
+
+- The durability for all claw class weapons are now doubled.
+- Lowered the requirements for claw class weapons. 
+- Adjusted attribute requirements for all claw class weapons. 
+- Adjusted damages for all Elite weapons.
+- Adjusted affix level for wands, staves and orbs (Higher levels of these
+  items have better magic attributes).
+- Increased the chances of enhanced damage affixes on weapons.
+- Increased the chances of enhanced attack rating affixes on weapons.
+- Increased the chances of enhanced armor affixes on armor.
+- Increased the chances of elemental suffixes on weapons.
+- Increased level and damage for high level elemental damage affixes. 
+- Adjusted affix rarity for various other items.
+- Decreased values on +max damage and +min damage charms.
+- Increased values for % gold find affixes on charms and jewels.
+- Increased attributes of many affixes for jewels.
+- Increased chances of extra quantity affixes on throwing items.
+- Increased chances of regenerate quantity affixes on throwing items.
+- Increased jewel drop rates. 
+- The necromancer spell "Iron Maiden" no longer appears on charged items.
+- Increased resistance bonus for tal, ral, ort, thul runes when socketed
+  into shields by 5%.
+- Increased resistance bonus for um rune when socketed into shields by 2%.
+- Increased resistance bonus for um rune when socketed into helms and
+  armor by 5%.
+- Changed bonus for runes with + to max resists to 5%.
+- Revamped rune words. 
+- Adjusted rune drop rates. 
+- Removed several melee modifiers from generating on orbs.
+- Changed Izual to be able to drop treasure. 
+- Changed Charsi's imbue quest to always give staff mods on items that can
+  have them.
+- Items sold to stores are priced as if they were fully repaired.
+- Lowered prices for items with +2 or +3 to single skills. 
+- Lowered costs for recharging items.
+- Removed throwing potions from stores. 
+- Increased prices for circlets and coronets. 
+- Unique monsters with the "teleport" attribute now heal a fixed amount. 
+- Crushing blow is at 1/2 effectiveness on bows. 
+- Crushing blow is affected by physical resistance. 
+- Lowered hireling resurrection cost.
+- Applied diminishing returns on player velocity. 
+- Increased chances of finding unique and set items. 
+- Slightly increased the non-party drop rate for solo-8 player games.
+- Lowered gambling prices that scale with your level. 
+- Changed prices on rejuv and full rejuv potions. 
+- Added potential sockets for Troll nest and Blade barrier shields. 
+- Enabled sockets on certain items, increase sockets potential on others.
+- Increased blocking for grim shield. 
+- Increased AC for all elite shields. 
+- Increased AC for Bone visage helm. Changed +rate items (fast, faster,
+  fastest) to display as x% faster. 
+- Adjusted armor, blocking, durability for elite Paladin shields. (These
+  were less than the exceptional versions) 
+- Throwing weapon durability is lost at 1/3 rate when used in melee.
+- Rare +2 all skills can now spawn on amulets. 
+- Increased range of the Glorious axe.
+- Changed items with pierce to use their pierce value as a percentage
+  instead of as a level in the skill. 
+- Changed the piercing value for certain uniques with pierce (Kuko
+  Shakaku, Buriza-Do Kuyanon, Demon Machine, Razor Tail).
+- Changed Wizardspike unique bone knife to 75% resist all.
+- The set item Naj's Puzzler now has 69 charges of teleport. 
+- Added sound to shift-click of potions in grid (transfer to belt).
+- Added elemental damage affixes for charms. 
+- Adjusted the difficulty of Baal on higher difficulties. 
+- Cannot get credit for ancients quest unless level is greater than or
+  equal to 20 * difficulty level. Where the difficulty level is one for
+  normal, two for nightmare and three for hell mode. 
+- We now average the speed of your two weapons when you do two-handed
+  attacks - Frenzy, Double Swing, Dragon Claw, etc... 
+- Lower Resist, Conviction and Amplify Damage don't affect immunities. 
+
+(Later added to notes)
+- Crafted items cannot generate with affixes meant for magic items 
+  only. 
+
+
+     Major Bugs
+
+- Addressed certain duping issues when entering and leaving games. 
+- Fixed a bug that allowed players to use charged items for free if you
+  repaired them while in the inactive weapon slot. 
+
+
+     Minor Bugs
+
+- Fixed display for rate modifiers (fast, faster, fastest). 
+- Added missing "crimson" affix with adds +5-10 fire resistance. 
+- Fixed a bug where quests and horadric cube recipes could generate items
+  with too many sockets. 
+- Fixed a bug were expert's/veteran's/master's prefixes were swapped with
+  sounding/resonant/echoing prefixes. 
+- Fixed a bug which allowed spells cast while wearing items of piercing to
+  have piercing.
+- Fixed a bug where single skill bonuses didn't stack properly. 
+- Fixed a bug where variable costs for armor types wasn't being calculated
+  properly. 
+- Fixed a bug where you were allowed to multi-buy rejuv potions in stores.
+
+
+     Server Fix
+
+- We fixed a problem where people who were disconnected from games abruptly
+  (ie network connection problems) lost items. The items lost before this
+  server are lost for good, but no new items will be lost this way. 
+
+--------------------------------------------------------------------------
+- Patch 1.47
+--------------------------------------------------------------------------
+
+     Lots of Stuff
+
+- Crushing blow not affected by negative physical resistance
+- Changed +rate items (fast, faster, fastest) to display as x% faster
+- Changed deadly strike on highlord's wrath unique ring to 0.375%/lvl
+  deadly strike
+- Changed wizardspike unique bone knife to 75% resist all
+- Changed laying of hand's set bramble mitts to 50% fire resist instead
+  of 50% fire absorb and 250% damage to demons
+- Changed bonus for runes with + to max resists to 5%
+- Increased prices for circlets and coronets
+- Fixed bug were expert's/veteran's/master's prefixes were swapped with
+  sounding/resonant/echoing prefixes
+- Changed items with pierce to use their pierce value as a percentage
+  instead of as a level in the skill
+- Fixed bug which allowed spells cast while wearing items of piercing to
+  have piercing
+- Changed the piercing value for certain uniques with pierce (Kuko
+  Shakaku, Buriza-Do Kuyanon, Demon Machine, Razor Tail)
+- Fixed bug where you were allowed to multi-buy rejuv potions in stores
+- Adjusted armor, blocking, durability for elite paladin shields (these
+  were less than the exceptional versions)
+- Increased range of glorious axe by one
+- Split rune words table into server and client versions
+- Added code to give warning if server version of rune words data files
+  are found in release client build
+- Fixed problem with runewords being generated short
+- Throwing weapon durability is lost at 1/3 rate when used in melee
+- Changed prices on rejuv and full rejuv potions
+- Increased number of runeword properties to 7
+- Fixed bug where single skill bonuses didn't stack properly
+- Lowered costs for recharging items
+- Fixed bug where variable costs for armor types wasn't being calculated
+  properly
+- Fixed crash introduced in 06/03/01 with respect to swapping out charged
+  items/repairing them at stores
+- Enabled sockets on certain items, increase sockets potential on others
+- Revamped rune words
+
+
+     Major Bugs
+
+- Addressed certain duping issues when entering and leaving games.
+
+
+     Minor Bugs
+
+- Fixed display for rate modifiers (fast, faster, fastest).
+- Added missing "crimson" affix with adds +5-10 fire resistance.
+- Fixed a bug where quests and horadric cube recipes could generate items
+  with too many sockets.
+
+--------------------------------------------------------------------------
+- Patch 1.46
+--------------------------------------------------------------------------
+
+     Skill Balance Changes
+
+  Druid
+- Increased the delay between the times that Hurricane does damage.
+- (Increased the radius for Armageddon's damage and increased the delay
+  between missiles. Didn't make it into the Beta build.)
+
+  Assassin
+- Dragon Tail does not cost mana or knockback when it misses.
+
+  Sorceress
+- Made sure that Thunderstorm hits.
+- Static Field is no longer affected by Conviction and Lower Resist. Also,
+  it will not take a monster below 33% health in Nightmare (50% in Hell).
+- Increased Frozen Orb damage.
+- Cold Mastery will not affect cold immune monsters.
+
+  Amazon
+- Fixed the bug that added javelin damage to Lightning Fury, and made the
+  graphics simpler for the lightning.
+
+  Necromancer
+- The hitpoints for a Revived monster no longer reflect the number of
+  players in the game.
+
+  Barbarian
+- Whirlwind will now alternate between two weapons when you use two weapons.
+- Fixed the bug which would allow you to still have armorclass after using
+  Berserk.
+
+
+     Modifications
+
+- We now average the speed of your two weapons when you do two-handed
+  attacks - Frenzy, Double Swing, Dragon Claw, etc...
+- Dragon Tail now has an attack bonus.
+- Lower Resist, Conviction and Amplify Damage don't affect immunities.
+
+--------------------------------------------------------------------------
+- Patch 1.45
+--------------------------------------------------------------------------
+
+     Skill Balance Changes
+
+(We have planned some other skill balance changes.)
+
+  Paladin
+- Increased Holy Shock's melee damage bonus.
+- Decreased the power of Conviction.
+
+  Necromancer
+- Increased Fire Golem's melee damage.
+
+  Sorceress
+- Increased Fire Wall's damage
+- Increased Blizzard's duration.
+- Decreased Meteor's casting delay.
+- Decreased casting time for Chain Lightning and Lightning.
+- Increased Frozen Orb's damage
+
+  Amazon
+- Increased Freezing Arrow damage.
+- Increased Ice Arrow damage.
+- Increased Immolation Arrow damage, added a casting delay and decreased
+  the fire duration.
+
+  Assassin
+- Increased Fist of Fire damage.
+- Increased Claws of Thunder damage.
+- Increased Pheonix Strike damage.
+- Fixed various bugs with skills that use two claws.
+
+  Druid
+- Turned down the mastery bonuses for the wolves and bears
+- Increased Feral Rage's life stealing
+- Increased Hunger's life stealing, but increased its damage penalty
+
+--------------------------------------------------------------------------
+- Changes Since Diablo II Version 1.06
+--------------------------------------------------------------------------
+
+     Skill Balance Changes
+
+  Paladin
+- In expansion games, Blessed Hammer/Concentration combination imbalance
+  has been corrected.
+- In non-expansion games, the Blessed Hammer/Concentration combination
+  remains the same.
+- Limited Zeal to 5 swings.
+- Fixed display for Vengeance's damage to reflect its actual damage.
+- Increased damage for Fist of the Heavens.
+- Decreased the length of time that Converted monsters fight for you.
+- Increased the damage per level for Sanctuary.
+- Increased the Smite damage for Holy Shield.
+- Increased resistance bonus for Resist Fire, Resist Cold, Resist
+  Lightning, and Salvation.
+- Increased the Mana regeneration rate for Meditation.
+- Added melee lightning damage to Holy Shock.
+- Added melee damage to undead to Sanctuary.
+- Allowed Conviction to reduce an enemy's resistance to a negative value.
+- Increased the player's resistance penalty for Conviction.
+- Added a damage bonus to Fanaticism.
+- Fixed a bug with Charge, and Vengeance. Weapon damage was being added
+  twice.
+- Fixed a bug with Zeal. Your character would get into a situation where he
+  would keep swinging. This bug fix should make these skills more effective.
+
+  Barbarian
+- In expansion games, Whirlwind is now properly modified by weapon speed.
+  In non-expansion games, Whirlwind remains the same.
+- Frenzy, Double-Swing, and Double-Throw are now properly modified by
+  weapon speed.
+- Added damage bonuses to Concentrate and Frenzy.
+- Frenzy now increases in attack speed as more monsters are hit.
+- Increased the damage bonus on Berserk.
+- Changed Battle Orders bonus to increase by 3% per level at all levels.
+- Increased the damage of War Cry.
+- Whirlwind attacks 50% more if you are dual wielding.
+
+  Amazon
+- Strafe has a greater range.
+- Impale and Jab are now properly modified by weapon speed.
+- Impale increases damage with level and decreases the chance to lose
+  durability.
+- Fend is now uninterruptible and does more damage.
+- Increased the damage of Plague Javelin.
+- Multishot only attempts to hit the player once instead of with each arrow
+- Multishot: only 3/4 of the Damage is taken from your weapon.
+- Lightning Strike: there is now no mana increase for using higher levels of
+  this skill.
+- Fixed a bug with Powerstrike. Weapon damage was being added twice.
+- Fixed a bug with Fend. Your character would get into a situation where she
+  would keep swinging. This bug fix should make these skills more effective.
+- Fixed a bug with Freezing Arrow: Damage from the weapon you're using is no
+  longer is counted in area effect damage.
+
+  Sorceress
+- Increased the damage of Hydra.
+- Lightning Mastery now affects electrical damage rather than decreasing
+  the Mana cost of those skills.
+- Added a casting timer to Fire Wall, Meteor, Blizzard, Frozen Orb, and
+  Hydra and commensurately increased their damage to prevent a drop in
+  frame rate, while maintaining the same overall balance.
+- Decreased the Mana cost for Enchant and increased its bonus to fire
+  damage.
+- The damage inflicted by most Sorceress skills over level 8 has been
+  increased.
+
+  Necromancer
+- Enhanced the damage and decreased duration for Poison Dagger, Poison
+  Explosion and Poison Nova.
+- Increased duration and adjusted radius for Decrepify.
+- Fixed Iron Maiden+Blood Golem bug and increased the Blood Golem's Life
+  stealing.
+- Bone Spear: Increased Mana cost per level
+- Bone Spirit: Increased Damage. Increased Mana cost per Level
+
+
+     Major Bugs
+
+- Fixed a bug with Paladin skills and party/hostility on the borders of
+  town.
+- Fixed a bug that allowed a Necromancer to summon more than one Golem
+  at a time.
+- Player can no longer steal Life/Mana from inanimate objects.
+- Fire Mastery now correctly increases damage to the Hydra skill.
+- Fixed a bug that occasionally prevented Hirelings from dying along
+  with the player.
+- Fixed the double-draw bug in some skill effects, including Blizzard,
+  to improve frame rate.
+- Fixed the updating of the summonables' health bar on their icons.
+- Fixed a bug with left-hand swinging on the right-hand spell selection
+  side.
+- Fixed the pop-up description for Fist of the Heavens.
+- Fixed the overlapping of the character name and level name in the
+  party screen.
+- Fixed bug with Barbarian Masteries.
+- Fixed a bug with damage on swords
+- Fixed bug that prevented items from spawning at their maximum values
+
+
+     Modifications
+
+- Gambling prices are now based on the character level.
+- Sets and uniques can no longer be gambled for.
+- Items Gambled have a chance to be Exceptional and Elite Items once a
+  player has reached certain character levels.
+- Rings and Amulets are always listed on the Gambling Screen.
+- Boss monsters now do 30% less damage to Hirelings and minions than before.
+- Monsters now display if they are Undead or Demon, when highlighted. If
+  nothing is listed, they are an "Animal" type.
+- General levels for monsters in Nightmare and Hell difficulty have been
+  adjusted.
+- Maximum monster level is now level 70 in Nightmare and level 90 in Hell.
+- Monsters in Nightmare/Hell difficulty, have higher Resistances, Hit
+  Points, and lower attack ratings than before.
+- Poison Damage attacks from Monsters, do more damage than before.
+- Mana and Life stealing effects are reduced by half in Nightmare and Hell.
+- Retrieving your corpse where it died in Nightmare and Hell restores 50%
+  of any experience lost at death.
+- Adjusted the stocking of vendor inventories based on difficulty level.
+- Adjusted how Hirelings gain experience.
+- Adjusted how Hirelings react to missiles.
+- Adjusted Hireling resistances.
+- Increased the amount of Gold a character can hold in the Stash.
+- Increased the power of all Gems/Skulls and added level requirements.
+- Increased the power of all throwing potions and added level requirements.
+- Increased the resistance penalty in Nightmare difficulty to -40 and
+  Hell difficulty to -100.
+- Sounds for Gems in inventory have changed.
+- Looting corpses is available only in Hardcore games.
+- In multi-player, you may only go hostile once per minute with each
+  other player in your game.
+- New Party Experience Bonus to players in a Party in multiplayer.
+- Crystal Swords have an increased durability.
+- Scepter class items have increased damage.
+- In Normal difficulty, Diablo is harder.
+- Unique monster types will appear more often in Nightmare and Hell.
+- Removed Diablo countdown timer
+- Screenshots taken now are numbered 001-999.
+- Some Set Items now use unique palette shifted Art
+- Several Poison modifiers on items have been adjusted.
+- Normal uniques now have Level Limits.
+- Changed the way items spawn.
+- Bolts now can store up 250, Arrows now at 255.
+(Later changed to: Bolts now can store up 250, Arrows now at 350.)
+- You can now carry up to 12 Keys in one stack.
+- Super Unique Monsters Hephasto The Armorer and Bremm Sparkfist have been
+  toned down.
+- Bone Shields and Helms can now have sockets.
+- Total Chance to Block now dependent on Dexterity, Character Level, and
+  Chance To Block Items.
+
+(Later added to notes)
+- Unique items can now spawn even if they already exist in that game.
+- Flawless quality gems may now drop.
+- Exceptional items may now drop in the last level of Normal depending on
+  the level of the character and the level of the monster.
+- New sets of normal items that have not been converted can have new
+  magical bonuses and capabilities depending on how many pieces of the set
+  you have or which pieces are used in combination with other set items.
+- Bosses no longer automatically give a rare/unique/set item, but have a
+  good chance of doing so.
+- Frequency of item drops has been increased for single player mode
+- Frequency of item drops playing alone in multiplayer mode is now the same
+  as it is for single player mode
+- Gold from items sold to merchants is now split between party members in
+  the same act.
+- Monsters can now be immune to certain attacks and will now display their
+  immunities.
+- The unique monster Flamespike The Crawler was removed from the Inner
+  Cloister waypoint in Act 1
+- The normal set item "Infernal Buckle" was changed to "Infernal Sign".
+- In a party, the player who delivers the kill to a monster no longer
+  receives a 10% experience bonus.
+
+
+     Improvements
+
+- Hundreds of new magical properties - Items of all levels can now possess
+  greater and more diverse magical powers. Some magical properties appear
+  only on Magic Items while others appear on both Rare and Magic Items.
+- New Horadric Cube recipes: Numerous additional recipes for the Horadric
+  Cube are just waiting to be discovered.
+- Weapon Swapping: quickly alternate between two sets of weapon/shield
+  configurations (equipment outfitted in the left and right hands) with a
+  click of the mouse or through a convenient keyboard shortcut.
+- The Stash size has been increased.
+- Interactive environments: carve your own path through Act V by destroying
+  breakable wall sections, barricades, and siege towers.
+- Normal set items now gain additional magical bonuses and partial set
+  bonuses.
+- Holding down SHIFT and RIGHT-Clicking, when buying health potions,
+  auto-fills any empty slots in the belt. This applies to buying scrolls
+  of Town Portal and Identify scrolls too.
+- Holding down SHIFT and LEFT-Clicking on health potions in inventory,
+  will auto-move them to the appropriate column in your belt.
+- Added a new 'Repair All' button for equipped items at the armorers in
+  each Act.
+- New Auto-Map functionality. Players can adjust the size of the Auto-Map
+  in the "Auto-Map Options" menu, switching to the new "Mini-Map".
+- 8 more "Hot keys" are available to assign skills to now.
+- Improved the displays for character status screens.
+  * Total blocking % is now shown.
+  * Chance to Hit and Defense against last monster fought is now shown.
+  * Maximum Resistances are now shown in Gold color.
+  * Elemental damage only items, display colors for elemental type damage.
+- Wells now heal hirelings.
+- Removed collisions for players with Minions.
+- Minion's health will scale up accordingly in Nightmare and Hell difficulty.
+- Ignore via the Party Member now ignores multiple party invite/cancel
+  messages
+- Some set items have unique art.
+- Multiple Sets can now be used at the same time.
+- Gems, Runes, and Jewels can now be inserted into Socketed Items while the
+  character is wearing them.
+- Some Normal Uniques now have higher Damage and Defense.
+- Socketed Items can now have up to 6 Sockets.
+- Throwing Weapons can be replenished by repairing them.
+- Monsters now list immunities.
+
+(Later added to notes)
+- Chests now give better loot.
+- Improved damage and defense now show the percentage of damage and defense
+  improvement.
+- The Horadric Cube no longer "eats" items.
+- New items can be gambled, such as circlets, katars, and throwing weapons.
+
+
+     Attention
+
+- Player can no longer steal Life/Mana from certain monster types.
+- Names of pre-existing Rare Items have changed. However, the item
+  properties have not.
+- The maximum damage of Enhanced Damage items may change 1-3 points.
+- The damage of many items has been increased.
+- Items with one or two sockets may gain an additional socket.
+- After patching Set and Unique items will have additional level
+  requirements.

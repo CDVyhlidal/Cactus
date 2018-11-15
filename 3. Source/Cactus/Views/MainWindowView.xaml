@@ -1,0 +1,50 @@
+﻿<Window x:Class="Cactus.MainWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cactus"
+        mc:Ignorable="d"
+        Title="{Binding Title, Mode=OneWay}" Width="500" Height="280" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
+        DataContext="{Binding MainWindow, Source={StaticResource Locator}}">
+
+    <StackPanel Margin="10">
+        <ListView Name="EntriesListView" Height="185" Margin="0 0 0 10" ItemsSource="{Binding Entries}" SelectedItem="{Binding SelectedEntry}"
+                  SelectionMode="Single" MouseDoubleClick="EntriesListView_DoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridView.ColumnHeaderContainerStyle>
+                        <Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+                            <Setter Property="IsHitTestVisible" Value="False"/>
+                        </Style>
+                    </GridView.ColumnHeaderContainerStyle>
+                    <GridViewColumn Width="50" Header="Last">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsHitTestVisible="False" Focusable="False" IsChecked="{Binding WasLastRan}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="50" Header="Exp">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsHitTestVisible="False" Focusable="False" IsChecked="{Binding IsExpansion}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="200" DisplayMemberBinding="{Binding Platform}" Header="Platform"/>
+                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding Flags}" Header="Flags"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Height="25">
+            <Button Name="btnAdd" Content="Add" Command="{Binding AddCommand}" Margin="0 0 5 0"/>
+            <Button Name="btnEdit" Content="Edit" Command="{Binding EditCommand}" Margin="0 0 5 0"/>
+            <Button Name="btnDelete" Content="Delete" Command="{Binding DeleteCommand}" Margin="0 0 5 0"/>
+            <Button Name="btnCopy" Content="Copy" Command="{Binding CopyCommand}" Margin="0 0 5 0"/>
+            <Button Name="btnMoveUp" Content="Up" Command="{Binding UpCommand}" Margin="0 0 5 0"/>
+            <Button Name="btnMoveDown" Content="Down" Command="{Binding DownCommand}" Margin="0 0 5 0"/>
+            <Button Name="btnLaunch" Content="Launch" Command="{Binding LaunchCommand}"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
