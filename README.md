@@ -6,9 +6,9 @@
 ## Description
 
 This is a C# based application that will help you manage **`Multiple Versions or _Compatible Mods_`**
-of Diablo II (Which I will call "Platforms") from a single application. This is a **`File-based
+of Diablo II (Which I will call **`Platforms`**) from a single application. This is a **`File-based
 Version Switcher`** and thus it doesn't modify any files. It simply copies files from their respective
-"Platforms" folder, to the root of your Diablo II folder, while making sure that all of your characters
+**`Platforms`** folder, to the root of your Diablo II folder, while making sure that all of your characters
 are properly isolated. This means you can easily install and play every single version of Diablo II
 from 1.00 to the latest 1.14d (and any other future versions) while maximizing your disk space
 (Since you won't have to keep having multiple copies of your MPQs).
@@ -34,8 +34,8 @@ fix your MPQs so that they are compatible with the older versions of Diablo II.
 
 1. Copy all of the files in the **`1. Files`** folder into your Diablo II root folder.
 2. Copy **`2. MpqFixer`** from the **`2. Other`** folder into your Diablo II root folder.
-3. Run the **`FIX_MPQS_RUN_AS_ADMIN.bat`** inside the **`3. MpqFixer`** that you copied as
-   Administrator. This will fix your MPQ files so that they will work with the older versions
+3. Run the **`FIX_MPQS_RUN_AS_ADMIN.bat`** inside the **`2. MpqFixer`** that you copied as
+   **`Administrator`**. This will fix your MPQ files so that they work with the older versions
    of the game.
 
 ### Adding/Running A Platform
@@ -48,13 +48,13 @@ fix your MPQs so that they are compatible with the older versions of Diablo II.
    Cactus copies all of the files from the **`Platforms/[NAME]`** folder to the Diablo II root folder,
    so most of your entries will have identical paths (Example: **`D:\Games\Diablo II\Game.exe`** or **`D:\Games\Diablo II\Alpaca.exe`**).
 5. Enter the Flags you want (Example: **`-w -ns -3dfx`**)
-6. Make sure **`Expansion"`** is selected (Unless you didn't purchase Lord of Destruction).
-7. Click **`Add"`**.
+6. Make sure **`Expansion`** is selected (Unless you didn't purchase Lord of Destruction).
+7. Click **`Add`**.
 8. Select your newly added Platform and press **`Launch`**.
 
 The game should start. If you are having video issues, either make sure you have ran
 the **`D2VidTst.exe`** and configured everything properly (Pre 1.14), or try installing
-GlideWrapper and adding the  **`-3dfx`** flag to the end of your path.
+**`GlideWrapper`** and adding the  **`-3dfx`** flag to the end of your path.
 
 ## Moving Cactus To A New Computer
 
@@ -67,5 +67,5 @@ the **`Last Ran`** box will cause Cactus to reconfigure itself (Including regist
 ## Updating Files In The Platforms folder
 
 If you update any files in your Platforms folder, then uncheck the **`Last Ran`**
-box from the corresponding entry, and run it again. This will cause Cactus
+box from the corresponding platform, and run it again. This will cause Cactus
 to re-install the files with the new ones.
