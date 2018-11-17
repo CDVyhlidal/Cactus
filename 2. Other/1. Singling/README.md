@@ -1,6 +1,6 @@
-## Singling - 2.3.2
+## Singling - 2.3.3
 ##### Jonathan Vasquez (fearedbliss)
-##### Released on Saturday, November 10, 2018
+##### Released on Friday, November 16, 2018
 
 ## Synopsis
 
@@ -42,11 +42,15 @@ order to improve the Vanilla Diablo II Single Player experience.
 
 - `[1.08-1.14d]` Battle.net-only Runewords are now enabled on Single Player.
 
+## Extras
+
+- GlideWrapper
+
 ## Notes
 
 - The Game Menus CPU fix will only be applied for v1.10+. The fix for versions
   pre 1.10 was reverted since it caused lag for systems that weren't using the
-  GlideWrapper. Most people don't spend a lot of time in the Game Menus anyways
+  GlideWrapper. Most people don't spend a lot of time in the Main Menu anyways
   so it isn't a big deal to keep this in.
 
 - If you are using Glide, make sure to disable VSYNC in your Glide settings
@@ -63,14 +67,14 @@ that the game assigned identical fingerprints to.
 ### Patch 1.09b
 
 This patch was picked over 1.09d because it contains 'players 64' and
-also because CtC is working. 1.09d has broken CtC which means that you will
+also working CtC. 1.09d has broken CtC which means that you will
 see the animation of your CtC effect, but it actually won't do anything.
 
 ### Patch 1.10f+
 
 - 1.10f has been kept since it is the version of Diablo II with the most mod support.
 - 1.13d has been kept since it is the last version of Diablo II before the major rearchitect
-  that blizzard made.
+  that Blizzard made.
 - 1.14d is kept since it is the latest version of the game.
 
 ## Links
