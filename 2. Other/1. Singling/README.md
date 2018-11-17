@@ -1,6 +1,6 @@
-## Singling - 2.3.3
+## Singling - 2.3.4
 ##### Jonathan Vasquez (fearedbliss)
-##### Released on Friday, November 16, 2018
+##### Released on Saturday, November 17, 2018
 
 ## Synopsis
 
