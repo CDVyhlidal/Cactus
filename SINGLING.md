@@ -1,4 +1,4 @@
-## Singling - 2.3.5
+## Singling - 2.3.6
 ##### Jonathan Vasquez (fearedbliss)
 ##### Released on Sunday, November 18, 2018
 
@@ -17,6 +17,7 @@ order to improve the Vanilla Diablo II Single Player Experience.
 #### Expansion
 
 - 1.07
+- 1.07.41
 - 1.08
 - 1.09b
 - 1.10f
