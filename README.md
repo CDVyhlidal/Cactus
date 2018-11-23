@@ -1,7 +1,6 @@
 ## Cactus 1.2.1 ([Discord](https://discord.gg/B59qDKy))
 ##### Jonathan Vasquez (fearedbliss)
-##### Apache License 2.0
-##### Released on Sunday, November 18, 2018
+##### Released on Friday, November 23, 2018
 
 ## Description
 
@@ -12,6 +11,10 @@ Version Switcher`** and thus it doesn't modify any files. It simply copies files
 are properly isolated. This means you can easily install and play every single version of Diablo II
 from 1.00 to the latest 1.14d (and any other future versions) while maximizing your disk space
 (Since you won't have to keep having multiple copies of your MPQs).
+
+## License
+
+Released under the GNU General Public License v3 or Later.
 
 ## Requirements
 

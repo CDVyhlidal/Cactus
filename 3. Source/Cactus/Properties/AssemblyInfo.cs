@@ -8,7 +8,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Cactus")]
-[assembly: AssemblyDescription("A Diablo II Version Switcher")]
+[assembly: AssemblyDescription("A Modern Diablo II Version Switcher")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Cactus")]

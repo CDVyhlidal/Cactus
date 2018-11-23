@@ -1,5 +1,4 @@
-All credits go to GalaXyHaXz. I (fearedbliss) only enabled the
-ability to make Hardcore characters without having to beat the game.
+All credits go to GalaXyHaXz for 1.07.41.
 
 ---------------------------------------------------------------------------
 Diablo II - Lord of Destruction : Beta Patch 1.07.41 (1.41)
