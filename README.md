@@ -1,6 +1,6 @@
 ## Cactus 1.2.1 ([Discord](https://discord.gg/B59qDKy))
 ##### Jonathan Vasquez (fearedbliss)
-##### Released on Friday, November 23, 2018
+##### Released on Saturday, November 24, 2018
 
 ## Description
 
