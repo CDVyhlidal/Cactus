@@ -1,4 +1,4 @@
-## Succulent 5.0.0 ([Discord](https://discord.gg/B59qDKy), [Cactus](https://github.com/fearedbliss/Cactus))
+## Succulent 5.1.0 ([Discord](https://discord.gg/B59qDKy), [Cactus](https://github.com/fearedbliss/Cactus))
 ##### By Jonathan Vasquez (fearedbliss)
 ##### Released on Saturday, November 24, 2018
 
@@ -25,6 +25,7 @@ Single Player Experience, and contains strong influence from **`Diablo I`** and 
 - All items no longer have level requirements.
   - Any item that grants a skill, will still have a level requirement
     equal to the level when that skill would have become unlocked.
+- All affixes are enabled on Rares.
 
 #### Pre 1.10
 
