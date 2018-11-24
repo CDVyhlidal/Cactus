@@ -1,4 +1,4 @@
-## Succulent 5.1.0 ([Discord](https://discord.gg/B59qDKy), [Cactus](https://github.com/fearedbliss/Cactus))
+## Succulent 5.2.0 ([Discord](https://discord.gg/B59qDKy), [Cactus](https://github.com/fearedbliss/Cactus))
 ##### By Jonathan Vasquez (fearedbliss)
 ##### Released on Saturday, November 24, 2018
 
@@ -25,7 +25,8 @@ Single Player Experience, and contains strong influence from **`Diablo I`** and 
 - All items no longer have level requirements.
   - Any item that grants a skill, will still have a level requirement
     equal to the level when that skill would have become unlocked.
-- All affixes are enabled on Rares.
+- Rares can now spawn with any affix.
+- The minimum cap on Static Field has been removed.
 
 #### Pre 1.10
 
@@ -44,21 +45,18 @@ Single Player Experience, and contains strong influence from **`Diablo I`** and 
 - You can now open the Cow Level with just a Town Portal Book.
 - Nihlathak's Portal no longer closes when you get the Halls of Pain WP and have
   already killed him.
+- There no longer is an experience penalty when you die.
 
 ## Drop Balancing
 
-- The default item drop amounts are the same as /players 8.
-- Improved Item Drop Rates.
-- Improved Rune Drop Rates.
-- Act Bosses always have quest drops and drop rates.
-- Chests can now drop higher runes on each difficulty.
-  - Normal (A2+): Up to Sol
-  - Nightmare: Up to Ist
-  - Hell: Up to Zod
+- Improved Item and Rune Drop Rates.
+- Act bosses always have quest drops and drop rates.
+- The Countess and Chests can now drop higher runes on each difficulty. `(Normal: Sol, NM: Ist, Hell: Zod)`
 - Annihilus & Hellfire Torch are now droppable like Gheeds.
 - Azurewrath Crystal Sword is now enabled and droppable.
 - Keys no longer drop (They are useless on Single Player).
 - Rare items will spawn with max affixes if possible.
+- Perfect Gems now have a chance to drop when appropriate.
 
 ## Optimizations
 
