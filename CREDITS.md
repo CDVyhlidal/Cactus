@@ -29,3 +29,9 @@ The respective communities can be found below:
 - [PhrozenKeep](http://d2mods.info)
 
 - [Icon made by Freepik from www.flaticon.com](https://www.flaticon.com/free-icon/cactus_809137)
+
+- Major thanks to ChickenBuckets for providing the original Diablo II Beta and LoD Beta Disks,
+  and major thanks also to GalaXyHaXz for taking the 1.07.41 disks and actually making them
+  playable on Single Player and LAN, since the 1.07.41 beta was only available online.
+  
+  [LoD Beta Post](https://www.betaarchive.com/forum/viewtopic.php?t=35744)

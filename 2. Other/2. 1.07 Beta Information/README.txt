@@ -1,4 +1,4 @@
-All credits go to GalaXyHaXz for 1.07.41.
+All credits go to GalaXyHaXz for 1.07.41 - fearedbliss
 
 ---------------------------------------------------------------------------
 Diablo II - Lord of Destruction : Beta Patch 1.07.41 (1.41)
