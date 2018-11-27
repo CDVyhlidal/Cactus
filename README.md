@@ -1,15 +1,15 @@
 ## Cactus 1.2.1 ([Discord](https://discord.gg/B59qDKy))
 ##### Jonathan Vasquez (fearedbliss)
-##### Released on Saturday, November 24, 2018
+##### Released on Monday, November 26, 2018
 
 ## Description
 
-This is a C# based application that will help you manage **`Multiple Versions or _Compatible Mods_`**
+Cactus is a C# based application that will help you manage **`Multiple Versions or _Compatible Mods_`**
 of Diablo II (Which I will call **`Platforms`**) from a single application. This is a **`File-based
 Version Switcher`** and thus it doesn't modify any files. It simply copies files from their respective
 **`Platforms`** folder, to the root of your Diablo II folder, while making sure that all of your characters
 are properly isolated. This means you can easily install and play every single version of Diablo II
-from 1.00 to the latest 1.14d (and any other future versions) while maximizing your disk space
+from **`1.00`** to the latest **`1.14d`** (and any other future versions) while maximizing your disk space
 (Since you won't have to keep having multiple copies of your MPQs).
 
 ## License
@@ -40,7 +40,7 @@ fix your MPQs so that they are compatible with the older versions of Diablo II.
    folder. (Example: If you want to run **`1.09b`**, type **`1.09b`**).
 4. Enter the path to the executable you want to launch in your Diablo II root folder.
    Cactus copies all of the files from the **`Platforms/[NAME]`** folder to the Diablo II root folder,
-   so most of your entries will have identical paths (Example: **`D:\Games\Diablo II\Game.exe`** or **`D:\Games\Diablo II\Alpaca.exe`**).
+   so most of your entries will have identical paths (Example: **`D:\Games\Diablo II\Game.exe`**).
 5. Enter the Flags you want (Example: **`-w -ns -3dfx`**)
 6. Make sure **`Expansion`** is selected (Unless you are playing **`1.00-1.06b`** or didn't purchase **`Lord of Destruction`**).
 7. Click **`Add`**.
