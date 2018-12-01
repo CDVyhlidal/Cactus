@@ -1,4 +1,7 @@
 .vs/
 bin/
 obj/
+Release/
+Debug/
 Entries.json
+LastRequiredFiles.json

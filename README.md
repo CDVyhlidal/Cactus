@@ -1,4 +1,4 @@
-## Cactus 1.2.1 ([Discord](https://discord.gg/PNJsaPa))
+## Cactus 1.2.2 ([Discord](https://discord.gg/PNJsaPa))
 ##### Jonathan Vasquez (fearedbliss)
 ##### Released on Saturday, December 1, 2018
 
@@ -20,7 +20,7 @@ Released under the GNU General Public License v3 or Later.
 
 - .NET Framework 4.6.1 +
 
-## Installation Instructions ([Video](https://youtu.be/REfc1D1mKok))
+## Installation Instructions ([Video](https://www.youtube.com/watch?v=CCqjB7a_eXY))
 
 ### Install Cactus And Prepare MPQs
 
@@ -63,10 +63,19 @@ We use **`ZeroTier`** to connect to each other, which can be easily installed by
 ## Moving Cactus To A New Computer
 
 If you want to move all of your Platforms, Characters, and Diablo II folder
-to another machine, you can just copy your entire Diablo II folder as is,
-transport it to your new machine, and then after that edit the Last Ran Platform
-and uncheck the **`Last Ran`** box. Then run whatever Platform you want. Unchecking
-the **`Last Ran`** box will cause Cactus to reconfigure itself (Including registry locations).
+to another machine, you will need to:
+
+1. Copy your entire Diablo II folder to your new machine.
+2. Edit the **`Entries.json`** file and change the **`Path`** for all of your entries
+   so that it now has the **`Path`** on your new machine.
+   - The **`Base Directory`** for all Paths need to match. The exes can be different.
+   		- GOOD: **`D:\Games\Diablo II\Game.exe`** and **`D:\Games\Diablo II\Alpaca.exe`**.
+   		- BAD: **`D:\Games\Diablo II\Game.exe`** and **`D:\Diablo Immortal For PC\Game.exe`**.
+3. Open **`Cactus`** and edit the **`Last Ran Platform`**.
+4. Uncheck the **`Last Ran`** box and Click **`Edit`**.
+5. Now **`Launch`** whatever Platform you want.
+
+Unchecking the **`Last Ran`** box will cause Cactus to reconfigure itself (Including registry locations).
 
 ## Updating Files In The Platforms folder
 

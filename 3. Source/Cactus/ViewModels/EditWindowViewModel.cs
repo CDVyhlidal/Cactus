@@ -58,7 +58,11 @@ namespace Cactus.ViewModels
                 !_entryManager.IsRootDirectoryEqualToOthers(CurrentEntry) ||
                 _pathBuilder.ContainsInvalidCharacters(CurrentEntry.Platform))
             {
-                MessageBox.Show("Please make sure all fields are populated, root path should match the rest of your entries (.exe can vary), and no invalid characters.");
+                MessageBox.Show("Unable to change your Entry! Please make sure all fields are:\n\n" +
+                    "- Populated (Flags are optional)\n" +
+                    "- Path should match the rest of your Entries (.exe can vary)\n" +
+                    "- No invalid characters\n\n" +
+                    "If you have moved Cactus to a new machine, please manually edit the Entries.json and adjust all your paths accordingly.");
                 ReverseChanges();
                 return;
             }
