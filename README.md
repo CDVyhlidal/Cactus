@@ -1,6 +1,6 @@
-## Cactus 1.2.1 ([Discord](https://discord.gg/B59qDKy))
+## Cactus 1.2.1 ([Discord](https://discord.gg/PNJsaPa))
 ##### Jonathan Vasquez (fearedbliss)
-##### Released on Monday, November 26, 2018
+##### Released on Saturday, December 1, 2018
 
 ## Description
 
@@ -58,7 +58,7 @@ We use **`ZeroTier`** to connect to each other, which can be easily installed by
 1. [Download and Install the **`ZeroTier`** Client](https://www.zerotier.com/download.shtml)
 2. Run ZeroTier (You can create an account if you want but it isn't needed).
 3. Join the following network: **`d5e5fb6537f19465`**
-4. Since this is a Private Network, you will need approval. Join the [Discord](https://discord.gg/B59qDKy) channel and send a message with your **`Node Id`** to **`fearedbliss`** in channel **`#lan-requests`**. He'll approve you once he gets a chance. You can get your **`Node Id`** by right clicking the **`ZeroTier`** tray icon on the bottom right. It will be displayed at the top.
+4. Since this is a Private Network, you will need approval. Join the [Discord](https://discord.gg/PNJsaPa) channel and send a message with your **`Node Id`** to **`fearedbliss`** in channel **`#multiplayer`**. He'll approve you once he gets a chance. You can get your **`Node Id`** by right clicking the **`ZeroTier`** tray icon on the bottom right. It will be displayed at the top.
 
 ## Moving Cactus To A New Computer
 

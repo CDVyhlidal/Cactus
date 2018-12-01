@@ -1,6 +1,6 @@
-## Singling 2.4.0
+## Singling 2.4.1
 ##### Jonathan Vasquez (fearedbliss)
-##### Released on Monday, November 26, 2018
+##### Released on Saturday, December 1, 2018
 
 ## Synopsis
 
@@ -13,6 +13,7 @@ order to improve the Vanilla Diablo II Single Player Experience.
 - **`1.05b`**
 - **`1.07`**
 - **`1.09b`**
+- **`1.10`**
 - **`1.14d`**
 
 ## Features
@@ -23,19 +24,18 @@ order to improve the Vanilla Diablo II Single Player Experience.
 - The Battle.net button has been disabled for safety reasons.
 - The introduction cinematics are now automatically skipped.
 
-- **`[1.00-1.09b]`** You no longer need the CD in order to play the game.
-- **`[1.00-1.09b]`** You can now make Hardcore characters without beating Softcore.
-- **`[1.00-1.09b]`** The window will no longer minimize when you click out of it.
-- **`[1.00-1.09b]`** The window will now have Minimize and Close buttons.
+- **`[1.00-1.10]`** You no longer need the CD in order to play the game.
+- **`[1.00-1.10]`** You can now make Hardcore characters without beating Softcore.
+- **`[1.00-1.10]`** The window will no longer minimize when you click out of it.
+- **`[1.00-1.10]`** The window will now have Minimize and Close buttons.
 
-- **`[1.14d]`** Battle.net-only Runewords are now enabled on Single Player.
+- **`[1.10-1.14d]`** Battle.net-only Runewords are now enabled on Single Player.
 
 ## Notes
 
-- The Main Menu CPU fix will only be applied for **`v1.10+`**. The fix for versions
-  **`Pre-1.10`** was reverted since it caused lag for systems that weren't using 
-  GlideWrapper. Most people don't spend a lot of time in the Main Menu anyways
-  so it isn't a big deal to keep this in.
+- The Main Menu CPU fix will only be applied for **`v1.10+`**, since people not
+  using Glide in versions before that would experience massive lag. Most people
+  don't spend their time sitting in the Main Menu so this isn't a big deal.
 
 - If you are using Glide, make sure to disable VSYNC in your Glide settings
   or you will still experience high CPU usage in LAN games.
@@ -71,7 +71,14 @@ This patch was picked over **`1.09d`** because it contains **`players 64`** and
 also working CtC. **`1.09d`** has broken CtC which means that you will
 see the animation of your CtC effect, but it actually won't do anything.
 
-#### Patch 1.10 +
+#### Patch 1.10
 
-The latest version of the game is used since nothing major has happened after
-**`1.10`** other than respecing.
+This patch was picked because it was the last patch released by Blizzard North,
+it was the first patch in the series that massively redesigned the game and made
+it primarily balanced for Multiplayer, and lastly it is the patch that has the
+most mod support.
+
+#### Patch > 1.10
+
+Since nothing major has been implemented in the game (other than respec and uber trist) after
+version **`1.10`**, the latest version of the game will be used.
