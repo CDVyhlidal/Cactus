@@ -24,6 +24,9 @@
 
 - [Credits to Snake from SnakeByte Studios for the fixed number "5" font.](http://www.snakebytestudios.com/projects/mods/diablo-2-mods/#fixedfont)
 
+- Massive thanks to Necrolis and Kingpin for guiding me in the correct direction
+  while implementing the players command. I couldn't have done it without their expertise.
+  
 The respective communities can be found below:
 
 - [PhrozenKeep](http://d2mods.info)

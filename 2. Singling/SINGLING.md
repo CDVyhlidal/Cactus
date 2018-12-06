@@ -1,6 +1,6 @@
-## Singling 2.4.1
+## Singling 2.5.0
 ##### Jonathan Vasquez (fearedbliss)
-##### Released on Saturday, December 1, 2018
+##### Released on Wednesday, December 5, 2018
 
 ## Synopsis
 
@@ -24,6 +24,7 @@ order to improve the Vanilla Diablo II Single Player Experience.
 - The Battle.net button has been disabled for safety reasons.
 - The introduction cinematics are now automatically skipped.
 
+- **`[1.07]`** The **`players`** command is now implemented (up to 8 players).
 - **`[1.00-1.10]`** You no longer need the CD in order to play the game.
 - **`[1.00-1.10]`** You can now make Hardcore characters without beating Softcore.
 - **`[1.00-1.10]`** The window will no longer minimize when you click out of it.
@@ -42,6 +43,11 @@ order to improve the Vanilla Diablo II Single Player Experience.
 
 - Due to a Windows bug, the Minimize/Close buttons will not show if you are
   using Glide for versions below **`1.14d`**.
+  
+- The **`players`** command works similarly to **`1.09b`**. You type **`players #`**
+  with no slash and the game will simulate that. No confirmation will be displayed.
+  If you are in a LAN game, the host will need to set the **`players #`** explicitly.
+  The Monster's HP, Experience, and Item Drops (Including Chests) will be affected.
 
 ## Patch Rational
 
