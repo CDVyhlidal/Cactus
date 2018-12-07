@@ -20,7 +20,7 @@ Released under the GNU General Public License v3 or Later.
 
 - .NET Framework 4.6.1 +
 
-## Installation Instructions ([Video](https://www.youtube.com/watch?v=CCqjB7a_eXY))
+## Installation Instructions ([Video](https://youtu.be/wcOMGDSPwlY))
 
 ### Install Cactus And Prepare MPQs
 

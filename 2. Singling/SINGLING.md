@@ -1,6 +1,6 @@
-## Singling 2.5.0
+## Singling 3.0.0
 ##### Jonathan Vasquez (fearedbliss)
-##### Released on Wednesday, December 5, 2018
+##### Released on Thursday, December 6, 2018
 
 ## Synopsis
 
@@ -24,7 +24,8 @@ order to improve the Vanilla Diablo II Single Player Experience.
 - The Battle.net button has been disabled for safety reasons.
 - The introduction cinematics are now automatically skipped.
 
-- **`[1.07]`** The **`players`** command is now implemented (up to 8 players).
+- **`[1.00-1.07]`** The **`players`** command is now implemented (up to 8 players).
+
 - **`[1.00-1.10]`** You no longer need the CD in order to play the game.
 - **`[1.00-1.10]`** You can now make Hardcore characters without beating Softcore.
 - **`[1.00-1.10]`** The window will no longer minimize when you click out of it.
@@ -48,6 +49,12 @@ order to improve the Vanilla Diablo II Single Player Experience.
   with no slash and the game will simulate that. No confirmation will be displayed.
   If you are in a LAN game, the host will need to set the **`players #`** explicitly.
   The Monster's HP, Experience, and Item Drops (Including Chests) will be affected.
+  
+  For versions before **`1.07`**, the game was designed with monsters and chests
+  having a chance to drop only a single item, and chests are not affected by
+  player count at all. Monsters however will have an increased chance of dropping
+  a single item for every additional player in the game (up to players 5, everything
+  after that player count doesn't matter).
 
 ## Patch Rational
 
