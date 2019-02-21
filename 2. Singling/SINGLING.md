@@ -1,6 +1,6 @@
-## Singling 3.0.0
+## Singling 3.0.1
 ##### Jonathan Vasquez (fearedbliss)
-##### Released on Thursday, December 6, 2018
+##### Released on Wednesday, February 20, 2019
 
 ## Synopsis
 
